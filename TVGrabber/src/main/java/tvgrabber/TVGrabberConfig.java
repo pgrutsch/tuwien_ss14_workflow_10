@@ -1,6 +1,5 @@
 package tvgrabber;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
@@ -12,13 +11,9 @@ import org.springframework.context.annotation.ImportResource;
 @Configuration
 @ImportResource({"classpath:/camel-config.xml"})
 @ComponentScan(basePackages = {"tvgrabber"})
-public class Config {
+public class TVGrabberConfig {
 
 
-    @Bean
-    public Producer producer() {
-        return new Producer();
-    }
-
+    /* Don't define Beans here, use @Autowired instead to get instances */
 
 }

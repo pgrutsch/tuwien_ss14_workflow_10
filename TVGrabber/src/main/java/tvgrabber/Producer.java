@@ -1,12 +1,9 @@
 package tvgrabber;
 
-import org.apache.camel.Consume;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
-import org.springframework.context.annotation.Bean;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
-
-import static org.apache.camel.component.dataset.DataSetEndpoint.assertEquals;
 
 
 /**
@@ -15,14 +12,14 @@ import static org.apache.camel.component.dataset.DataSetEndpoint.assertEquals;
 @Component
 public class Producer {
 
+    private static final Logger logger = Logger.getLogger(Producer.class);
+
     @Produce(uri = "seda:ichBinDerStart")
     ProducerTemplate producer;
 
     public void send(String msg) throws Exception {
 
         producer.sendBody(msg);
-
-        //producer.requestBody("hihihihi");
 
     }
 
