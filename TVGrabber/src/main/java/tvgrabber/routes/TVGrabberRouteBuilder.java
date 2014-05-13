@@ -4,7 +4,8 @@ import org.apache.camel.*;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
-import tvgrabber.MyBean;
+import tvgrabber.beans.MyBean;
+import tvgrabber.beans.Addressmanger;
 
 /**
  * Created by patrickgrutsch on 30.04.14.
@@ -66,7 +67,18 @@ public class TVGrabberRouteBuilder extends RouteBuilder {
             e.printStackTrace();
         }
 
+        /*Subscribe/ Unsubscribe */
+        //TODO: create mail account
+        // see: http://camel.apache.org/mail.html
+        from("pop3s://host:995?password=pw&username=name&consumer.delay=12000")
+        .to("seda:smtp");
 
+        from("seda:smtp").choice()
+                .when(header("subject").isEqualTo("Unsubscribe")).to("seda:unsubscribe")
+                .otherwise().to("seda:subscribe");
+
+        from("seda:unsubscribe").bean(Addressmanger.class, "unsubscribe");
+        from("seda:subscribe").bean(Addressmanger.class, "subscribe");
     }
 
 

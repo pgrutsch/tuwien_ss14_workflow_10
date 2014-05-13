@@ -1,4 +1,4 @@
-package tvgrabber;
+package tvgrabber.beans;
 
 import org.apache.camel.Body;
 import org.apache.camel.Exchange;
