@@ -27,4 +27,7 @@ public class Producer {
         return "Hello Test!!";
     }
 
+    public void setProducer(ProducerTemplate producer) {
+        this.producer = producer;
+    }
 }

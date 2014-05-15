@@ -1,7 +1,9 @@
+import org.apache.camel.ProducerTemplate;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.mockito.Mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -68,6 +70,22 @@ public class SampleTest {
                 e.printStackTrace();
             }
         }
+
+    }
+
+    @Test
+    public void MockitoSampleTest() throws Exception {
+        // for further reading:
+        // http://docs.mockito.googlecode.com/hg-history/be6d53f62790ac7c9cf07c32485343ce94e1b563/1.9.5/org/mockito/Mockito.html
+
+        String msgToSend = "Hi, I am a Test.";
+
+        ProducerTemplate prodtemp = mock(ProducerTemplate.class);
+        
+        producer.setProducer(prodtemp);
+        producer.send(msgToSend);
+
+        verify(prodtemp).sendBody(msgToSend);
 
     }
 }
