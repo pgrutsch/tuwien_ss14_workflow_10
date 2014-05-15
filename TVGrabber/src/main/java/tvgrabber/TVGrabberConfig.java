@@ -1,5 +1,6 @@
 package tvgrabber;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
@@ -15,5 +16,6 @@ public class TVGrabberConfig {
 
 
     /* Don't define Beans here, use @Autowired instead to get instances */
+
 
 }

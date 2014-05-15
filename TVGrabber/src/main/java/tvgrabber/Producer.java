@@ -23,4 +23,8 @@ public class Producer {
 
     }
 
+    public String forTest() {
+        return "Hello Test!!";
+    }
+
 }

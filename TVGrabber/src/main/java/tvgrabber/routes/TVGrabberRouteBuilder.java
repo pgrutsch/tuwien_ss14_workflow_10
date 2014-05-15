@@ -5,7 +5,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import tvgrabber.beans.MyBean;
-import tvgrabber.beans.Addressmanger;
+import tvgrabber.beans.Addressmanager;
 
 /**
  * Created by patrickgrutsch on 30.04.14.
@@ -77,8 +77,8 @@ public class TVGrabberRouteBuilder extends RouteBuilder {
                 .when(header("subject").isEqualTo("Unsubscribe")).to("seda:unsubscribe")
                 .otherwise().to("seda:subscribe");
 
-        from("seda:unsubscribe").bean(Addressmanger.class, "unsubscribe");
-        from("seda:subscribe").bean(Addressmanger.class, "subscribe");
+        from("seda:unsubscribe").bean(Addressmanager.class, "unsubscribe");
+        from("seda:subscribe").bean(Addressmanager.class, "subscribe");
     }
 
 

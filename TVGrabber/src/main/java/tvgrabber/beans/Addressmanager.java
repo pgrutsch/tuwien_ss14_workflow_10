@@ -15,8 +15,8 @@ import java.util.Map;
  */
 
 @Component
-public class Addressmanger {
-    private static final Logger logger = Logger.getLogger(Addressmanger.class);
+public class Addressmanager {
+    private static final Logger logger = Logger.getLogger(Addressmanager.class);
 
     public void unsubscribe(@Headers Map<String, Object> headers, @Body String myBody, Exchange exchange){
         logger.debug("Started to unsubscribe user");
@@ -28,4 +28,9 @@ public class Addressmanger {
         //TODO: subscribe this user
 
     }
+
+    public String forTest() {
+        return "Hello Test!!";
+    }
+
 }
