@@ -70,6 +70,7 @@ public class TVGrabberRouteBuilder extends RouteBuilder {
         /*Subscribe/ Unsubscribe */
         //TODO: create mail account
         // see: http://camel.apache.org/mail.html
+        /*
         from("pop3s://host:995?password=pw&username=name&consumer.delay=12000")
         .to("seda:smtp");
 
@@ -79,6 +80,7 @@ public class TVGrabberRouteBuilder extends RouteBuilder {
 
         from("seda:unsubscribe").bean(Addressmanger.class, "unsubscribe");
         from("seda:subscribe").bean(Addressmanger.class, "subscribe");
+        */
     }
 
 
