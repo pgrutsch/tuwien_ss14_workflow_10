@@ -28,9 +28,4 @@ public class Addressmanager {
         //TODO: subscribe this user
 
     }
-
-    public String forTest() {
-        return "Hello Test!!";
-    }
-
 }
