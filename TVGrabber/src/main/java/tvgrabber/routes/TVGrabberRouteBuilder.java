@@ -1,11 +1,14 @@
 package tvgrabber.routes;
 
-import org.apache.camel.*;
+import org.apache.camel.Exchange;
+import org.apache.camel.LoggingLevel;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.converter.jaxb.JaxbDataFormat;
+import org.apache.camel.spi.DataFormat;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
-import tvgrabber.beans.MyBean;
-import tvgrabber.beans.Addressmanager;
+import tvgrabber.entities.Series;
 
 /**
  * Created by patrickgrutsch on 30.04.14.
@@ -18,54 +21,30 @@ public class TVGrabberRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-
         //TODO implement .from .to etc here
 
+        logger.info("configure()");
 
-        /* synchronous alternative to SEDA would be "direct" component */
-        from("seda:ichBinDerStart")
-                .log(LoggingLevel.INFO, "ROUTING STARTED")
+        /* Fetch and parse guide.xml */
+        DataFormat jaxbDataFormat = new JaxbDataFormat("tvgrabber.entities");
+
+        from("file://src/tvdata?noop=true&initialDelay=2000&delay=4000&fileName=guide.xml")
+                .log(LoggingLevel.INFO, "Loading guide.xml")
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        log.info("process1");
+                        logger.info("Loading new guide.xml");
                     }
                 })
-                .to("seda:ichBinDasEnde");
-
-
-        from("seda:ichBinDasEnde")
+                .unmarshal(jaxbDataFormat)
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        log.info("process2");
+                        logger.info("series: " + exchange.getIn().getBody(Series.class).getTitle());
                     }
-                })
-                .bean(MyBean.class, "echo")
-                .to("seda:ichBinDasEnde2");
+                });
+                //.to("jdbc:statement");
 
-
-        /* just an example to consume from the seda queue. check if messages are really in the queue */
-        try {
-            Endpoint endpoint = getContext().getEndpoint("seda:ichBinDasEnde2");
-            final PollingConsumer consumer = endpoint.createPollingConsumer();
-
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while(true) {
-                        Exchange exchange = consumer.receive();
-
-                        if(exchange != null) {
-                            System.out.println(exchange);
-                        }
-                    }
-                }
-            }).start();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         /*Subscribe/ Unsubscribe */
         from("pop3s://pop.gmail.com:995?password=workflow2014&username=workflow2014ss@gmail.com&consumer.delay=12000")

@@ -9,6 +9,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.stereotype.Component;
 import tvgrabber.routes.TVGrabberRouteBuilder;
 
+import java.util.Scanner;
+
 /**
  * Created by patrickgrutsch on 30.04.14.
  */
@@ -16,9 +18,6 @@ import tvgrabber.routes.TVGrabberRouteBuilder;
 public class TVGrabberMain extends org.apache.camel.main.Main {
 
     private static final Logger logger = Logger.getLogger(TVGrabberMain.class);
-
-    @Autowired
-    private  Producer producer;
 
     public static void main(String args[]) throws Exception {
 
@@ -34,30 +33,14 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
 
     public void startApp() {
 
-       /* SEDA is asynchronous!
-       use a delay to ensure that the messages are really consumed before the program quits */
-
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                while(true) {
-                    try {
-                        logger.info("========= SEND MSG");
+                new Scanner(System.in).nextLine();
 
-                        producer.send("my msg " + Math.random()*100);
-
-                        Thread.sleep(2000);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        break;
-                    }
-
-
-                }
             }
         }).start();
-
 
     }
 
