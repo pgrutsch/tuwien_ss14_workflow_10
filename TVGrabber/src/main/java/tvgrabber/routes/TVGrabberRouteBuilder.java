@@ -8,6 +8,8 @@ import org.apache.camel.converter.jaxb.JaxbDataFormat;
 import org.apache.camel.spi.DataFormat;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
+import tvgrabber.beans.Addressmanager;
+import tvgrabber.beans.MyBean;
 import tvgrabber.entities.Series;
 
 /**
@@ -36,6 +38,7 @@ public class TVGrabberRouteBuilder extends RouteBuilder {
                         logger.info("Loading new guide.xml");
                     }
                 })
+                .split().tokenizeXML("programme")
                 .unmarshal(jaxbDataFormat)
                 .process(new Processor() {
                     @Override

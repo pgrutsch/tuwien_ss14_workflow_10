@@ -8,8 +8,9 @@ import javax.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
+    /* Factory methods MUST be public, static, zero argument */
 
-    public Series getSeries() {
+    public static Series createSeries() {
         return new Series();
     }
 }
