@@ -23,33 +23,28 @@ public class TVGrabberRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        //TODO implement .from .to etc here
-
-        logger.info("configure()");
 
         /* Fetch and parse guide.xml */
         DataFormat jaxbDataFormat = new JaxbDataFormat("tvgrabber.entities");
 
         from("file://src/tvdata?noop=true&initialDelay=2000&delay=4000&fileName=guide.xml")
                 .log(LoggingLevel.INFO, "Loading guide.xml")
-                .process(new Processor() {
-                    @Override
-                    public void process(Exchange exchange) throws Exception {
-                        logger.info("Loading new guide.xml");
-                    }
-                })
                 .split().tokenizeXML("programme")
                 .unmarshal(jaxbDataFormat)
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        logger.info("series: " + exchange.getIn().getBody(Series.class).getTitle());
+                        logger.info("Series title: " + exchange.getIn().getBody(Series.class).getTitle());
+                        logger.info("Series desc: " + exchange.getIn().getBody(Series.class).getDesc());
+                        logger.info("Series channel: " + exchange.getIn().getBody(Series.class).getChannel());
+                        logger.info("Series start: " + exchange.getIn().getBody(Series.class).getStart());
+                        logger.info("Series stop: " + exchange.getIn().getBody(Series.class).getStop());
                     }
                 });
                 //.to("jdbc:statement");
 
 
-        /*Subscribe/ Unsubscribe */
+        /*Subscribe / Unsubscribe */
         from("pop3s://pop.gmail.com:995?password=workflow2014&username=workflow2014ss@gmail.com&consumer.delay=12000")
         .bean(MyBean.class,"echo")
                 .choice()

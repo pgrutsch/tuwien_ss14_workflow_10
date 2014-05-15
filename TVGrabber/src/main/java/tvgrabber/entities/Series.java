@@ -16,7 +16,34 @@ public class Series {
     @XmlElement(name = "desc")
     private String desc;
 
+    //TODO: convert to date
+    @XmlAttribute(name = "start")
+    private String start;
+
+    //TODO: convert to date
+    @XmlAttribute(name = "stop")
+    private String stop;
+
+    @XmlAttribute(name = "channel")
+    private String channel;
+
     public String getTitle() {
-        return this.title;
+        return title;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public String getStop() {
+        return stop;
+    }
+
+    public String getChannel() {
+        return channel;
     }
 }
