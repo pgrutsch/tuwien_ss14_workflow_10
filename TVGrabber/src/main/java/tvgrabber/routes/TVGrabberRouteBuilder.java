@@ -40,8 +40,19 @@ public class TVGrabberRouteBuilder extends RouteBuilder {
                         logger.info("Series start: " + exchange.getIn().getBody(Series.class).getStart());
                         logger.info("Series stop: " + exchange.getIn().getBody(Series.class).getStop());
                     }
+                })
+                .to("jpa://tvgrabber.entities.Series");
+
+
+        /* Fetch 5 entries every 5 seconds to check if there is really data in the database */
+        from("jpa://tvgrabber.entities.Series?consumeDelete=false&maximumResults=5&consumer.delay=5000")
+                .log(LoggingLevel.INFO, "Reading from series from TVProgram table")
+                .process(new Processor() {
+                    @Override
+                    public void process(Exchange exchange) throws Exception {
+                        logger.info("Series title: " + exchange.getIn().getBody(Series.class).getTitle());
+                    }
                 });
-                //.to("jdbc:statement");
 
 
         /*Subscribe / Unsubscribe */

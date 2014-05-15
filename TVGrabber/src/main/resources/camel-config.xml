@@ -11,9 +11,9 @@
         <routeBuilder ref="TVGrabberRouteBuilder"/>
     </camelContext>
 
-    <jdbc:embedded-database id="embeddedDatasource" type="HSQL"/>
+    <jdbc:embedded-database id="derbyDatasource" type="DERBY"/>
 
-    <jdbc:initialize-database data-source="embeddedDatasource" ignore-failures="DROPS">
+    <jdbc:initialize-database data-source="derbyDatasource" ignore-failures="DROPS">
         <jdbc:script location="classpath:sql/create.sql"/>
     </jdbc:initialize-database>
 

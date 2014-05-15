@@ -12,12 +12,12 @@ import javax.sql.DataSource;
  */
 @Configuration
 @Profile("testing")
-public class StandAloneHsql {
+public class StandAloneDerby {
 
     @Bean
     public DataSource dataSource(){
         return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.HSQL)
+                .setType(EmbeddedDatabaseType.DERBY)
                 .addScript("create.sql").addScript("testinsert.sql")
                 .build();
     }

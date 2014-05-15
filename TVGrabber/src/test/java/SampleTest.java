@@ -22,7 +22,7 @@ import java.sql.Statement;
  */
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class,
-        classes = {TVGrabberConfig.class, StandAloneHsql.class})
+        classes = {TVGrabberConfig.class, StandAloneDerby.class})
 @ActiveProfiles("testing")
 public class SampleTest {
 
