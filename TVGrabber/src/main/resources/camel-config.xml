@@ -8,7 +8,10 @@
 		http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
-        <routeBuilder ref="TVGrabberRouteBuilder"/>
+        <routeBuilder ref="TVGrabberBuild"/>
+        <routeBuilder ref="TVGrabberSubscribe"/>
+        <routeBuilder ref="TVGrabberNewsletter"/>
+        <routeBuilder ref="TVGrabberComment"/>
     </camelContext>
 
     <jdbc:embedded-database id="derbyDatasource" type="DERBY"/>

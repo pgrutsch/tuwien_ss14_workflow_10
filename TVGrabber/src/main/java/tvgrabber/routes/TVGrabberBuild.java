@@ -17,9 +17,9 @@ import tvgrabber.entities.Series;
  */
 
 @Component
-public class TVGrabberRouteBuilder extends RouteBuilder {
+public class TVGrabberBuild extends RouteBuilder {
 
-    private static final Logger logger = Logger.getLogger(TVGrabberRouteBuilder.class);
+    private static final Logger logger = Logger.getLogger(TVGrabberBuild.class);
 
     @Override
     public void configure() throws Exception {
@@ -50,7 +50,7 @@ public class TVGrabberRouteBuilder extends RouteBuilder {
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        logger.info("Series title: " + exchange.getIn().getBody(Series.class).getTitle());
+                        logger.info("Series: " + exchange.getIn().getBody(Series.class).getId() + " - " + exchange.getIn().getBody(Series.class).getTitle());
                     }
                 });
 

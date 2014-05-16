@@ -1,13 +1,8 @@
 package tvgrabber;
 
-import org.apache.camel.Endpoint;
-import org.apache.camel.Exchange;
-import org.apache.camel.PollingConsumer;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
-import tvgrabber.routes.TVGrabberRouteBuilder;
 
 import java.util.Scanner;
 
