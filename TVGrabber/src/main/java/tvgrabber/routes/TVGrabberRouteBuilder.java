@@ -34,11 +34,11 @@ public class TVGrabberRouteBuilder extends RouteBuilder {
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        logger.info("Series title: " + exchange.getIn().getBody(Series.class).getTitle());
-                        logger.info("Series desc: " + exchange.getIn().getBody(Series.class).getDesc());
-                        logger.info("Series channel: " + exchange.getIn().getBody(Series.class).getChannel());
-                        logger.info("Series start: " + exchange.getIn().getBody(Series.class).getStart());
-                        logger.info("Series stop: " + exchange.getIn().getBody(Series.class).getStop());
+                        logger.debug("Series title: " + exchange.getIn().getBody(Series.class).getTitle());
+                        logger.debug("Series desc: " + exchange.getIn().getBody(Series.class).getDesc());
+                        logger.debug("Series channel: " + exchange.getIn().getBody(Series.class).getChannel());
+                        logger.debug("Series start: " + exchange.getIn().getBody(Series.class).getStart());
+                        logger.debug("Series stop: " + exchange.getIn().getBody(Series.class).getStop());
                     }
                 })
                 .to("jpa://tvgrabber.entities.Series");
