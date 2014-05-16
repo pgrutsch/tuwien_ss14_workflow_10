@@ -31,13 +31,11 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
         new Thread(new Runnable() {
             @Override
             public void run() {
-
                 new Scanner(System.in).nextLine();
-
+                enableHangupSupport();
             }
         }).start();
 
     }
-
 
 }

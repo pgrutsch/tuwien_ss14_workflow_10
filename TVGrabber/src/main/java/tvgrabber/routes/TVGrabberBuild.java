@@ -54,17 +54,6 @@ public class TVGrabberBuild extends RouteBuilder {
                     }
                 });
 
-
-        /*Subscribe / Unsubscribe */
-        from("pop3s://pop.gmail.com:995?password=workflow2014&username=workflow2014ss@gmail.com&consumer.delay=12000")
-        .bean(MyBean.class,"echo")
-                .choice()
-                .when(header("subject").contains("Unsubscribe")).to("seda:unsubscribe")
-                .otherwise().to("seda:subscribe");
-
-        from("seda:unsubscribe").bean(MyBean.class,"echo").bean(Addressmanager.class, "unsubscribe");
-        from("seda:subscribe").bean(Addressmanager.class, "subscribe");
-
     }
 
 
