@@ -26,6 +26,9 @@ import java.sql.Statement;
 @ActiveProfiles("testing")
 public class SampleTest {
 
+    // What was is:
+    // http://spring.io/blog/2011/06/21/spring-3-1-m2-testing-with-configuration-classes-and-profiles/
+
     @Autowired
     Producer producer;
 
@@ -81,7 +84,7 @@ public class SampleTest {
         String msgToSend = "Hi, I am a Test.";
 
         ProducerTemplate prodtemp = mock(ProducerTemplate.class);
-        
+
         producer.setProducer(prodtemp);
         producer.send(msgToSend);
 
