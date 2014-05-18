@@ -1,6 +1,7 @@
-import at.tvgrabber.tns.Comment;
-import at.tvgrabber.tns.PostComment;
+
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import soap.PostComment;
+import soap.SOAPComment;
 
 import java.util.Scanner;
 
@@ -41,8 +42,10 @@ public class WSClient {
             if(input.equals("exit")) {
                 return;
             } else {
-                Comment c = new Comment();
-                c.setContent(input);
+                SOAPComment c = new SOAPComment();
+                c.setComment(input);
+                c.setEmail("alois@huber.com");
+                c.setTvprogram(34);
                 myService.postComment(c);
             }
 

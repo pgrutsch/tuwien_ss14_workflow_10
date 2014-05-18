@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-                  xmlns:tns="http://www.tvgrabber.com/soap"
+                  xmlns:tns="http://www.tvgrabber.at/soap"
                   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
                   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                   name="PostComment"
-                  targetNamespace="http://www.tvgrabber.com/soap">
+                  targetNamespace="http://www.tvgrabber.at/soap">
   <wsdl:types>
-    <xsd:schema targetNamespace="http://www.tvgrabber.com/soap">
-      <xsd:element name="Comment">
+    <xsd:schema targetNamespace="http://www.tvgrabber.at/soap">
+      <xsd:element name="SOAPComment">
           <xsd:complexType>
               <xsd:sequence>
-                  <xsd:element name="content" type="xsd:string" minOccurs="1" maxOccurs="1" />
+                  <xsd:element name="id" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+                  <xsd:element name="email" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="comment" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="tvprogram" type="xsd:int" minOccurs="1" maxOccurs="1"/>
               </xsd:sequence>
           </xsd:complexType>
       </xsd:element>
@@ -18,7 +21,7 @@
   </wsdl:types>
 
   <wsdl:message name="PostCommentIn">
-    <wsdl:part element="tns:Comment" name="parameters"/>
+    <wsdl:part element="tns:SOAPComment" name="parameters"/>
   </wsdl:message>
 
   <wsdl:portType name="PostComment">
@@ -30,7 +33,7 @@
   <wsdl:binding name="PostCommentSOAP" type="tns:PostComment">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <wsdl:operation name="PostComment">
-      <soap:operation soapAction="http://www.tvgrabber.com/soap/PostComment"/>
+      <soap:operation soapAction="http://www.tvgrabber.at/soap/PostComment"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
@@ -39,7 +42,7 @@
 
   <wsdl:service name="PostComment">
     <wsdl:port binding="tns:PostCommentSOAP" name="TVGrabberSOAP">
-      <soap:address location="http://www.tvgrabber.com/"/>
+      <soap:address location="http://www.tvgrabber.at/"/>
     </wsdl:port>
   </wsdl:service>
 

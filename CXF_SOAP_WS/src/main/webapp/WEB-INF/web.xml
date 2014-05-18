@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
-	<display-name>AppStore Gateway</display-name>
+	<display-name>TVGrabber Post Comment</display-name>
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -36,7 +36,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>cxf</servlet-name>
-		<url-pattern>/soap/*</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 
 
