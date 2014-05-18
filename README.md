@@ -4,8 +4,10 @@ tuwien_ss14_workflow_10
 TU Wien Workflow SS 14, Group 10
 
 #### CXF_SOAP_WS
-*How to start*
+**How to start
+
 maven clean install
+
 maven plugin tomcat7:run
 
 This will start a webservice at
