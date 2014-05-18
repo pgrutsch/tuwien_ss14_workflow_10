@@ -1,5 +1,5 @@
 
-package tvgrabber.webservice.soap;
+package webservice;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

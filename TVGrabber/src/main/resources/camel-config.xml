@@ -20,7 +20,6 @@
         <routeBuilder ref="TVGrabberSubscribe"/>
         <routeBuilder ref="TVGrabberNewsletter"/>
         <routeBuilder ref="TVGrabberComment"/>
-
     </camelContext>
 
 </beans>

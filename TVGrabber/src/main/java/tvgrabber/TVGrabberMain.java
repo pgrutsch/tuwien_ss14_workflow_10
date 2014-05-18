@@ -4,8 +4,6 @@ import org.apache.log4j.Logger;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
-import java.util.Scanner;
-
 /**
  * Created by patrickgrutsch on 30.04.14.
  */
@@ -14,7 +12,7 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
 
     private static final Logger logger = Logger.getLogger(TVGrabberMain.class);
 
-    public static void main(String args[]) throws Exception {
+    public static void main(String args[]) {
 
         AnnotationConfigApplicationContext springContext = new AnnotationConfigApplicationContext(TVGrabberConfig.class);
 
@@ -26,15 +24,15 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
 
     }
 
-    public void startApp() {
+    public void startApp(){
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                new Scanner(System.in).nextLine();
-                enableHangupSupport();
-            }
-        }).start();
+        super.enableHangupSupport();
+        try {
+            super.run();
+        } catch (Exception e) {
+            logger.error("Error starting app");
+            e.printStackTrace();
+        }
 
     }
 

@@ -1,4 +1,4 @@
-package tvgrabber.webservice.soap;
+package webservice;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;

@@ -23,11 +23,11 @@ public class TVGrabberComment extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        String url = "cxf://http://127.0.0.1:8080/spring-soap-1.0.0-SNAPSHOT/soap/PostComment?serviceClass=" + PostComment.class.getName() +
+        String url = "cxf://http://127.0.0.1:8080/spring-soap/PostComment?serviceClass=" + PostComment.class.getName() +
                 "&serviceName=PostComment&endpointName={http://www.tvgrabber.com/soap}TVGrabberSOAP";
 
         from(url)
-                .log(LoggingLevel.INFO, "Receiving SOAP msg from: http://localhost:8080/spring-soap-1.0.0-SNAPSHOT/soap/PostComment")
+                .log(LoggingLevel.INFO, "Receiving SOAP msg from: http://localhost:8080/spring/PostComment")
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {

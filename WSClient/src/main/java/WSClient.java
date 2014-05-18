@@ -22,7 +22,7 @@ public class WSClient {
 
     public void test() {
 
-        String serviceUrl = "http://localhost:8080/spring-soap-1.0.0-SNAPSHOT/soap/PostComment";
+        String serviceUrl = "http://localhost:8080/spring-soap/PostComment";
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
         factory.setServiceClass(PostComment.class);
         factory.setAddress(serviceUrl);
