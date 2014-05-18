@@ -3,11 +3,15 @@ tuwien_ss14_workflow_10
 
 TU Wien Workflow SS 14, Group 10
 
-CXF_SOAP_WS:
-Start this project with a local Jetty server (Run config). This will start a webservice at
-http://localhost:8080/spring-soap-1.0.0-SNAPSHOT/soap/
+#### CXF_SOAP_WS
+*How to start*
+maven clean install
+maven plugin tomcat7:run
 
-WSClient:
+This will start a webservice at
+http://localhost:8080/spring-soap
+
+#### WSClient:
 A simple webservice client to test the CXF component in TVGrabber.
 Start it and enter a comment. If the comment was sent successfully,
-you see the comment in your TVGrabber's console.
+you see the comment in your TVGrabber's and Webservice's server console.
