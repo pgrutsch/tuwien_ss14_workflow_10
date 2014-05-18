@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://www.tvgrabber.at/tns"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  name="PostComment"
+                  targetNamespace="http://www.tvgrabber.at/tns">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.tvgrabber.at/tns">
+      <xsd:element name="Comment">
+          <xsd:complexType>
+              <xsd:sequence>
+                  <xsd:element name="content" type="xsd:string" minOccurs="1" maxOccurs="1" />
+              </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+
+  <wsdl:message name="PostCommentIn">
+    <wsdl:part element="tns:Comment" name="parameters"/>
+  </wsdl:message>
+
+  <wsdl:portType name="PostComment">
+    <wsdl:operation name="PostComment">
+      <wsdl:input message="tns:PostCommentIn"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="PostCommentSOAP" type="tns:PostComment">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="PostComment">
+      <soap:operation soapAction="http://www.tvgrabber.at/tns/PostComment"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="PostComment">
+    <wsdl:port binding="tns:PostCommentSOAP" name="TVGrabberSOAP">
+      <soap:address location="http://www.tvgrabber.at/"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>
