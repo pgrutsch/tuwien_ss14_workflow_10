@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.*;
  */
 
 @Entity
-@Table(name ="COMMENT")
+@Table(name ="Comment", schema = "TVGRABBER")
 public class Comment {
 
     @Id
@@ -16,7 +16,7 @@ public class Comment {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "email")
+    @Column(name = "email", length = 200)
     private String email;
 
     @Column(name = "comment")

@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by patrickgrutsch on 15.05.14.
  */
 @Entity
-@Table(name ="TVProgram")
+@Table(name ="TVProgram", schema = "TVGRABBER")
 @XmlRootElement(name = "programme")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(factoryClass=ObjectFactory.class, factoryMethod="createSeries")
@@ -20,7 +20,7 @@ public class Series implements Serializable {
     private Integer id;
 
     @XmlElement(name = "title")
-    @Column(name = "title")
+    @Column(name = "title", length = 200)
     private String title;
 
     @XmlElement(name = "desc")
@@ -30,16 +30,16 @@ public class Series implements Serializable {
 
     //TODO: convert to date
     @XmlAttribute(name = "start")
-    @Column(name = "startTime")
+    @Column(name = "startTime", length = 29)
     private String start;
 
     //TODO: convert to date
     @XmlAttribute(name = "stop")
-    @Column(name = "endTime")
+    @Column(name = "endTime", length = 29)
     private String stop;
 
     @XmlAttribute(name = "channel")
-    @Column(name = "channel")
+    @Column(name = "channel", length = 200)
     private String channel;
 
     public Integer getId() {
