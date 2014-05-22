@@ -18,7 +18,7 @@ public class StandAloneDerby {
     public DataSource dataSource(){
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.DERBY)
-                .addScript("create.sql").addScript("testinsert.sql")
+                .addScript("schema.sql").addScript("create.sql").addScript("testinsert.sql")
                 .build();
     }
 }

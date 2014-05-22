@@ -56,7 +56,7 @@ public class SampleTest {
         try {
             cs = dataSource.getConnection();
             stm = cs.createStatement();
-            rs = stm.executeQuery("Select email from TVUser");
+            rs = stm.executeQuery("Select email from TVGRABBER.TVUser");
 
             rs.next();
 
