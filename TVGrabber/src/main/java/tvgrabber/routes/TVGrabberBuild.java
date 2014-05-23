@@ -8,8 +8,6 @@ import org.apache.camel.converter.jaxb.JaxbDataFormat;
 import org.apache.camel.spi.DataFormat;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
-import tvgrabber.beans.Addressmanager;
-import tvgrabber.beans.MyBean;
 import tvgrabber.entities.Series;
 
 /**
@@ -29,8 +27,10 @@ public class TVGrabberBuild extends RouteBuilder {
 
         from("file://src/tvdata?noop=true&initialDelay=2000&delay=4000&fileName=guide.xml")
                 .log(LoggingLevel.INFO, "Loading guide.xml")
+                .wireTap("file://archive?fileName=${date:now:yyyyMMdd}_${file:onlyname}")
                 .split().tokenizeXML("programme")
                 .unmarshal(jaxbDataFormat)
+                .filter().method(Series.class, "isSeries") // Content filter
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
