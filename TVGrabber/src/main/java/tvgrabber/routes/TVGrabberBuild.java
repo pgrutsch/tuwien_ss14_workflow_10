@@ -27,7 +27,7 @@ public class TVGrabberBuild extends RouteBuilder {
         /* Fetch and parse guide.xml */
         DataFormat jaxbDataFormat = new JaxbDataFormat("tvgrabber.entities");
 
-        /*from("file://src/tvdata?noop=true&initialDelay=2000&delay=4000&fileName=guide.xml")
+        from("file://src/tvdata?noop=true&initialDelay=2000&delay=4000&fileName=guide.xml")
                 .log(LoggingLevel.INFO, "Loading guide.xml")
                 .split().tokenizeXML("programme")
                 .unmarshal(jaxbDataFormat)
@@ -41,7 +41,7 @@ public class TVGrabberBuild extends RouteBuilder {
                         logger.debug("Series stop: " + exchange.getIn().getBody(Series.class).getStop());
                     }
                 })
-                .to("jpa://tvgrabber.entities.Series");*/
+                .to("jpa://tvgrabber.entities.Series");
 
 
         /* Fetch 5 entries every 5 seconds to check if there is really data in the database */
@@ -50,7 +50,8 @@ public class TVGrabberBuild extends RouteBuilder {
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        logger.info("Series: " + exchange.getIn().getBody(Series.class).getId() + " - " + exchange.getIn().getBody(Series.class).getTitle());
+                        logger.info("Series: " + exchange.getIn().getBody(Series.class).getId() + " - "
+                                + exchange.getIn().getBody(Series.class).getTitle());
                     }
                 });
 

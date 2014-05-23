@@ -4,6 +4,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.cxf.CxfEndpoint;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import tvgrabber.beans.CommentBean;
@@ -25,6 +26,7 @@ public class TVGrabberComment extends RouteBuilder {
 
         String url = "cxf://http://localhost:8080/spring-soap/PostComment?serviceClass=" + PostComment.class.getName() +
                 "&serviceName=PostComment&endpointName={http://www.tvgrabber.at/soap}TVGrabberSOAP";
+
 
         from(url)
                 .log(LoggingLevel.INFO, "Receiving SOAP msg from: http://localhost:8080/spring-soap/PostComment")

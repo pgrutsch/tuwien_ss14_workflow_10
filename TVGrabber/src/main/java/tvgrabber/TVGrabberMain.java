@@ -27,13 +27,10 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
 
     @Autowired
     private TVGrabberBuild tvGrabberBuild;
-
     @Autowired
     private TVGrabberComment tvGrabberComment;
-
     @Autowired
     private TVGrabberNewsletter tvGrabberNewsletter;
-
     @Autowired
     private TVGrabberSubscribe tvGrabberSubscribe;
 
