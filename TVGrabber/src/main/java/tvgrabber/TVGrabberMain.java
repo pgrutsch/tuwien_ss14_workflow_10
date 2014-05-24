@@ -57,7 +57,7 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
 
         List<RouteBuilder> routeBuilders = new ArrayList<RouteBuilder>();
         routeBuilders.add(tvGrabberBuild);
-        //routeBuilders.add(tvGrabberComment);
+        routeBuilders.add(tvGrabberComment);
         routeBuilders.add(tvGrabberNewsletter);
         routeBuilders.add(tvGrabberSubscribe);
 
@@ -77,7 +77,7 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
 
     /* Clear all tables.
        As we use an embedded database all the db files are stored in the target folder.
-       This cleaning allows you running the app without deleted the target folder every time.
+       This cleaning allows you running the app without deleting the target folder every run.
      */
     private void clearDatabase() throws SQLException {
         logger.debug("Getting Database connection");

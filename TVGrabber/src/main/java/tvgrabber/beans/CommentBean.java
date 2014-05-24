@@ -20,8 +20,6 @@ public class CommentBean {
 
         SOAPComment soapComment = exchange.getIn().getBody(SOAPComment.class);
 
-        logger.debug(exchange.getIn().getBody(SOAPComment.class).getComment());
-
         Comment comment = new Comment();
         comment.setEmail(soapComment.getEmail());
         comment.setComment(soapComment.getComment());

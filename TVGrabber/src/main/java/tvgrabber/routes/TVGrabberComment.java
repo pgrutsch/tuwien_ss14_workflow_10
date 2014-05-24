@@ -4,7 +4,6 @@ import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.cxf.CxfEndpoint;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import tvgrabber.beans.CommentBean;
@@ -24,12 +23,10 @@ public class TVGrabberComment extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        String url = "cxf://http://localhost:8080/spring-soap/PostComment?serviceClass=" + PostComment.class.getName() +
-                "&serviceName=PostComment&endpointName={http://www.tvgrabber.at/soap}TVGrabberSOAP";
-
+        String url = "cxf://http://localhost:8080/spring-soap/PostComment?serviceClass=" + PostComment.class.getName();
 
         from(url)
-                .log(LoggingLevel.INFO, "Receiving SOAP msg from: http://localhost:8080/spring-soap/PostComment")
+                .log(LoggingLevel.INFO, "Receiving SOAP msg from http://localhost:8080/spring-soap/PostComment")
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
@@ -37,12 +34,12 @@ public class TVGrabberComment extends RouteBuilder {
                         String email = exchange.getIn().getBody(SOAPComment.class).getEmail();
                         int tvprogram_id = exchange.getIn().getBody(SOAPComment.class).getTvprogram();
 
-                        logger.debug("PostComment:");
-                        logger.debug("Email: " + email + " TVProgramm id: " + tvprogram_id + " Comment: " + comment);
+                        logger.debug("Postcomment = Email: " + email + " TVProgramm id: " + tvprogram_id + " Comment: " + comment);
                     }
                 })
                 .bean(CommentBean.class)
                 .recipientList(header("recipients")).parallelProcessing();
+
 
         from("jpa://tvgrabber.entities.Comment?consumeDelete=false&maximumResults=5&consumer.delay=7000")
                 .log(LoggingLevel.INFO, "Reading comments from DB")
