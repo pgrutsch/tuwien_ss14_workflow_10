@@ -51,7 +51,8 @@ public class TVGrabberBuild extends RouteBuilder {
                     @Override
                     public void process(Exchange exchange) throws Exception {
                         logger.info("Series: " + exchange.getIn().getBody(Series.class).getId() + " - "
-                                + exchange.getIn().getBody(Series.class).getTitle());
+                                + exchange.getIn().getBody(Series.class).getTitle() + " - "
+                                + exchange.getIn().getBody(Series.class).getStart());
                     }
                 });
 

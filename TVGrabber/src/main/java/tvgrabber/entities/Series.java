@@ -1,11 +1,14 @@
 package tvgrabber.entities;
 
 import org.apache.camel.Exchange;
+import tvgrabber.beans.XMLDateAdapter;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,15 +39,15 @@ public class Series implements Serializable {
     @Transient // @Column(name = "category") - not stored in DB
     private List<String> category = new ArrayList<String>();
 
-    //TODO: convert to date
     @XmlAttribute(name = "start")
     @Column(name = "startTime", length = 29)
-    private String start;
+    @XmlJavaTypeAdapter(XMLDateAdapter.class)
+    private Date start;
 
-    //TODO: convert to date
     @XmlAttribute(name = "stop")
     @Column(name = "endTime", length = 29)
-    private String stop;
+    @XmlJavaTypeAdapter(XMLDateAdapter.class)
+    private Date stop;
 
     @XmlAttribute(name = "channel")
     @Column(name = "channel", length = 200)
@@ -71,11 +74,11 @@ public class Series implements Serializable {
         return desc;
     }
 
-    public String getStart() {
+    public Date getStart() {
         return start;
     }
 
-    public String getStop() {
+    public Date getStop() {
         return stop;
     }
 
