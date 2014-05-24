@@ -41,7 +41,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/cxf-codegen-plugin-markers" />
-      <excludeFolder url="file://$MODULE_DIR$/target/derby" />
       <excludeFolder url="file://$MODULE_DIR$/target/generated" />
       <excludeFolder url="file://$MODULE_DIR$/target/maven-archiver" />
       <excludeFolder url="file://$MODULE_DIR$/target/surefire-reports" />

@@ -1,7 +1,6 @@
 package tvgrabber.entities;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.*;
 
 /**
  * Created by patrickgrutsch on 18.05.14.

@@ -3,8 +3,6 @@ package tvgrabber.routes;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
-import tvgrabber.beans.Addressmanager;
-import tvgrabber.beans.MyBean;
 
 /**
  * Created by patrickgrutsch on 30.04.14.

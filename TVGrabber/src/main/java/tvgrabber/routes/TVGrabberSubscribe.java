@@ -1,16 +1,10 @@
 package tvgrabber.routes;
 
-import org.apache.camel.Exchange;
-import org.apache.camel.LoggingLevel;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.converter.jaxb.JaxbDataFormat;
-import org.apache.camel.spi.DataFormat;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import tvgrabber.beans.Addressmanager;
 import tvgrabber.beans.MyBean;
-import tvgrabber.entities.Series;
 
 /**
  * Created by patrickgrutsch on 30.04.14.

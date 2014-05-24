@@ -1,15 +1,9 @@
+package tvgrabber;
+
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import static org.mockito.Mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import tvgrabber.Producer;
-import tvgrabber.TVGrabberConfig;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -17,17 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 /**
  * Created by stamm_000 on 15.05.14.
  */
-@RunWith(CamelSpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class,
-        classes = {TVGrabberConfig.class, StandAloneDerby.class})
-@ActiveProfiles("testing")
-public class SampleTest {
-
-    // What was is:
-    // http://spring.io/blog/2011/06/21/spring-3-1-m2-testing-with-configuration-classes-and-profiles/
+public class SampleTest extends AbstractTest {
 
     @Autowired
     Producer producer;

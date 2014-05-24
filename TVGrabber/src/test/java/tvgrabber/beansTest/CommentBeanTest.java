@@ -1,18 +1,15 @@
+package tvgrabber.beansTest;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.impl.DefaultExchange;
-import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import tvgrabber.TVGrabberConfig;
+import tvgrabber.AbstractTest;
 import tvgrabber.beans.CommentBean;
 import tvgrabber.entities.Comment;
 import tvgrabber.webservice.soap.SOAPComment;
@@ -23,17 +20,12 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by patrickgrutsch on 24.05.14.
  */
 
-@RunWith(CamelSpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class,
-        classes = {TVGrabberConfig.class, StandAloneDerby.class})
-@ActiveProfiles("testing")
-public class CommentBeanTest {
+public class CommentBeanTest extends AbstractTest {
 
     private Exchange exchange;
     private CamelContext context;
@@ -94,7 +86,7 @@ public class CommentBeanTest {
         commentBean.route(headers, exchange);
 
         List<String> recipients = new ArrayList<String>();
-        recipients.add("jpa://tvgrabber.beans.Comment");
+        recipients.add("jpa://tvgrabber.tvgrabber.beansTest.Comment");
 
         //TODO add twitter
         assertEquals(headers.get("recipients"), recipients);

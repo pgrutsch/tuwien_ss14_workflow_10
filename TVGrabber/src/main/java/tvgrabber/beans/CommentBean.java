@@ -29,7 +29,7 @@ public class CommentBean {
 
         exchange.getIn().setBody(comment);
 
-        String db = "jpa://tvgrabber.beans.Comment";
+        String db = "jpa://tvgrabber.tvgrabber.beansTest.Comment";
         String twitter = ""; //TODO
 
 
