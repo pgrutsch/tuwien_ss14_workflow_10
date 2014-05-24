@@ -3,6 +3,7 @@ package tvgrabber.beans;
 import org.apache.camel.Exchange;
 import org.apache.camel.Headers;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 import tvgrabber.entities.Comment;
 import tvgrabber.webservice.soap.SOAPComment;
 
@@ -12,6 +13,7 @@ import java.util.Map;
 /**
  * Created by patrickgrutsch on 18.05.14.
  */
+@Component
 public class CommentBean {
 
     private static final Logger logger = Logger.getLogger(CommentBean.class);
