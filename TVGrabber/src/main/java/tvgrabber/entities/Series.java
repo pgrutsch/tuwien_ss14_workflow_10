@@ -1,7 +1,10 @@
 package tvgrabber.entities;
 
 import org.apache.camel.Exchange;
+import org.apache.openjpa.persistence.jdbc.Strategy;
 import tvgrabber.beans.XMLDateAdapter;
+import tvgrabber.routes.*;
+import tvgrabber.routes.TVGrabberComment;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
@@ -10,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by patrickgrutsch on 15.05.14.
@@ -56,6 +60,16 @@ public class Series implements Serializable {
     @Column(name = "imdbRating")
     private Double imdbRating = 0.0;
 
+    @OneToMany(mappedBy = "series")
+    private Set<Comment> comments;
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
 
     public void setImdbRating(Double imdbRating) {
         this.imdbRating = imdbRating;
@@ -96,5 +110,33 @@ public class Series implements Serializable {
 
     public Double getImdbRating() {
         return imdbRating;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public void setStop(Date stop) {
+        this.stop = stop;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
+
+    public void setCategory(List<String> category) {
+        this.category = category;
     }
 }

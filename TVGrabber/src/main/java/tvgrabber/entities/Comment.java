@@ -1,6 +1,7 @@
 package tvgrabber.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by patrickgrutsch on 18.05.14.
@@ -8,22 +9,23 @@ import javax.persistence.*;
 
 @Entity
 @Table(name ="Comment", schema = "TVGRABBER")
-public class Comment {
+public class Comment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "email", length = 200)
+    @Column(name = "email", length = 200, nullable = false)
     private String email;
 
-    @Column(name = "comment")
+    @Column(name = "comment", nullable = false)
     @Lob //prevent max length of 255
     private String comment;
 
-    @Column(name = "tvprogram")
-    private Integer tvprogram;
+    @ManyToOne
+    @JoinColumn(name = "tvProgram_id")
+    private Series series;
 
     public void setId(Integer id) {
         this.id = id;
@@ -35,10 +37,6 @@ public class Comment {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public void setTvprogram(Integer tvprogram) {
-        this.tvprogram = tvprogram;
     }
 
     public Integer getId() {
@@ -53,7 +51,11 @@ public class Comment {
         return comment;
     }
 
-    public Integer getTvprogram() {
-        return tvprogram;
+    public Series getTvprogram() {
+        return series;
+    }
+
+    public void setTvprogram(Series tvprogram) {
+        this.series = tvprogram;
     }
 }

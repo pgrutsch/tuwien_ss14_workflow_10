@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import tvgrabber.beans.CommentBean;
 import tvgrabber.entities.Comment;
 import tvgrabber.webservice.soap.PostComment;
-import tvgrabber.webservice.soap.SOAPComment;
 
 /**
  * Created by patrickgrutsch on 30.04.14.
@@ -27,21 +26,14 @@ public class TVGrabberComment extends RouteBuilder {
 
         from(url)
                 .log(LoggingLevel.INFO, "Receiving SOAP msg from http://localhost:8080/spring-soap/PostComment")
-                .process(new Processor() {
-                    @Override
-                    public void process(Exchange exchange) throws Exception {
-                        String comment = exchange.getIn().getBody(SOAPComment.class).getComment();
-                        String email = exchange.getIn().getBody(SOAPComment.class).getEmail();
-                        int tvprogram_id = exchange.getIn().getBody(SOAPComment.class).getTvprogram();
-
-                        logger.debug("Postcomment = Email: " + email + " TVProgramm id: " + tvprogram_id + " Comment: " + comment);
-                    }
-                })
+                .errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL))
                 .bean(CommentBean.class)
-                .recipientList(header("recipients")).parallelProcessing();
+                .recipientList(header("recipients"))
+                .parallelProcessing();
 
 
         from("jpa://tvgrabber.entities.Comment?consumeDelete=false&maximumResults=5&consumer.delay=7000")
+                .errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL))
                 .log(LoggingLevel.INFO, "Reading comments from DB")
                 .process(new Processor() {
                     @Override

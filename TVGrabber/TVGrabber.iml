@@ -41,6 +41,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/cxf-codegen-plugin-markers" />
+      <excludeFolder url="file://$MODULE_DIR$/target/derby" />
       <excludeFolder url="file://$MODULE_DIR$/target/generated" />
       <excludeFolder url="file://$MODULE_DIR$/target/maven-archiver" />
       <excludeFolder url="file://$MODULE_DIR$/target/surefire-reports" />
@@ -96,6 +97,10 @@
     <orderEntry type="library" name="Maven: net.oauth.core:oauth-provider:20100527" level="project" />
     <orderEntry type="library" name="Maven: net.oauth.core:oauth:20100527" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-rt-features-clustering:2.7.10" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.camel:camel-http:2.13.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.geronimo.specs:geronimo-servlet_3.0_spec:1.0" level="project" />
+    <orderEntry type="library" name="Maven: commons-httpclient:commons-httpclient:3.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.8" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-rt-transports-http-jetty:2.7.11" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-server:8.1.14.v20131031" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-continuation:8.1.14.v20131031" level="project" />
@@ -103,7 +108,6 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-io:8.1.14.v20131031" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-util:8.1.14.v20131031" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-security:8.1.14.v20131031" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.geronimo.specs:geronimo-servlet_3.0_spec:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.0.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.0.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.5" level="project" />

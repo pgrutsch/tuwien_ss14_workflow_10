@@ -5,10 +5,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
-import tvgrabber.routes.TVGrabberBuild;
-import tvgrabber.routes.TVGrabberComment;
-import tvgrabber.routes.TVGrabberNewsletter;
-import tvgrabber.routes.TVGrabberSubscribe;
+import tvgrabber.routes.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,6 +30,8 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
     private TVGrabberNewsletter tvGrabberNewsletter;
     @Autowired
     private TVGrabberSubscribe tvGrabberSubscribe;
+    @Autowired
+    private TVGrabberDeadLetter tvGrabberDeadLetter;
 
     public static void main(String args[]) {
 
@@ -60,6 +59,7 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
         routeBuilders.add(tvGrabberComment);
         routeBuilders.add(tvGrabberNewsletter);
         routeBuilders.add(tvGrabberSubscribe);
+        routeBuilders.add(tvGrabberDeadLetter);
 
         super.setRouteBuilders(routeBuilders);
         super.enableHangupSupport();
