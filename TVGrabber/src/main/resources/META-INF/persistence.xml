@@ -13,6 +13,7 @@
         <!-- Add Entity classes here -->
         <class>tvgrabber.entities.Series</class>
         <class>tvgrabber.entities.Comment</class>
+        <class>tvgrabber.entities.TVGrabberUser</class>
 
         <properties>
             <property name="openjpa.ConnectionURL" value="jdbc:derby:target/derby;create=true"/>

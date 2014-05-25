@@ -1,10 +1,13 @@
 package tvgrabber.routes;
 
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import tvgrabber.beans.Addressmanager;
 import tvgrabber.beans.MyBean;
+import tvgrabber.entities.TVGrabberUser;
 
 /**
  * Created by patrickgrutsch on 30.04.14.
@@ -24,11 +27,15 @@ public class TVGrabberSubscribe extends RouteBuilder {
                 .choice()
                 .when(header("subject").contains("Unsubscribe")).to("seda:unsubscribe")
                 .otherwise().to("seda:subscribe");
+        //TODO: perhaps a deadletter queue or something like this :)
 
-        from("seda:unsubscribe").bean(MyBean.class,"echo").bean(Addressmanager.class, "unsubscribe");
-        from("seda:subscribe").bean(Addressmanager.class, "subscribe");
+        from("seda:unsubscribe").bean(Addressmanager.class, "unsubscribe")
+                .to("jpa://tvgrabber.entities.TVGrabberUser")
+                .setHeader("to", header("from")).to("smtp://smtp.gmail.com:587?password=workflow2014&username=workflow2014ss@gmail.com");
+
+        from("seda:subscribe").bean(Addressmanager.class, "subscribe").to("jpa://tvgrabber.entities.TVGrabberUser");
+
+        }
+
 
     }
-
-
-}

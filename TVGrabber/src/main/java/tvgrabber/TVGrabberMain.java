@@ -82,7 +82,7 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
     private void clearDatabase() throws SQLException {
         logger.debug("Getting Database connection");
 
-        Connection dbConn = DriverManager.getConnection("jdbc:derby:target/derby;create=true");
+        Connection dbConn = getConnection();
         Statement statement = dbConn.createStatement();
 
         logger.debug("Executing delete statements");
@@ -101,6 +101,10 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
         statement.close();
         dbConn.close();
 
+    }
+
+    public static Connection getConnection() throws SQLException{
+        return DriverManager.getConnection("jdbc:derby:target/derby;create=true");
     }
 
 }
