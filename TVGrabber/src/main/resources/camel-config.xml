@@ -12,6 +12,7 @@
         <routeBuilder ref="TVGrabberSubscribe"/>
         <routeBuilder ref="TVGrabberNewsletter"/>
         <routeBuilder ref="TVGrabberComment"/>
+        <routeBuilder ref="SampleRoute"/>
     </camelContext>
 
     <jdbc:embedded-database id="derbyDatasource" type="DERBY"/>
