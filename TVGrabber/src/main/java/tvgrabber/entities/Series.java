@@ -53,6 +53,14 @@ public class Series implements Serializable {
     @Column(name = "channel", length = 200)
     private String channel;
 
+    @Column(name = "imdbRating")
+    private Double imdbRating = 0.0;
+
+
+    public void setImdbRating(Double imdbRating) {
+        this.imdbRating = imdbRating;
+    }
+
     public List<String> getCategory() {
         return category;
     }
@@ -84,5 +92,9 @@ public class Series implements Serializable {
 
     public String getChannel() {
         return channel;
+    }
+
+    public Double getImdbRating() {
+        return imdbRating;
     }
 }
