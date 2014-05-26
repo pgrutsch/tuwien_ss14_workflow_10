@@ -1,4 +1,4 @@
-package tvgrabber.routes.exceptions;
+package tvgrabber.exceptions;
 
 /**
  * Created with IntelliJ IDEA.

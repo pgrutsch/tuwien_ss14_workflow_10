@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import tvgrabber.TVGrabberMain;
 import tvgrabber.entities.TVGrabberUser;
-import tvgrabber.routes.exceptions.UnsubscribeException;
+import tvgrabber.exceptions.UnsubscribeException;
 
 import java.sql.*;
 import java.util.Map;
