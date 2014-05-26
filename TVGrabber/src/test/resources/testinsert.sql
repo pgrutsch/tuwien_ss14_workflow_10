@@ -1,2 +1,4 @@
 insert into TVGRABBER.TVUser
-(email, subscribed, searchTerm) values ('bla', 1, 'blanochbla');
+(email, subscribed, searchTerm) values ('bla', FALSE , '');
+insert into TVGRABBER.TVUser
+(email, subscribed, searchTerm) values ('usermailbiz', TRUE , 'subscribed');
