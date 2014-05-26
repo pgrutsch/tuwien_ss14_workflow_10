@@ -45,7 +45,7 @@ public class WSClient {
                 SOAPComment c = new SOAPComment();
                 c.setComment(input);
                 c.setEmail("alois@huber.com");
-                c.setTvprogram(102);
+                c.setTvprogram(1);
                 myService.postComment(c);
             }
 
