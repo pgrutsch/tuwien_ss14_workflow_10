@@ -67,6 +67,7 @@ public class TVGrabberBuild extends RouteBuilder {
         from("seda:waitingForEnrichment")
                 .setHeader(Exchange.HTTP_QUERY, simple("t=${header.seriesTitle}&r=xml"))
                 .setHeader(Exchange.HTTP_METHOD, constant("GET"))
+                //.throttle(1).asyncDelayed() // Throttler EIP to avoid overloading omdbapi (1 request per second allowed)
                 //.enrich("http://omdbapi.com/", aggregationStrategy)
                 .to("jpa://tvgrabber.entities.Series");
 
