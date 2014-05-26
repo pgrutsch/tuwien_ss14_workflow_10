@@ -1,5 +1,6 @@
 package tvgrabber.routes;
 
+import facebook4j.PostUpdate;
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.Processor;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Component;
 import tvgrabber.beans.IMDBRatingAggregationStrategy;
 import tvgrabber.beans.NewSeries;
 import tvgrabber.entities.Series;
+
+import java.net.URL;
 
 /**
  * Created by patrickgrutsch on 30.04.14.
@@ -94,8 +97,15 @@ public class TVGrabberBuild extends RouteBuilder {
                                 + exchange.getIn().getBody(Series.class).getImdbRating() + ")");
                     }
                 });
-           //TODO add FB
+
+        //TODO add rout for Facebook
+        String facebookRout = "facebook://postStatusMessage?message=inBody&userId=100007112160276" +
+                "&oAuthAppId=357513357719221" +
+                "&oAuthAppSecret=4d027c8b2e01fa43afe7321907c22d5f" +
+                "&oAuthAccessToken=CAAFFKBCwdrUBADbQFRodHFg9mtOZAej2D2iIKewURCnzKjRRx5QVnl7qzEqlKfGhWDBU4VoJ0TmW7MiDMZAl3CrePgTEEzB9aUqG2TftHcDy6y41vB52jaifeJZCkE4h8DgOSCQztDWeviBnXewt15b3AabYVgMQ3MnctojyF8oDmV6926uk3fyhAfCE10ZD";
         from("seda:socialMedia").filter().method(NewSeries.class, "filterExistingSeries")
+                .multicast()
+                .to(facebookRout)
                 .to("seda:twitter");
 
     }
