@@ -1,9 +1,15 @@
 package tvgrabber;
 
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -17,7 +23,13 @@ import static org.mockito.Mockito.verify;
 /**
  * Created by stamm_000 on 15.05.14.
  */
-public class SampleTest extends AbstractTest {
+
+@RunWith(CamelSpringJUnit4ClassRunner.class)
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class,
+        classes = {TVGrabberConfig.class, StandAloneDerby.class})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
+@ActiveProfiles("testing")
+public class SampleTest {
 
     @Autowired
     Producer producer;
