@@ -5,27 +5,35 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.impl.DefaultExchange;
+import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import tvgrabber.AbstractTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import tvgrabber.StandAloneDerby;
+import tvgrabber.TVGrabberConfig;
 import tvgrabber.beans.CommentBean;
 import tvgrabber.entities.Comment;
 import tvgrabber.webservice.soap.SOAPComment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by patrickgrutsch on 24.05.14.
  */
 
-public class CommentBeanTest extends AbstractTest {
+@RunWith(CamelSpringJUnit4ClassRunner.class)
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class,
+        classes = {TVGrabberConfig.class, StandAloneDerby.class})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
+@ActiveProfiles("testing")
+public class CommentBeanTest {
 
     private Exchange exchange;
     private CamelContext context;
