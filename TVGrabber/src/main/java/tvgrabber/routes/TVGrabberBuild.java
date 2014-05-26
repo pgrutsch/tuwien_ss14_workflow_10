@@ -23,6 +23,15 @@ public class TVGrabberBuild extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+        onException(HttpOperationFailedException.class)
+                .maximumRedeliveries(0)
+                .process(new Processor() {
+                    public void process(Exchange exchange) throws Exception {
+                        log.error("ERROR while connecting to omdbapi.com API to retrieve IMDB rating");
+                        log.error(exchange.getException().getMessage());
+                    }
+                }).handled(true);
+
 
         /* Fetch and parse guide.xml */
         DataFormat jaxbDataFormat = new JaxbDataFormat("tvgrabber.entities");
@@ -40,8 +49,6 @@ public class TVGrabberBuild extends RouteBuilder {
 
                         String encodedTitle = msg.getTitle().replaceAll("[^ a-zA-Z0-9-_]", "");
                         exchange.getIn().setHeader("seriesTitle", encodedTitle);
-                        //.setHeader(Exchange.HTTP_METHOD, constant("POST"))
-                        //exchange.getIn().setHeader(Exchange.HTTP_QUERY, constant("t="+ msg.getTitle() +"&r=xml"));
 
                         logger.debug("Series title: " + msg.getTitle());
                         logger.debug("Series desc: " + msg.getDesc());
@@ -56,20 +63,10 @@ public class TVGrabberBuild extends RouteBuilder {
 
         IMDBRatingAggregationStrategy aggregationStrategy = new IMDBRatingAggregationStrategy();
         from("seda:waitingForEnrichment")
-                //.setHeader(Exchange.HTTP_QUERY, simple("t=${header.seriesTitle}&r=xml"))
-                //.setHeader(Exchange.HTTP_METHOD, constant("GET"))
+                .setHeader(Exchange.HTTP_QUERY, simple("t=${header.seriesTitle}&r=xml"))
+                .setHeader(Exchange.HTTP_METHOD, constant("GET"))
                 //.enrich("http://omdbapi.com/", aggregationStrategy)
-                .to("jpa://tvgrabber.entities.Series")
-                .onException(HttpOperationFailedException.class)
-                .maximumRedeliveries(0)
-                .process(new Processor() {
-                    public void process(Exchange exchange) throws Exception {
-                        // Not sure if this is working correct already
-                        log.info("ERROR while enriching Series with IMDBRating from omdbapi.com:");
-                        log.info(" --------------" + exchange.isFailed());
-                    }
-                });
-
+                .to("jpa://tvgrabber.entities.Series");
 
 
         /* Fetch 5 entries every 5 seconds to check if there is really data in the database */
