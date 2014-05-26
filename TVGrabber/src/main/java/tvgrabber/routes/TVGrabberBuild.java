@@ -39,7 +39,6 @@ public class TVGrabberBuild extends RouteBuilder {
 
         errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL));
 
-
         DataFormat jaxbDataFormat = new JaxbDataFormat("tvgrabber.entities");
 
         from("file://src/tvdata?noop=true&initialDelay=2000&delay=4000&fileName=guide.xml")
@@ -98,6 +97,9 @@ public class TVGrabberBuild extends RouteBuilder {
                                 + exchange.getIn().getBody(Series.class).getImdbRating() + ")");
                     }
                 });
+           //TODO add FB
+        from("seda:socialMedia").filter().method(NewSeries.class, "filterExistingSeries")
+                .to("seda:twitter");
 
         //TODO add rout for Facebook
        from("seda:socialMedia").filter().method(NewSeries.class, "filterExistingSeries")
