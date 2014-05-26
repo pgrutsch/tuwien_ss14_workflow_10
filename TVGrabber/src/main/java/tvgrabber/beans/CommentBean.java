@@ -39,11 +39,12 @@ public class CommentBean {
         exchange.getIn().setBody(comment);
 
         String db = "jpa://tvgrabber.entities.Comment";
-        String twitter = ""; //TODO
+        String twitter = "seda:twitter";
 
+        String facebook = ""; //TODO
 
-        //TODO add twitter to list
-        headers.put("recipients", Arrays.asList(db));
+        headers.put("recipients", Arrays.asList(db, twitter));
+        headers.put("type", "comment");
     }
 
     private void validateComment(SOAPComment comment) throws NullPointerException {

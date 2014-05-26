@@ -8,8 +8,10 @@ import org.apache.camel.component.http.HttpOperationFailedException;
 import org.apache.camel.converter.jaxb.JaxbDataFormat;
 import org.apache.camel.spi.DataFormat;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tvgrabber.beans.IMDBRatingAggregationStrategy;
+import tvgrabber.beans.NewSeries;
 import tvgrabber.entities.Series;
 
 /**
@@ -20,6 +22,9 @@ import tvgrabber.entities.Series;
 public class TVGrabberBuild extends RouteBuilder {
 
     private static final Logger logger = Logger.getLogger(TVGrabberBuild.class);
+
+//    @Autowired
+//    private FacebookConfiguration facebookConfiguration;
 
     @Override
     public void configure() throws Exception {
@@ -35,7 +40,11 @@ public class TVGrabberBuild extends RouteBuilder {
         errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL));
 
 
-        /* Fetch and parse guide.xml */
+        /* setting FB properties */
+//        facebookConfiguration.setOAuthAppId("357513357719221");
+//        facebookConfiguration.setOAuthAppSecret("4d027c8b2e01fa43afe7321907c22d5f");
+//        facebookConfiguration.setOAuthAccessToken("");//TODO get Token from Sprout
+//        /* Fetch and parse guide.xml */
         DataFormat jaxbDataFormat = new JaxbDataFormat("tvgrabber.entities");
 
         from("file://src/tvdata?noop=true&initialDelay=2000&delay=4000&fileName=guide.xml")
@@ -60,7 +69,9 @@ public class TVGrabberBuild extends RouteBuilder {
                         logger.debug("Series stop: " + msg.getStop());
                     }
                 })
-                .to("seda:waitingForEnrichment");
+                .multicast()
+                .to("seda:waitingForEnrichment")
+                .to("seda:socialMedia");
 
 
         IMDBRatingAggregationStrategy aggregationStrategy = new IMDBRatingAggregationStrategy();
@@ -70,7 +81,6 @@ public class TVGrabberBuild extends RouteBuilder {
                 //.throttle(1).asyncDelayed() // Throttler EIP to avoid overloading omdbapi (1 request per second allowed)
                 //.enrich("http://omdbapi.com/", aggregationStrategy)
                 .to("jpa://tvgrabber.entities.Series");
-
 
         /* Fetch 5 entries every 5 seconds to check if there is really data in the database */
         from("jpa://tvgrabber.entities.Series?consumeDelete=false&maximumResults=5&consumer.delay=5000")
@@ -84,6 +94,9 @@ public class TVGrabberBuild extends RouteBuilder {
                                 + exchange.getIn().getBody(Series.class).getImdbRating() + ")");
                     }
                 });
+           //TODO add FB
+        from("seda:socialMedia").filter().method(NewSeries.class, "filterExistingSeries")
+                .to("seda:twitter");
 
     }
 
