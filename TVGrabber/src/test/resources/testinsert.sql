@@ -12,4 +12,3 @@ values ('test2', 'just a sample', '1990-03-02 08:30:00.010000','1990-03-02 08:30
 insert into TVGRABBER.TVProgram
 (title, description, startTime, endTime, channel)
 values ('test2blabla', 'just a sample', '1990-03-02 08:30:00.010000','1990-03-02 08:30:00.020000', 'blachannel');
-

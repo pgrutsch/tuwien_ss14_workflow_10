@@ -25,10 +25,11 @@ public class Twitter extends RouteBuilder {
 
         //TODO add some more stuff to twitter but verify length in both cases
 
+
+        /* change the time for testing stuff */
         from(twitterEnd).throttle(1).timePeriodMillis(600000L).asyncDelayed()
                 .choice().when(isComment).to(twitterAccess)
                 .otherwise().split(body()).setBody(simple("${body.title}"))
-                .log(LoggingLevel.DEBUG, "TWEET: " + body().toString())
                 .to(twitterAccess).end();
     }
 }
