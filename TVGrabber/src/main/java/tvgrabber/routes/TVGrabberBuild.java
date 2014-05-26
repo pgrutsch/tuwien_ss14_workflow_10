@@ -32,6 +32,8 @@ public class TVGrabberBuild extends RouteBuilder {
                     }
                 }).handled(true);
 
+        errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL));
+
 
         /* Fetch and parse guide.xml */
         DataFormat jaxbDataFormat = new JaxbDataFormat("tvgrabber.entities");
