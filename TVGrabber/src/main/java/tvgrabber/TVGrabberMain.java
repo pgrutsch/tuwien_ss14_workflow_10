@@ -32,6 +32,8 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
     private TVGrabberSubscribe tvGrabberSubscribe;
     @Autowired
     private TVGrabberDeadLetter tvGrabberDeadLetter;
+    @Autowired
+    private Twitter twitter;
 
     public static void main(String args[]) {
 
@@ -60,6 +62,7 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
         routeBuilders.add(tvGrabberNewsletter);
         routeBuilders.add(tvGrabberSubscribe);
         routeBuilders.add(tvGrabberDeadLetter);
+        routeBuilders.add(twitter);
 
         super.setRouteBuilders(routeBuilders);
         super.enableHangupSupport();
