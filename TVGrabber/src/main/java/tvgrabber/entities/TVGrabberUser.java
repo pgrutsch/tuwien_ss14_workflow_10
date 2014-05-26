@@ -16,7 +16,7 @@ public class TVGrabberUser implements Serializable {
     public TVGrabberUser() {
     }
 
-    public TVGrabberUser(int id, String email, int subscribed, String searchTerm) {
+    public TVGrabberUser(int id, String email, boolean subscribed, String searchTerm) {
         this.id = id;
         this.email = email;
         this.subscribed = subscribed;
@@ -32,7 +32,7 @@ public class TVGrabberUser implements Serializable {
     private String email;
 
     @Column(name="subscribed", nullable = false)
-    private int subscribed;
+    private Boolean subscribed;
 
     @Column(name="searchTerm", length = 200, nullable = false)
     private String searchTerm;
@@ -54,11 +54,11 @@ public class TVGrabberUser implements Serializable {
         this.email = email;
     }
 
-    public int getSubscribed() {
+    public boolean getSubscribed() {
         return subscribed;
     }
 
-    public void setSubscribed(int subscribed) {
+    public void setSubscribed(boolean subscribed) {
         this.subscribed = subscribed;
     }
 

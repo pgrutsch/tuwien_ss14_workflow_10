@@ -23,18 +23,19 @@ public class TVGrabberSubscribe extends RouteBuilder {
 
         /*Subscribe / Unsubscribe */
         from("pop3s://pop.gmail.com:995?password=workflow2014&username=workflow2014ss@gmail.com&consumer.delay=12000")
-        .bean(MyBean.class,"echo")
-                .choice()
-                .when(header("subject").contains("Unsubscribe")).to("seda:unsubscribe")
-                .otherwise().to("seda:subscribe");
-        //TODO: perhaps a deadletter queue or something like this :)
+            .choice().when(header("subject").contains("Unsubscribe"))
+                .to("seda:unsubscribe")
+            .otherwise().to("seda:subscribe");
 
         from("seda:unsubscribe").bean(Addressmanager.class, "unsubscribe")
+                .choice().when(body().isNotNull())
+                    .to("jpa://tvgrabber.entities.TVGrabberUser")
+                    .to("smtps://smtp.gmail.com:465?password=workflow2014&username=workflow2014ss@gmail.com")
+                .otherwise().to(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL);
+
+        from("seda:subscribe").bean(Addressmanager.class, "subscribe")
                 .to("jpa://tvgrabber.entities.TVGrabberUser")
-                .setHeader("to", header("from")).to("smtp://smtp.gmail.com:587?password=workflow2014&username=workflow2014ss@gmail.com");
-
-        from("seda:subscribe").bean(Addressmanager.class, "subscribe").to("jpa://tvgrabber.entities.TVGrabberUser");
-
+                .to("smtps://smtp.gmail.com:465?password=workflow2014&username=workflow2014ss@gmail.com");
         }
 
 
