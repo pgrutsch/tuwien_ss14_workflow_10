@@ -101,7 +101,6 @@ public class TVGrabberBuild extends RouteBuilder {
         from("seda:socialMedia").filter().method(NewSeries.class, "filterExistingSeries")
                 .to("seda:twitter");
 
-        //TODO add rout for Facebook
        from("seda:socialMedia").filter().method(NewSeries.class, "filterExistingSeries")
                 .multicast()
                 .to("seda:facebook")
