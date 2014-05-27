@@ -3,10 +3,12 @@ package tvgrabber.beans;
 import org.apache.camel.Exchange;
 import org.apache.camel.Headers;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tvgrabber.TVGrabberMain;
 import tvgrabber.entities.Series;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +26,9 @@ public class NewSeries {
     private int count = 1;
     private Connection con;
 
+    @Autowired
+    private DataSource dataSource;
+
     /**
      * checks if serie is new
      *
@@ -36,10 +41,10 @@ public class NewSeries {
 
         try {
             if (con == null){
-                con = TVGrabberMain.getConnection();
+                con = dataSource.getConnection();
             }
             PreparedStatement countSeriesWithSameName =
-                    con.prepareStatement("SELECT count(*) from TVGRABBER.TVProgram where title LIKE ?");
+                    con.prepareStatement("SELECT count(*) from TVProgram where title LIKE ?");
             countSeriesWithSameName.setString(1, "%"+serie2check.getTitle()+"%");
             ResultSet rsSerie = countSeriesWithSameName.executeQuery();
 

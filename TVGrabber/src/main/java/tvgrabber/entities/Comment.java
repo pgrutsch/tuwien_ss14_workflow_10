@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 
 @Entity
-@Table(name ="Comment", schema = "TVGRABBER")
+@Table(name ="Comment")
 public class Comment implements Serializable {
 
     @Id

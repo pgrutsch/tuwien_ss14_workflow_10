@@ -41,7 +41,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/cxf-codegen-plugin-markers" />
-      <excludeFolder url="file://$MODULE_DIR$/target/derby" />
       <excludeFolder url="file://$MODULE_DIR$/target/generated" />
       <excludeFolder url="file://$MODULE_DIR$/target/maven-archiver" />
       <excludeFolder url="file://$MODULE_DIR$/target/surefire-reports" />
@@ -49,6 +48,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: com.h2database:h2:1.4.178" level="project" />
+    <orderEntry type="library" name="Maven: com.h2database:h2:1.4.178" level="project" />
     <orderEntry type="library" name="Maven: org.apache.camel:camel-core:2.13.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.camel:camel-spring:2.13.0" level="project" />
@@ -101,6 +102,14 @@
     <orderEntry type="library" name="Maven: org.apache.geronimo.specs:geronimo-servlet_3.0_spec:1.0" level="project" />
     <orderEntry type="library" name="Maven: commons-httpclient:commons-httpclient:3.1" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.8" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.camel:camel-twitter:2.13.0" level="project" />
+    <orderEntry type="library" name="Maven: org.twitter4j:twitter4j-core:3.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.twitter4j:twitter4j-stream:3.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.camel:camel-facebook:2.13.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.camel:spi-annotations:2.13.0" level="project" />
+    <orderEntry type="library" name="Maven: org.facebook4j:facebook4j-core:1.1.12" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.camel:camel-jms:2.13.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jms:3.2.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-rt-transports-http-jetty:2.7.11" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-server:8.1.14.v20131031" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-continuation:8.1.14.v20131031" level="project" />
@@ -123,6 +132,7 @@
     <orderEntry type="library" name="Maven: commons-pool:commons-pool:1.5.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xbean:xbean-asm4-shaded:3.14" level="project" />
     <orderEntry type="library" name="Maven: org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.h2database:h2:1.4.178" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.camel:camel-test-spring:2.13.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.camel:camel-test:2.13.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:3.2.8.RELEASE" level="project" />

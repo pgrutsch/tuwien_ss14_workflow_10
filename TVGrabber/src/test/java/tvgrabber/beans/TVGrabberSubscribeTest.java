@@ -1,4 +1,4 @@
-package tvgrabber.beansTest;
+package tvgrabber.beans;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
@@ -14,9 +14,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import tvgrabber.StandAloneDerby;
+import tvgrabber.StandAloneTestH2;
 import tvgrabber.TVGrabberConfig;
-import tvgrabber.beans.Addressmanager;
 import tvgrabber.entities.TVGrabberUser;
 import tvgrabber.routes.TVGrabberSubscribe;
 
@@ -30,7 +29,7 @@ import java.util.Map;
  */
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class,
-        classes = {TVGrabberConfig.class, StandAloneDerby.class})
+        classes = {TVGrabberConfig.class, StandAloneTestH2.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @ActiveProfiles("testing")
 public class TVGrabberSubscribeTest extends CamelTestSupport {

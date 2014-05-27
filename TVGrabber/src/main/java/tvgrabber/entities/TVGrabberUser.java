@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Date: 25.05.2014
  */
 @Entity
-@Table(name="TVUser", schema = "TVGRABBER")
+@Table(name="TVUser")
 public class TVGrabberUser implements Serializable {
 
     public TVGrabberUser() {

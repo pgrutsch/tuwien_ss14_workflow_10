@@ -13,13 +13,14 @@ import javax.sql.DataSource;
  */
 @Configuration
 @Profile("testing")
-public class StandAloneDerby {
+public class StandAloneTestH2 {
 
     @Bean
     public DataSource dataSource(){
         return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.DERBY)
-                .addScript("schema.sql").addScript("create.sql").addScript("testinsert.sql")
+                .setType(EmbeddedDatabaseType.H2)
+                .setName("h2testdb")
+                .addScript("create.sql").addScript("testinsert.sql")
                 .build();
     }
 }

@@ -1,4 +1,4 @@
-package tvgrabber.beansTest;
+package tvgrabber.beans;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
@@ -12,9 +12,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import tvgrabber.StandAloneDerby;
+import tvgrabber.StandAloneTestH2;
 import tvgrabber.TVGrabberConfig;
-import tvgrabber.beans.NewSeries;
 import tvgrabber.entities.Series;
 
 import javax.sql.DataSource;
@@ -22,7 +21,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -30,7 +28,7 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class,
-        classes = {TVGrabberConfig.class, StandAloneDerby.class})
+        classes = {TVGrabberConfig.class, StandAloneTestH2.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @ActiveProfiles("testing")
 public class NewSeriesTest{
@@ -43,7 +41,7 @@ public class NewSeriesTest{
     private NewSeries newSeries;
 
     @Autowired
-    private DataSource  dataSource;
+    private DataSource dataSource;
 
 
     @Before

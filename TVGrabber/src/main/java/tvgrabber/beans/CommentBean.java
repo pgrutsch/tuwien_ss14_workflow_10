@@ -3,12 +3,13 @@ package tvgrabber.beans;
 import org.apache.camel.Exchange;
 import org.apache.camel.Headers;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import tvgrabber.TVGrabberMain;
 import tvgrabber.entities.Comment;
 import tvgrabber.entities.Series;
 import tvgrabber.webservice.soap.SOAPComment;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +24,9 @@ import java.util.Map;
 public class CommentBean {
 
     private static final Logger logger = Logger.getLogger(CommentBean.class);
+
+    @Autowired
+    private DataSource dataSource;
 
     public void route(@Headers Map<String, Object> headers, Exchange exchange) throws NullPointerException {
         SOAPComment soapComment = exchange.getIn().getBody(SOAPComment.class);
@@ -71,8 +75,8 @@ public class CommentBean {
         Series tvProgram = null;
 
         try {
-            Connection con = TVGrabberMain.getConnection();
-            PreparedStatement getSeriesByIDPS = con.prepareStatement("SELECT * FROM TVGRABBER.TVProgram WHERE ID = ?");
+            Connection con = dataSource.getConnection();
+            PreparedStatement getSeriesByIDPS = con.prepareStatement("SELECT * FROM TVProgram WHERE ID = ?");
             getSeriesByIDPS.setInt(1, id);
             ResultSet rsSeries = getSeriesByIDPS.executeQuery();
 

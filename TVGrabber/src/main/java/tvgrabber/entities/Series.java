@@ -19,7 +19,7 @@ import java.util.Set;
  * Created by patrickgrutsch on 15.05.14.
  */
 @Entity
-@Table(name ="TVProgram", schema = "TVGRABBER")
+@Table(name ="TVProgram")
 @XmlRootElement(name = "programme")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(factoryClass=ObjectFactory.class, factoryMethod="createSeries")

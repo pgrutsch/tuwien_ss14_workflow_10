@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<tv generator-info-name="WebGrab+Plus/w MDB &amp; REX Postprocess -- version 1.1.1/52.22 -- Jan van Straaten" generator-info-url="http://www.webgrabplus.com">
+  <channel id="ORF eins">
+    <display-name lang="de">ORF eins</display-name>
+    <icon src="http://tvtv.at/images/senderlogos/orf1.gif" />
+    <url>http://www.tvtv.at</url>
+  </channel>
+  <channel id="ORF 2">
+    <display-name lang="de">ORF 2</display-name>
+    <icon src="http://tvtv.at/images/senderlogos/orf2.gif" />
+    <url>http://www.tvtv.at</url>
+  </channel>
+  <programme start="20140501210000 +0200" stop="20140501225500 +0200" channel="ORF eins">
+    <title lang="de">Fußball UEFA Europa League Semifinale</title>
+    <sub-title lang="de">Das Spiel</sub-title>
+    <date>2014</date>
+    <category lang="de">Fußball</category>
+    <category lang="de">Sport</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+  </programme>
+  <programme start="20140501225500 +0200" stop="20140501230500 +0200" channel="ORF eins">
+    <title lang="de">Fußball UEFA Europa League Semifinale</title>
+    <sub-title lang="de">Die Analyse</sub-title>
+    <category lang="de">Fußball</category>
+    <category lang="de">Sport</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+  </programme>
+  <programme start="20140501230500 +0200" stop="20140502000000 +0200" channel="ORF eins">
+    <title lang="de">Fußball UEFA Europa League</title>
+    <sub-title lang="de">Highlights Semifinale</sub-title>
+    <date>2014</date>
+    <category lang="de">Fußball</category>
+    <category lang="de">Sport</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+  </programme>
+  <programme start="20140425060000 +0200" stop="20140425070000 +0200" channel="ORF 2">
+    <title lang="de">Text Aktuell</title>
+    <title lang="xx">Text Aktuell</title>
+    <desc lang="de">Ein Service von ORF-Teletext mit den Schlagzeilen des Tages und dem Wetterbericht</desc>
+    <category lang="de">Sonstiges</category>
+    <category lang="de">Nachrichten/Info</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+  </programme>
+  <programme start="20140425070000 +0200" stop="20140425090000 +0200" channel="ORF 2">
+    <title lang="de">Wetter-Panorama</title>
+    <title lang="xx">Wetter-&lt;wbr&gt;Panorama</title>
+    <desc lang="de">Bilder aus der Bergwelt und aktuelle Wetterinformationen</desc>
+    <category lang="de">Sonstiges</category>
+    <category lang="de">Nachrichten/Info</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+  </programme>
+  <programme start="20140425090000 +0200" stop="20140425090500 +0200" channel="ORF 2">
+    <title lang="de">ZIB</title>
+    <title lang="xx">ZIB</title>
+    <desc lang="de">Aktuelle Nachrichten aus Österreich und aller Welt im Überblick</desc>
+    <category lang="de">Sonstiges</category>
+    <category lang="de">Nachrichten/Info</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+  </programme>
+  <programme start="20140425090500 +0200" stop="20140425093000 +0200" channel="ORF 2">
+    <title lang="de">Frisch gekocht</title>
+    <title lang="xx">Frisch gekocht</title>
+    <desc lang="de">Rezepte: Kletzenkrapferl und Milchkalbsbries mit Topinambur, Bergheu und Molke. Die tägliche Kochshow mit Elisabeth Engstler, Starkoch Andreas Döllerer und Patissiere Eveline Wild. Rezepte: Kletzenkrapferl und Milchkalbsbries mit Topinambur, Bergheu und Molke</desc>
+    <credits>
+      <presenter>Elisabeth Engstler</presenter>
+    </credits>
+    <category lang="de">Show</category>
+    <category lang="de">Unterhaltung</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+    <subtitles type="Gehörlose" />
+  </programme>
+  <programme start="20140425102000 +0200" stop="20140425110500 +0200" channel="ORF 2">
+    <title lang="de">Kommissar Rex</title>
+    <title lang="xx">Kommissar Rex</title>
+    <sub-title lang="de">Die Babydealer</sub-title>
+    <desc lang="de">In einer Kirche wird ein totes Baby aufgefunden. Bei der Obduktion findet Dr. Graf in dessen Luftröhre eine Feder, die von einem exotischen Vogel stammt. Durch komplizierte Recherchen stoßen Brandtner und sein Team auf einen Verbrecherring, der in Italien Babys stiehlt und in Österreich um hohe Summen verkauft. Während der Ermittlungen kommt eine junge Italienerin nach Wien, die ihr gestohlenes Baby auf eigene Faust sucht und sich dadurch in Lebensgefahr bringt. Die Ereignisse überstürzen sich: Für Brandtner und Rex gilt es, die Verbrecher zu stellen, die raffiniert versteckten geraubten Babys zu finden und die junge Italienerin zu retten, die von der Bande verfolgt wird. Buch: Ralph Werner</desc>
+    <credits>
+      <director>Michi Riebl</director>
+      <actor>Gedeon Burkhard (Alexander Brandtner)</actor>
+      <actor>Heinz Weixelbraun (Christian Böck)</actor>
+      <actor>Martin Weinek (Fritz Kunz)</actor>
+      <actor>Gerhard Zemann (Dr. Leo Graf)</actor>
+      <actor>Anna Thalbach (Sandra Fossati)</actor>
+      <actor>Dario Bertini (Gianni Costarella)</actor>
+      <actor>Julian Weigend (Kurt)</actor>
+      <writer>Ralph Werner</writer>
+      <producer>Mungo-Film / Sat.1 / Österreichischer Rundfunk (ORF)</producer>
+      <composer>Peter Wolf</composer>
+    </credits>
+    <date>2001</date>
+    <category lang="de">Krimi</category>
+    <category lang="de">Serie</category>
+    <episode-num>Staffel 7, Folge 2 von 10</episode-num>
+    <subtitles type="Gehörlose" />
+  </programme>
+  <programme start="20140425110500 +0200" stop="20140425115500 +0200" channel="ORF 2">
+    <title lang="de">Sturm der Liebe</title>
+    <title lang="xx">Sturm der Liebe</title>
+    <desc lang="de">Während Coco überlegt, wie sie sich vor dem Geburtstagsständchen mit Goran drücken kann, bietet Michael ihr an, mit ihr zu üben. Derweil plant Goran im Partykeller der Sonnbichlers seine Feier. Doch eine ausgefallene Heizung macht den Raum unbenutzbar. Als Coco Goran dann auch noch gesteht, dass sie nicht auf seiner Party singen möchte, sagt Goran die Feier geknickt ab. Daraufhin beschließt Coco, Goran mit einer Party in der WG und dem gewünschten Ständchen zu überraschen. Sie kommt auf Michaels Angebot zurück und übt heimlich mit ihm. Und tatsächlich: Unter Michaels Anleitung verliert Coco ihre Hemmungen und singt wunderschön. Pauline unterbricht den Kuss mit Leonard und gesteht ihm, dass sie wieder mit Daniel zusammen ist. Traurig erkennt Leonard, dass sich Pauline für Daniel entschieden hat, und stürzt sich in seine neue Rolle als Vater der kleinen Mila. Während Friedrich Leonard rät, das Kind an den "Fürstenhof" zu holen, möchte Leonard es auf Michaels Rat hin zunächst einmal bei seiner Mutter lassen. Es kommt zu einem Streit mit Friedrich, in dem Leonard ihm klarmacht, dass er und nicht Friedrich Milas Vater ist. Tina will Chris Brenners Tagebuch nicht zu Geld machen, sondern es Daniel geben. Der aber bittet Tina, es zu vernichten, um nicht neue Wunden bei ihm und Pauline aufzureißen. Als sie einen Blick in das Tagebuch wagt, kann Tina kaum glauben, welch verletzende Dinge Chris über sie geschrieben hat. Aufgewühlt zerreißt sie das Buch und wirft es weg – nicht ahnend, dass sie dabei von Sabrina beobachtet wird, die das Tagebuch wieder zusammenklebt und es der Presse anbietet</desc>
+    <credits>
+      <director>Steffen Nowak</director>
+      <actor>Liza Tzschirner (Pauline Jentzsch)</actor>
+      <actor>Christian Feist (Leonard Stahl)</actor>
+      <actor>Mona Seefried (Charlotte Saalfeld)</actor>
+      <actor>Sepp Schauer (Alfons Sonnbichler)</actor>
+      <actor>Antje Hagen (Hildegard Sonnbichler)</actor>
+      <actor>Nadine Warmuth (Patrizia Dietrich)</actor>
+      <actor>Dietrich Adam (Friedrich Stahl)</actor>
+      <writer>Marlene Schwedler</writer>
+      <producer>Bavaria Fernsehproduktion GmbH</producer>
+    </credits>
+    <date>2014</date>
+    <category lang="de">Soap</category>
+    <category lang="de">Serie</category>
+    <episode-num>Folge 1970</episode-num>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+    <subtitles type="Gehörlose" />
+  </programme>
+  <programme start="20140425115500 +0200" stop="20140425122500 +0200" channel="ORF 2">
+    <title lang="de">€co</title>
+    <title lang="xx">€co</title>
+    <desc lang="de">Belastungs-Budget in Arbeit: verbissener Streit bis zur letzten Minute / Geliebte Bienen: Todeskandidaten und Wirtschaftsfaktor / Filmland Österreich: ORF – Aufträge beleben Wirtschaft und Tourismus. Das Wirtschaftsmagazin informiert über Neues aus der Welt der Finanzen, testet Leistungen und Kosten im EU-Vergleich und ist darüber hinaus ein unabhängiger Ratgeber in Geldangelegenheiten</desc>
+    <date>2014</date>
+    <category lang="de">Magazin</category>
+    <category lang="de">Nachrichten/Info</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+    <subtitles type="Gehörlose" />
+  </programme>
+  <programme start="20140426131000 +0200" stop="20140426145000 +0200" channel="ORF 2">
+    <title lang="de">Roter Mohn</title>
+    <title lang="xx">Roter Mohn</title>
+    <desc lang="de">Ein skrupelloser Geschäftsmann will das kleine Theater von Graf Stefan von Reiffenberg (Rudolf Prack) kaufen. Um zu verhindern, dass daraus ein Tingeltangel-Lokal wird, führt das Ensemble ein fantastisches Verwirrstück auf. – Schlagerlustspiel mit Frauenschwarm Rudolf Prack</desc>
+    <credits>
+      <director>Franz Antel</director>
+      <actor>Rudolf Prack (Stefan von Reiffenberg)</actor>
+      <actor>Gundula Korte (Marina)</actor>
+      <actor>Hans Moser (Anton)</actor>
+      <actor>Ida Wüst (Tante Theresa)</actor>
+      <actor>Carola Höhn (Barbara)</actor>
+      <actor>Oskar Sima (Ottokar Scheidl)</actor>
+      <actor>Mady Rahl (Gina)</actor>
+      <writer>Werner P. Zibaso</writer>
+      <writer>Kurt Nachmann</writer>
+      <producer>Lux-Film Wien / Sascha-Filmproduktion</producer>
+      <composer>Johannes Fehring</composer>
+    </credits>
+    <date>1956</date>
+    <category lang="de">Comedy</category>
+    <category lang="de">Spielfilm</category>
+  </programme>
+  <programme start="20140426145000 +0200" stop="20140426154000 +0200" channel="ORF 2">
+    <title lang="de">Um Himmels Willen</title>
+    <title lang="xx">Um Himmels Willen</title>
+    <sub-title lang="de">Geniestreich</sub-title>
+    <desc lang="de">Barbaras 14-jährige Stieftochter Rebecca ist von Polizist Meier bei einem Einbruchsversuch auf frischer Tat ertappt worden. Meier bringt Rebecca vorläufig ins Kloster, wo Lotte sich das Mädchen zur Brust nimmt. Dabei erfährt die Nonne den Grund für die Tat: Rebeccas Freund Jürgen will nach Hamburg fliehen, um einer angedrohten Versetzung in die Sonderschule zu entgehen. Dafür fehlt ihm allerdings das nötige Kleingeld. Während eines Gesprächs mit dem Burschen findet Lotte schließlich heraus, dass dieser überdurchschnittlich intelligent ist und beschließt, ihm unter die Arme zu greifen</desc>
+    <credits>
+      <director>Helmut Metzger</director>
+      <actor>Jutta Speidel (Lotte Albers)</actor>
+      <actor>Fritz Wepper (Wolfgang Wöller)</actor>
+      <actor>Rosel Zech (Oberin Elisabeth Reuter)</actor>
+      <actor>Karin Gregorek (Felicitas Meier)</actor>
+      <actor>Emanuela von Frankenberg (Agnes Schwandt)</actor>
+      <actor>Donia Ben Jemia (Gina Gallo)</actor>
+      <actor>Anne Weinknecht (Sophie Tietze)</actor>
+      <writer>Michael Baier</writer>
+      <producer>Neue Deutsche Filmgesellschaft (NDF)</producer>
+      <composer>Birger Heymann</composer>
+    </credits>
+    <date>2005</date>
+    <category lang="de">Sonstiges</category>
+    <category lang="de">Serie</category>
+    <episode-num>Staffel 4, Folge 9 von 13</episode-num>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+    <subtitles type="Gehörlose" />
+  </programme>
+  <programme start="20140426154000 +0200" stop="20140426163000 +0200" channel="ORF 2">
+    <title lang="de">Um Himmels Willen</title>
+    <title lang="xx">Um Himmels Willen</title>
+    <sub-title lang="de">Klassentreffen</sub-title>
+    <desc lang="de">Bürgermeister Wolfgang Wöller ist zu einem Klassentreffen eingeladen. Den gekauften Doktortitel hat er bereits auf seine Visitenkarten drucken lassen. Als er mit Lotte durch den Gourmet-Tempel schreitet, in dem die Feier stattfindet, erblickt Lotte zu ihrem Entsetzen genau die beiden Personen, denen sie in diesem Moment am allerwenigsten begegnen will: der Mutter Oberin und dem Bischof Rossbauer</desc>
+    <credits>
+      <director>Helmut Metzger</director>
+      <actor>Jutta Speidel (Schwester Lotte)</actor>
+      <actor>Fritz Wepper (Wolfgang Wöller)</actor>
+      <actor>Rosel Zech (Oberin Elisabeth Reuter)</actor>
+      <actor>Anne Weinknecht (Schwester Sophie)</actor>
+      <actor>Karin Gregorek (Schwester Felicitas)</actor>
+      <actor>Emanuela von Frankenberg (Schwester Agnes)</actor>
+      <actor>Helen Zellweger (Schwester Julia)</actor>
+      <writer>Michael Baier</writer>
+      <producer>Neue Deutsche Filmgesellschaft (NDF)</producer>
+      <composer>Birger Heymann</composer>
+    </credits>
+    <date>2005</date>
+    <category lang="de">Sonstiges</category>
+    <category lang="de">Serie</category>
+    <episode-num>Staffel 4, Folge 10 von 13</episode-num>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+    <subtitles type="Gehörlose" />
+  </programme>
+  <programme start="20140426163000 +0200" stop="20140426165500 +0200" channel="ORF 2">
+    <title lang="de">Unterwegs in Österreich</title>
+    <title lang="xx">Unterwegs in Österreich</title>
+    <sub-title lang="de">Das Glück der Erde – Pferdeland Steiermark</sub-title>
+    <desc lang="de">Das Glück der Erde, liegt auf dem Rücken der Pferde – besagt ein altes Sprichwort. Auch in der Steiermark sind Pferde in vielfältiger Weise Teil des Lebens geworden. Ramsau am Dachstein etwa ist die pferdereichste Gemeinde der Steiermark. Robert Sturmer zeigt in seiner Dokumentation wie sich die Bedeutung des Pferdes in der Steiermark über die Jahrhunderte gewandelt hat. Der Film spannt einen Bogen von der traditionellen Pferdehaltung bis hin zu sportlichen Leistungen. Ein Film von Robert Sturmer</desc>
+    <date>2011</date>
+    <category lang="de">Dokumentation</category>
+    <category lang="de">Nachrichten/Info</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+    <subtitles type="Gehörlose" />
+  </programme>
+  <programme start="20140426165500 +0200" stop="20140426170000 +0200" channel="ORF 2">
+    <title lang="de">Religionen der Welt</title>
+    <title lang="xx">Religionen der Welt</title>
+    <desc lang="de">Die Riten und Feste der unterschiedlichen Religionen stehen im Mittelpunkt dieser Sendereihe. Die Beiträge greifen gezielt einzelne Themen heraus und stellen Menschen und ihre Glaubensweise vor</desc>
+    <category lang="de">Dokumentation</category>
+    <category lang="de">Nachrichten/Info</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+  </programme>
+  <programme start="20140426170000 +0200" stop="20140426170500 +0200" channel="ORF 2">
+    <title lang="de">ZIB</title>
+    <title lang="xx">ZIB</title>
+    <desc lang="de">Aktuelle Nachrichten aus Österreich und aller Welt im Überblick</desc>
+    <category lang="de">Sonstiges</category>
+    <category lang="de">Nachrichten/Info</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+    <subtitles type="Gehörlose" />
+  </programme>
+  <programme start="20140426170500 +0200" stop="20140426173000 +0200" channel="ORF 2">
+    <title lang="de">Bewusst gesund – Das Magazin</title>
+    <title lang="xx">Bewusst gesund</title>
+    <desc lang="de">In Bewusst gesund – Das Magazin geben wir Anregung und Anleitung zum gesund Werden und gesund Bleiben. Wichtige Erkenntnisse rund um Vorsorge, das Wiederentdecken alten Wissens über das, was Körper und Seele gut tut und zusammenhält bis hin zu neuen Erkenntnissen aus der Welt der Medizin, sind die Eckpfeiler unserer Sendung. Bewusst gesund – Das Magazin will informieren, kritisch hinterfragen, aber auch motivieren und Freude aufs Leben machen. Moderation: Ricarda Reinisch</desc>
+    <credits>
+      <producer>Kiwi-TV</producer>
+      <presenter>Ricarda Reinisch</presenter>
+    </credits>
+    <date>2014</date>
+    <category lang="de">Magazin</category>
+    <category lang="de">Nachrichten/Info</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+    <subtitles type="Gehörlose" />
+  </programme>
+  <programme start="20140426173000 +0200" stop="20140426182000 +0200" channel="ORF 2">
+    <title lang="de">Bürgeranwalt</title>
+    <title lang="xx">Bürgeranwalt</title>
+    <desc lang="de">Lärm durch "Funcourt" / Badegäste zweiter Klasse? Frau K. aus Wien ist empört / Teures Parken am Privatparkplatz. In dieser Sendung habe die "kleinen" Leute eine Plattform, um sich gegen übermächtige Gegner durchzusetzen. Volksanwältinnen und Volksanwälte stellen typische Fälle aus ihrem Berufsalltag vor</desc>
+    <category lang="de">Magazin</category>
+    <category lang="de">Nachrichten/Info</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+    <subtitles type="Gehörlose" />
+  </programme>
+  <programme start="20140426182000 +0200" stop="20140426190000 +0200" channel="ORF 2">
+    <title lang="de">Bingo</title>
+    <title lang="xx">Bingo</title>
+    <desc lang="de">In der Glücksspielshow gibt es bis zur letzten Sekunde Gewinnchancen. Das Studiopublikum drückt den fünf Kandidaten auf der Bühne die Daumen, dass sie möglichst viele Fragen richtig beantworten</desc>
+    <date>2014</date>
+    <category lang="de">Show</category>
+    <category lang="de">Unterhaltung</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+  </programme>
+  <programme start="20140426190000 +0200" stop="20140426193000 +0200" channel="ORF 2">
+    <title lang="de">Bundesland heute</title>
+    <title lang="xx">Bundesland heute</title>
+    <desc lang="de">Die neun ORF-Landesstudios liefern täglich Informationen für die Zuschauer im jeweiligen Bundesland. Altuelle Berichte beleuchten die regionalen und kommunalen Themen und Schwerpunkte, die dem Publikum im Bundesland wichtig sind. Dabei reicht die Palette von Landespolitik über Wirtschaft, Kultur und Gesellschaft bis zu Brauchtum und Sport</desc>
+    <date>2014</date>
+    <category lang="de">Magazin</category>
+    <category lang="de">Nachrichten/Info</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+  </programme>
+  <programme start="20140426193000 +0200" stop="20140426194900 +0200" channel="ORF 2">
+    <title lang="de">Zeit im Bild</title>
+    <title lang="xx">Zeit im Bild</title>
+    <desc lang="de">Die Sendung informiert den Zuschauer über das aktuelle Geschehen aus Innen- und Außenpolitik, Wirtschaft, Wissenschaft, Kultur und Chronik. Hintergrundberichte, Analysen und Kommentare vertiefen das Verständnis der tagesaktuellen Ereignisse</desc>
+    <category lang="de">Sonstiges</category>
+    <category lang="de">Nachrichten/Info</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+    <subtitles type="Gehörlose" />
+  </programme>
+  <programme start="20140426194900 +0200" stop="20140426195500 +0200" channel="ORF 2">
+    <title lang="de">Wetter</title>
+    <title lang="xx">Wetter</title>
+    <category lang="de">Sonstiges</category>
+    <category lang="de">Nachrichten/Info</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+    <subtitles type="Gehörlose" />
+  </programme>
+  <programme start="20140427005500 +0200" stop="20140427021000 +0200" channel="ORF 2">
+    <title lang="de">Columbo – Ein Denkmal für die Ewigkeit</title>
+    <title lang="xx">Columbo</title>
+    <desc lang="de">Der ehrgeizige und skrupellose Architekt Elliot Markham hat den Multimillionär Beau Williamson aus dem Weg geschafft, ohne eine Spur zu hinterlassen. Columbo muss ein Verbrechen beweisen, bei dem sogar die Leiche fehlt</desc>
+    <credits>
+      <director>Peter Falk</director>
+      <actor>Peter Falk (Columbo)</actor>
+      <actor>Patrick O'Neal (Elliot Markham)</actor>
+      <actor>Janis Paige (Goldie Williamson)</actor>
+      <actor>Pamela Austin (Jennifer Williamson)</actor>
+      <actor>John Fiedler (Doktor)</actor>
+      <actor>Forrest Tucker (Bo Williamson)</actor>
+      <actor>Bettye Ackerman (Miss Sherman)</actor>
+      <writer>Steven Bochco</writer>
+      <producer>Universal TV</producer>
+      <composer>Gil Mellé</composer>
+    </credits>
+    <date>1972</date>
+    <category lang="de">Krimi</category>
+    <category lang="de">Serie</category>
+    <episode-num>Staffel 1, Folge 8</episode-num>
+    <subtitles type="Gehörlose" />
+  </programme>
+</tv>

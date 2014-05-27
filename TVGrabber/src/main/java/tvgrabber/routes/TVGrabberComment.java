@@ -32,6 +32,7 @@ public class TVGrabberComment extends RouteBuilder {
                 .parallelProcessing();
 
 
+
         from("jpa://tvgrabber.entities.Comment?consumeDelete=false&maximumResults=5&consumer.delay=7000")
                 .errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL))
                 .log(LoggingLevel.INFO, "Reading comments from DB")
@@ -42,6 +43,7 @@ public class TVGrabberComment extends RouteBuilder {
                         logger.debug("Comment: " + exchange.getIn().getBody(Comment.class).getComment());
                     }
                 });
+
     }
 
 }
