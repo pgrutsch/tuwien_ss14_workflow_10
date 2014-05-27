@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * Created by LeBon on 26.05.14.
  */
 @Component
-public class Twitter extends RouteBuilder {
+public class TwitterRoute extends RouteBuilder {
 
     private String twitterAccess = "twitter://timeline/user?consumerKey=K8WGu6kIxeipNv1pYPTA" +
             "&consumerSecret=eS6kq93pT8xnMgK4MKnUR5ilkFExALXrSWiuB1wEXv8" +
