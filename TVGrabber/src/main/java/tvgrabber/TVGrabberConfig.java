@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
+import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 
 /**

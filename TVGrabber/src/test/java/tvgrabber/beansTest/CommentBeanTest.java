@@ -6,7 +6,9 @@ import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.impl.DefaultExchange;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
+import org.apache.log4j.Logger;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,10 +21,16 @@ import tvgrabber.StandAloneDerby;
 import tvgrabber.TVGrabberConfig;
 import tvgrabber.beans.CommentBean;
 import tvgrabber.entities.Comment;
+import tvgrabber.entities.Series;
 import tvgrabber.webservice.soap.SOAPComment;
 
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by patrickgrutsch on 24.05.14.
@@ -38,6 +46,8 @@ public class CommentBeanTest {
     private Exchange exchange;
     private CamelContext context;
     private Map<String, Object> headers;
+
+    private static final Logger logger = Logger.getLogger(CommentBeanTest.class);
 
     @Autowired
     private CommentBean commentBean;
@@ -66,22 +76,37 @@ public class CommentBeanTest {
         Comment comment = new Comment();
         comment.setComment("i'm the best comment in the world");
         comment.setEmail("hans@mueller.at");
-        //comment.setTvprogram(1);
+
+        Series series = new Series();
+        series.setId(1);
+
+        comment.setTvprogram(series);
 
         return comment;
     }
 
-    @After
-    public void tearDown() {
-        exchange = null;
-        context = null;
-        headers = null;
+    @AfterClass
+    public static void tearDown() {
+
+
+        Connection c = null;
+        try {
+            c = DriverManager.getConnection("jdbc:h2:./mem:h2mem");
+            Statement s = c.createStatement();
+            ResultSet rs = s.executeQuery("SELECT * FROM TVProgram");
+
+            logger.debug("Reading TVPrograms ...");
+            while(rs.next()) {
+                logger.debug("id: " + rs.getInt("id") + " title: " + rs.getString("title"));
+            }
+        } catch (SQLException e) {
+            logger.error("ERROR INSERT AND READ");
+            e.printStackTrace();
+        }
     }
 
-    //TODO: insert a tvprogram, so that the comment passes validation
-    /*
     @Test
-    public void route_shouldReplaceSOAPCommentWithComment() throws Exception {
+    public void route_shouldReplaceSOAPCommentWithComment() {
         commentBean.route(headers, exchange);
         Comment comment = createComment();
 
@@ -101,7 +126,6 @@ public class CommentBeanTest {
         //TODO add twitter
         assertEquals(headers.get("recipients"), recipients);
     }
-    */
 
     @Test
     public void route_shouldThrowNullPointerCommentEmpty() {

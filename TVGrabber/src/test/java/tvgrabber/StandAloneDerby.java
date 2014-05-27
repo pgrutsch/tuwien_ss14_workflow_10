@@ -19,7 +19,8 @@ public class StandAloneDerby {
     public DataSource dataSource(){
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
-                .addScript("schema.sql").addScript("create.sql").addScript("testinsert.sql")
+                .setName("h2testdb")
+                .addScript("create.sql").addScript("testinsert.sql")
                 .build();
     }
 }
