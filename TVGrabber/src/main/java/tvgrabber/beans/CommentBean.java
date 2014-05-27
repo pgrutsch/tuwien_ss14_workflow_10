@@ -71,7 +71,7 @@ public class CommentBean {
 
         try {
             Connection con = TVGrabberMain.getConnection();
-            PreparedStatement getSeriesByIDPS = con.prepareStatement("SELECT * FROM TVGRABBER.TVProgram WHERE ID = ?");
+            PreparedStatement getSeriesByIDPS = con.prepareStatement("SELECT * FROM TVProgram WHERE ID = ?");
             getSeriesByIDPS.setInt(1, id);
             ResultSet rsSeries = getSeriesByIDPS.executeQuery();
 

@@ -80,6 +80,7 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
        This cleaning allows you running the app without deleting the target folder every run.
      */
     private void clearDatabase() throws SQLException {
+        /*
         logger.debug("Getting Database connection");
 
         Connection dbConn = getConnection();
@@ -99,12 +100,13 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
         } catch (SQLException e) {}
 
         statement.close();
-        dbConn.close();
+        dbConn.close();*/
 
     }
 
     public static Connection getConnection() throws SQLException{
-        return DriverManager.getConnection("jdbc:derby:target/derby;create=true");
+        //return DriverManager.getConnection("jdbc:derby:target/derby;create=true");
+        return DriverManager.getConnection("jdbc:h2:./mem:h2mem");
     }
 
 }

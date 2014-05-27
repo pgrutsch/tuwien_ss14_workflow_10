@@ -21,7 +21,7 @@ import java.util.Map;
 @Component
 public class Addressmanager {
     private static final Logger logger = Logger.getLogger(Addressmanager.class);
-    private static final String existsUserByMail = "SELECT id, email, subscribed, searchTerm FROM TVGRABBER.TVUser WHERE email = ?";
+    private static final String existsUserByMail = "SELECT id, email, subscribed, searchTerm FROM TVUser WHERE email = ?";
 
     public void unsubscribe(@Headers Map<String, Object> headers, @Body String myBody, Exchange exchange){
         String userMail = String.valueOf(headers.get("from"));

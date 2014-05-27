@@ -32,10 +32,9 @@ public class TVGrabberConfig {
 
         EmbeddedDatabaseBuilder embeddedDatabaseBuilder = new EmbeddedDatabaseBuilder();
         return embeddedDatabaseBuilder
-                .addScript("classpath:sql/schema.sql")
                 .addScript("classpath:sql/create.sql")
-                .setName("tvgrabberEmbeddedDerby")
-                .setType(EmbeddedDatabaseType.DERBY)
+                .setName("tvgrabberEmbeddedH2")
+                .setType(EmbeddedDatabaseType.H2)
                 .ignoreFailedDrops(true)
                 .build();
     }
