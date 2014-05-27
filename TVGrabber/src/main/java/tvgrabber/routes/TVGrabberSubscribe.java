@@ -2,6 +2,7 @@ package tvgrabber.routes;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tvgrabber.beans.Addressmanager;
 
@@ -14,6 +15,9 @@ public class TVGrabberSubscribe extends RouteBuilder {
 
     private static final Logger logger = Logger.getLogger(TVGrabberSubscribe.class);
 
+    @Autowired
+    private Addressmanager addressmanager;
+
     @Override
     public void configure() throws Exception {
 
@@ -23,13 +27,13 @@ public class TVGrabberSubscribe extends RouteBuilder {
                 .to("seda:unsubscribe")
             .otherwise().to("seda:subscribe");
 
-        from("seda:unsubscribe").bean(Addressmanager.class, "unsubscribe")
+        from("seda:unsubscribe").bean(addressmanager, "unsubscribe")
                 .choice().when(body().isNotNull())
                     .to("jpa://tvgrabber.entities.TVGrabberUser")
                     .to("smtps://smtp.gmail.com:465?password=workflow2014&username=workflow2014ss@gmail.com")
                 .otherwise().to(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL);
 
-        from("seda:subscribe").bean(Addressmanager.class, "subscribe")
+        from("seda:subscribe").bean(addressmanager, "subscribe")
                 .to("jpa://tvgrabber.entities.TVGrabberUser")
                 .to("smtps://smtp.gmail.com:465?password=workflow2014&username=workflow2014ss@gmail.com");
         }

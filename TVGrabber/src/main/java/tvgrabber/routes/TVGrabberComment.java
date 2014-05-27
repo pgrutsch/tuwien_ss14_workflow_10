@@ -5,6 +5,7 @@ import org.apache.camel.LoggingLevel;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tvgrabber.beans.CommentBean;
 import tvgrabber.entities.Comment;
@@ -19,6 +20,9 @@ public class TVGrabberComment extends RouteBuilder {
 
     private static final Logger logger = Logger.getLogger(TVGrabberComment.class);
 
+    @Autowired
+    private CommentBean commentBean;
+
     @Override
     public void configure() throws Exception {
 
@@ -27,7 +31,7 @@ public class TVGrabberComment extends RouteBuilder {
         from(url)
                 .log(LoggingLevel.INFO, "Receiving SOAP msg from http://localhost:8080/spring-soap/PostComment")
                 .errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL))
-                .bean(CommentBean.class)
+                .bean(commentBean)
                 .recipientList(header("recipients"))
                 .parallelProcessing();
 
