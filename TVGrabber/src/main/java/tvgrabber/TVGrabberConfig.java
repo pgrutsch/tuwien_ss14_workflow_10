@@ -8,7 +8,6 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
-import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 
 /**
@@ -27,6 +26,7 @@ public class TVGrabberConfig {
 
 
     /* Initialize embedded Derby database */
+
     @Bean
     public DataSource dataSource() {
         logger.debug("Creating DataSource");
@@ -39,5 +39,4 @@ public class TVGrabberConfig {
                 .ignoreFailedDrops(true)
                 .build();
     }
-
 }

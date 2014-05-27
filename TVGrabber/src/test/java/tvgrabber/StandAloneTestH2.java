@@ -19,7 +19,7 @@ public class StandAloneTestH2 {
     public DataSource dataSource(){
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
-                .setName("h2testdb")
+                .setName("h2proddb")
                 .addScript("create.sql").addScript("testinsert.sql")
                 .build();
     }

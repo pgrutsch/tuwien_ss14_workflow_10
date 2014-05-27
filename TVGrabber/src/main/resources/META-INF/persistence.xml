@@ -16,17 +16,15 @@
         <class>tvgrabber.entities.TVGrabberUser</class>
 
         <properties>
-            <property name="openjpa.ConnectionURL" value="jdbc:h2:~/tvgrabberdb"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:h2:mem:h2proddb"/>
             <property name="openjpa.ConnectionDriverName" value="org.h2.Driver"/>
             <property name="openjpa.Log" value="DefaultLevel=WARN, Tool=INFO, SQL=TRACE"/>
             <property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
-
-            <!-- this property initializes a clean database, evertime when starting it -->
-            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(SchemaAction='add,deleteTableContents')"/>
-
-            <!-- previous used property -->
-            <!--property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/-->
+            <property name="openjpa.ConnectionUserName" value="SA"/>
+            <property name="openjpa.ConnectionPassword" value=""/>
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
         </properties>
+
     </persistence-unit>
 
 </persistence>

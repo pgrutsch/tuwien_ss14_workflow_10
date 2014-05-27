@@ -1,6 +1,5 @@
 package tvgrabber.routes;
 
-import facebook4j.PostUpdate;
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.Processor;
@@ -14,8 +13,6 @@ import org.springframework.stereotype.Component;
 import tvgrabber.beans.IMDBRatingAggregationStrategy;
 import tvgrabber.beans.NewSeries;
 import tvgrabber.entities.Series;
-
-import java.net.URL;
 
 /**
  * Created by patrickgrutsch on 30.04.14.
@@ -80,7 +77,9 @@ public class TVGrabberBuild extends RouteBuilder {
                 //.enrich("http://omdbapi.com/", aggregationStrategy)
                 .to("jpa://tvgrabber.entities.Series");
 
+
         /* Fetch 5 entries every 5 seconds to check if there is really data in the database */
+
         from("jpa://tvgrabber.entities.Series?consumeDelete=false&maximumResults=5&consumer.delay=5000")
                 .log(LoggingLevel.INFO, "Reading series from TVProgram table")
                 .process(new Processor() {

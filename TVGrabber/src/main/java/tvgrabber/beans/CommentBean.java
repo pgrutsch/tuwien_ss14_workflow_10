@@ -29,6 +29,7 @@ public class CommentBean {
     private DataSource dataSource;
 
     public void route(@Headers Map<String, Object> headers, Exchange exchange) throws NullPointerException {
+
         SOAPComment soapComment = exchange.getIn().getBody(SOAPComment.class);
 
         validateComment(soapComment);
@@ -74,11 +75,14 @@ public class CommentBean {
     private Series getSeriesByID(int id){
         Series tvProgram = null;
 
+        Connection con = null;
+        PreparedStatement getSeriesByIDPS = null;
+        ResultSet rsSeries = null;
         try {
-            Connection con = dataSource.getConnection();
-            PreparedStatement getSeriesByIDPS = con.prepareStatement("SELECT * FROM TVProgram WHERE ID = ?");
+            con = dataSource.getConnection();
+            getSeriesByIDPS = con.prepareStatement("SELECT * FROM TVProgram WHERE ID = ?");
             getSeriesByIDPS.setInt(1, id);
-            ResultSet rsSeries = getSeriesByIDPS.executeQuery();
+            rsSeries = getSeriesByIDPS.executeQuery();
 
             while (rsSeries.next()){
                 tvProgram = new Series();
@@ -98,6 +102,15 @@ public class CommentBean {
             logger.error("DB error:");
             logger.error(e.toString());
             return null;
+        } finally {
+            try {
+                if(con != null) con.close();
+                if(getSeriesByIDPS != null) getSeriesByIDPS.close();
+                if(rsSeries != null) rsSeries.close();
+            } catch (SQLException e) {
+                logger.error(e.toString());
+            }
+
         }
     }
 }
