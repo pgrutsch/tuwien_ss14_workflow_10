@@ -46,14 +46,6 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
 
     public void startApp() {
 
-        try {
-            clearDatabase();
-        } catch (SQLException e) {
-            logger.error("Error clearing Database");
-            e.printStackTrace();
-            return;
-        }
-
         List<RouteBuilder> routeBuilders = new ArrayList<RouteBuilder>();
         routeBuilders.add(tvGrabberBuild);
         routeBuilders.add(tvGrabberComment);
@@ -72,41 +64,6 @@ public class TVGrabberMain extends org.apache.camel.main.Main {
             return;
         }
 
-    }
-
-
-    /* Clear all tables.
-       As we use an embedded database all the db files are stored in the target folder.
-       This cleaning allows you running the app without deleting the target folder every run.
-     */
-    private void clearDatabase() throws SQLException {
-        /*
-        logger.debug("Getting Database connection");
-
-        Connection dbConn = getConnection();
-        Statement statement = dbConn.createStatement();
-
-        logger.debug("Executing delete statements");
-        try {
-            statement.executeUpdate("DELETE FROM TVGRABBER.Comment");
-        } catch (SQLException e) {}
-
-        try {
-            statement.executeUpdate("DELETE FROM TVGRABBER.TVProgram");
-        } catch (SQLException e) {}
-
-        try {
-            statement.executeUpdate("DELETE FROM TVGRABBER.TVUser");
-        } catch (SQLException e) {}
-
-        statement.close();
-        dbConn.close();*/
-
-    }
-
-    public static Connection getConnection() throws SQLException{
-        //return DriverManager.getConnection("jdbc:derby:target/derby;create=true");
-        return DriverManager.getConnection("jdbc:h2:./mem:h2mem");
     }
 
 }

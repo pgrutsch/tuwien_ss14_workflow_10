@@ -1,4 +1,4 @@
-package tvgrabber.routesTest;
+package tvgrabber.routes;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
@@ -14,7 +14,10 @@ import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import tvgrabber.StandAloneTestH2;
+import tvgrabber.TVGrabberConfig;
 
 /**
  * Created by patrickgrutsch on 26.05.14.
@@ -22,11 +25,12 @@ import org.springframework.test.context.ContextConfiguration;
 
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-        classes = {SampleRouteTest.TestConfig.class}, /* an inner class which defines the used routes */
+        classes = {TVGrabberConfig.class, SampleRouteTest.TestConfig.class, StandAloneTestH2.class}, /* an inner class which defines the used routes */
         loader = CamelSpringDelegatingTestContextLoader.class /* use this loader for route testing */
 )
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS) /* resets camel context after all tests were executed */
-@MockEndpoints /* mock all endpoints */
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) /* resets camel context after each method has been executed */
+@MockEndpoints /* mock all endpoints, i.e. mock endpoints intercept all real endpoints */
+@ActiveProfiles("testing")
 public class SampleRouteTest {
 
     @EndpointInject(uri = "mock:direct:end")
@@ -52,9 +56,7 @@ public class SampleRouteTest {
                 @Override
                 public void configure() throws Exception {
                     from("direct:test").errorHandler(deadLetterChannel("direct:error")).to("direct:end");
-
                     from("direct:error").log("Received message on direct:error endpoint.");
-
                     from("direct:end").log("Received message on direct:end endpoint.");
                 }
             };
@@ -66,7 +68,29 @@ public class SampleRouteTest {
      * @throws InterruptedException
      */
     @Test
-    public void testRoute() throws InterruptedException {
+    public void testRoute0() throws InterruptedException {
+        endEndpoint.expectedMessageCount(1); /* expected messages */
+        errorEndpoint.expectedMessageCount(0);
+
+        testProducer.sendBody("<name>test</name>");
+
+        endEndpoint.assertIsSatisfied();
+        errorEndpoint.assertIsSatisfied();
+    }
+
+    @Test
+    public void testRoute1() throws InterruptedException {
+        endEndpoint.expectedMessageCount(1); /* expected messages */
+        errorEndpoint.expectedMessageCount(0);
+
+        testProducer.sendBody("<name>test</name>");
+
+        endEndpoint.assertIsSatisfied();
+        errorEndpoint.assertIsSatisfied();
+    }
+
+    @Test
+    public void testRoute2() throws InterruptedException {
         endEndpoint.expectedMessageCount(1); /* expected messages */
         errorEndpoint.expectedMessageCount(0);
 

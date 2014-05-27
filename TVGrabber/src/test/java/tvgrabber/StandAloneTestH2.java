@@ -13,7 +13,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @Profile("testing")
-public class StandAloneDerby {
+public class StandAloneTestH2 {
 
     @Bean
     public DataSource dataSource(){

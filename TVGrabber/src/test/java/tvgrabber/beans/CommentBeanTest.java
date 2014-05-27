@@ -1,4 +1,4 @@
-package tvgrabber.beansTest;
+package tvgrabber.beans;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
@@ -8,7 +8,6 @@ import org.apache.camel.impl.DefaultExchange;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,13 +16,13 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import tvgrabber.StandAloneDerby;
+import tvgrabber.StandAloneTestH2;
 import tvgrabber.TVGrabberConfig;
-import tvgrabber.beans.CommentBean;
 import tvgrabber.entities.Comment;
 import tvgrabber.entities.Series;
 import tvgrabber.webservice.soap.SOAPComment;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,8 +37,8 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class,
-        classes = {TVGrabberConfig.class, StandAloneDerby.class})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
+        classes = {TVGrabberConfig.class, StandAloneTestH2.class})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ActiveProfiles("testing")
 public class CommentBeanTest {
 
@@ -51,6 +50,9 @@ public class CommentBeanTest {
 
     @Autowired
     private CommentBean commentBean;
+
+    @Autowired
+    private DataSource dataSource;
 
     @Before
     public void setUp() {
@@ -85,17 +87,22 @@ public class CommentBeanTest {
         return comment;
     }
 
-    @AfterClass
-    public static void tearDown() {
+    @After
+    public void tearDown() {
+        exchange = null;
+        context = null;
+        headers = null;
+    }
 
-
+    @Test
+    public void route_shouldReplaceSOAPCommentWithComment() {
         Connection c = null;
         try {
-            c = DriverManager.getConnection("jdbc:h2:./mem:h2mem");
+            c = dataSource.getConnection();
             Statement s = c.createStatement();
             ResultSet rs = s.executeQuery("SELECT * FROM TVProgram");
 
-            logger.debug("Reading TVPrograms ...");
+            logger.debug("1Reading TVPrograms ...");
             while(rs.next()) {
                 logger.debug("id: " + rs.getInt("id") + " title: " + rs.getString("title"));
             }
@@ -103,25 +110,39 @@ public class CommentBeanTest {
             logger.error("ERROR INSERT AND READ");
             e.printStackTrace();
         }
-    }
 
-    @Test
-    public void route_shouldReplaceSOAPCommentWithComment() {
+
         commentBean.route(headers, exchange);
         Comment comment = createComment();
 
         assertEquals(exchange.getIn().getBody(Comment.class).getComment(), comment.getComment());
         assertEquals(exchange.getIn().getBody(Comment.class).getEmail(), comment.getEmail());
-        assertEquals(exchange.getIn().getBody(Comment.class).getTvprogram(), comment.getTvprogram());
+        assertEquals(exchange.getIn().getBody(Comment.class).getTvprogram().getId(), comment.getTvprogram().getId());
         assertEquals(exchange.getIn().getBody(Comment.class).getId(), comment.getId());
     }
 
     @Test
     public void route_shouldSetRecipientlistHeader() throws Exception {
+        Connection c = null;
+        try {
+            c = dataSource.getConnection();
+            Statement s = c.createStatement();
+            ResultSet rs = s.executeQuery("SELECT * FROM TVProgram");
+
+            logger.debug("2Reading TVPrograms ...");
+            while(rs.next()) {
+                logger.debug("id: " + rs.getInt("id") + " title: " + rs.getString("title"));
+            }
+        } catch (SQLException e) {
+            logger.error("ERROR INSERT AND READ");
+            e.printStackTrace();
+        }
+
+
         commentBean.route(headers, exchange);
 
         List<String> recipients = new ArrayList<String>();
-        recipients.add("jpa://tvgrabber.tvgrabber.beansTest.Comment");
+        recipients.add("jpa://tvgrabber.entities.Comment");
 
         //TODO add twitter
         assertEquals(headers.get("recipients"), recipients);

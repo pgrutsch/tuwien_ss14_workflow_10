@@ -26,7 +26,7 @@ public class TVGrabberBuild extends RouteBuilder {
 
         /* Fetch and parse guide.xml */
         DataFormat jaxbDataFormat = new JaxbDataFormat("tvgrabber.entities");
-/*
+
         from("file://src/tvdata?noop=true&initialDelay=2000&delay=4000&fileName=guide.xml")
                 .log(LoggingLevel.INFO, "Loading guide.xml")
                 .wireTap("file://archive?fileName=${date:now:yyyyMMdd}_${file:onlyname}")
@@ -69,7 +69,7 @@ public class TVGrabberBuild extends RouteBuilder {
                         log.info(" --------------" + exchange.isFailed());
                     }
                 });
-*/
+
 
 
         /* Fetch 5 entries every 5 seconds to check if there is really data in the database */

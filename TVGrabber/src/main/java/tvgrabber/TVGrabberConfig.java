@@ -34,7 +34,7 @@ public class TVGrabberConfig {
         EmbeddedDatabaseBuilder embeddedDatabaseBuilder = new EmbeddedDatabaseBuilder();
         return embeddedDatabaseBuilder
                 .addScript("classpath:sql/create.sql")
-                .setName("tvgrabberEmbeddedH2")
+                .setName("h2proddb")
                 .setType(EmbeddedDatabaseType.H2)
                 .ignoreFailedDrops(true)
                 .build();
