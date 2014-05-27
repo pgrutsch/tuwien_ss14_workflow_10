@@ -64,9 +64,9 @@ public class TVGrabberBuild extends RouteBuilder {
                         logger.debug("Series stop: " + msg.getStop());
                     }
                 })
-                .multicast()
-                .to("seda:waitingForEnrichment")
-                .to("seda:socialMedia");
+                //.multicast()
+                .to("seda:waitingForEnrichment");
+                //.to("seda:socialMedia");
 
 
         IMDBRatingAggregationStrategy aggregationStrategy = new IMDBRatingAggregationStrategy();
@@ -90,7 +90,6 @@ public class TVGrabberBuild extends RouteBuilder {
                     }
                 });
 
-        //TODO add rout for Facebook
        from("seda:socialMedia").filter().method(NewSeries.class, "filterExistingSeries")
                 .multicast()
                 .to("seda:facebook")

@@ -2,11 +2,18 @@ package tvgrabber.beansTest;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
+import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import tvgrabber.AbstractTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import tvgrabber.StandAloneDerby;
+import tvgrabber.TVGrabberConfig;
 import tvgrabber.beans.NewSeries;
 import tvgrabber.entities.Series;
 
@@ -21,8 +28,12 @@ import static org.mockito.Mockito.when;
 /**
  * Created by LeBon on 26.05.14.
  */
-
-public class NewSeriesTest extends AbstractTest{
+@RunWith(CamelSpringJUnit4ClassRunner.class)
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class,
+        classes = {TVGrabberConfig.class, StandAloneDerby.class})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
+@ActiveProfiles("testing")
+public class NewSeriesTest{
 
     private Exchange exchange;
     private Series series;
