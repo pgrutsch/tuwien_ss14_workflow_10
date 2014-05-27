@@ -97,9 +97,6 @@ public class TVGrabberBuild extends RouteBuilder {
                                 + exchange.getIn().getBody(Series.class).getImdbRating() + ")");
                     }
                 });
-           //TODO add FB
-        from("seda:socialMedia").filter().method(NewSeries.class, "filterExistingSeries")
-                .to("seda:twitter");
 
        from("seda:socialMedia").filter().method(NewSeries.class, "filterExistingSeries")
                 .multicast()
