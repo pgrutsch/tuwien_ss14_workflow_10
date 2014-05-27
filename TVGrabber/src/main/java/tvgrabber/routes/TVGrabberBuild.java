@@ -26,17 +26,9 @@ public class TVGrabberBuild extends RouteBuilder {
 
     private static final Logger logger = Logger.getLogger(TVGrabberBuild.class);
 
-//    @Autowired
-//    private FacebookConfiguration facebookConfiguration;
-
     @Override
     public void configure() throws Exception {
 
-        /* setting FB properties */
-//        facebookConfiguration.setOAuthAppId("357513357719221");
-//        facebookConfiguration.setOAuthAppSecret("4d027c8b2e01fa43afe7321907c22d5f");
-//        facebookConfiguration.setOAuthAccessToken("");//TODO get Token from Sprout
-//        /* Fetch and parse guide.xml */
         DataFormat jaxbDataFormat = new JaxbDataFormat("tvgrabber.entities");
 
         from("file://src/tvdata?noop=true&initialDelay=2000&delay=4000&fileName=guide.xml")
@@ -84,9 +76,6 @@ public class TVGrabberBuild extends RouteBuilder {
                     }
                 });
 
-                /*.to("jpa://tvgrabber.entities.Series").filter().method(NewSeries.class, "filterExistingSeries")
-                //.to("facebook://postFeed/inBody=postUpdate")
-
         /* Fetch 5 entries every 5 seconds to check if there is really data in the database */
         from("jpa://tvgrabber.entities.Series?consumeDelete=false&maximumResults=5&consumer.delay=5000")
                 .log(LoggingLevel.INFO, "Reading from series from TVProgram table")
@@ -101,13 +90,9 @@ public class TVGrabberBuild extends RouteBuilder {
                 });
 
         //TODO add rout for Facebook
-        String facebookRout = "facebook://postStatusMessage?message=inBody&userId=100007112160276" +
-                "&oAuthAppId=357513357719221" +
-                "&oAuthAppSecret=4d027c8b2e01fa43afe7321907c22d5f" +
-                "&oAuthAccessToken=CAAFFKBCwdrUBADbQFRodHFg9mtOZAej2D2iIKewURCnzKjRRx5QVnl7qzEqlKfGhWDBU4VoJ0TmW7MiDMZAl3CrePgTEEzB9aUqG2TftHcDy6y41vB52jaifeJZCkE4h8DgOSCQztDWeviBnXewt15b3AabYVgMQ3MnctojyF8oDmV6926uk3fyhAfCE10ZD";
-        from("seda:socialMedia").filter().method(NewSeries.class, "filterExistingSeries")
+       from("seda:socialMedia").filter().method(NewSeries.class, "filterExistingSeries")
                 .multicast()
-                .to(facebookRout)
+                .to("seda:facebook")
                 .to("seda:twitter");
 
     }
