@@ -6,3 +6,4 @@
 *.toc
 *.autosave
 */target/*
+*mem:h2mem*
