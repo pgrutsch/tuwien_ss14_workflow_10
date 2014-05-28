@@ -27,9 +27,9 @@ public class TVGrabberSubscribe extends RouteBuilder {
 
 
         from("seda:unsubscribe").bean(Addressmanager.class, "unsubscribe")
-                .errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL))
                 .to("jpa://tvgrabber.entities.TVGrabberUser")
-                .to("smtps://smtp.gmail.com:465?password=workflow2014&username=workflow2014ss@gmail.com");
+                .to("smtps://smtp.gmail.com:465?password=workflow2014&username=workflow2014ss@gmail.com")
+                .errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL));
 
         from("seda:subscribe").bean(Addressmanager.class, "subscribe")
                 .to("jpa://tvgrabber.entities.TVGrabberUser")

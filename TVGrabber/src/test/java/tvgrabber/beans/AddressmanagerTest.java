@@ -17,6 +17,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import tvgrabber.StandAloneTestH2;
 import tvgrabber.TVGrabberConfig;
 import tvgrabber.entities.TVGrabberUser;
+import tvgrabber.exceptions.UnsubscribeException;
 import tvgrabber.routes.TVGrabberSubscribe;
 
 import java.util.HashMap;
@@ -67,7 +68,7 @@ public class AddressmanagerTest extends CamelTestSupport {
     }
 
     @Test
-    public void testUnsubscribe(){
+    public void testUnsubscribe() throws UnsubscribeException {
         header.put("from","usermailbiz");
         myBody="notRelevant";
 
@@ -79,14 +80,14 @@ public class AddressmanagerTest extends CamelTestSupport {
         assertFalse(exchange.getOut().isFault());
     }
 
-    @Test
-    public void unsubscribeExpectedException(){
+    @Test(expected = UnsubscribeException.class)
+    public void unsubscribeExpectedException() throws UnsubscribeException {
         String userMail="notindb";
         myBody="notimportant";
         header.put("from",userMail);
 
         addressmanager.unsubscribe(header,myBody,exchange);
-        assertEquals("User '"+userMail+"' tried to unsubscribe: '"+myBody+"' but isn't in the db.",exchange.getException().getMessage());
+        //assertEquals("User '"+userMail+"' tried to unsubscribe: '"+myBody+"' but isn't in the db.",exchange.getException().getMessage());
     }
 
 

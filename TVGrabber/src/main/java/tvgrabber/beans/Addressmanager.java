@@ -28,7 +28,7 @@ public class Addressmanager {
     @Autowired
     private DataSource dataSource;
 
-    public void unsubscribe(@Headers Map<String, Object> headers, @Body String myBody, Exchange exchange){
+    public void unsubscribe(@Headers Map<String, Object> headers, @Body String myBody, Exchange exchange) throws UnsubscribeException {
         String userMail = String.valueOf(headers.get("from"));
         logger.debug("Started to unsubscribe user: " + userMail);
         TVGrabberUser subscriber = existsUser(userMail);
@@ -40,7 +40,7 @@ public class Addressmanager {
             exchange.getOut().getHeaders().put("Subject", "Successfully unsubscribed");
         }else{
             logger.debug("User '" + userMail + "' tried to unsubscribe: '" + myBody + "' but isn't in the db.");
-            new UnsubscribeException("User '" + userMail + "' tried to unsubscribe: '" + myBody + "' but isn't in the db.");
+            throw new UnsubscribeException("User '" + userMail + "' tried to unsubscribe: '" + myBody + "' but isn't in the db.");
         }
         exchange.getOut().setBody(subscriber);
     }
