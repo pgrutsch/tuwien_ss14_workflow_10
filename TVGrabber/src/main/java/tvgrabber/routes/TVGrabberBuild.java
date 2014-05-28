@@ -37,7 +37,7 @@ public class TVGrabberBuild extends RouteBuilder {
                     }
                 }).handled(true);
 
-        errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL));
+       errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL));
 
 
         DataFormat jaxbDataFormat = new JaxbDataFormat("tvgrabber.entities");
@@ -65,16 +65,16 @@ public class TVGrabberBuild extends RouteBuilder {
                     }
                 })
                 .multicast()
-                .to("seda:waitingForEnrichment")
-                .to("seda:socialMedia");
+                .to("seda:waitingForEnrichment");
+                //.to("seda:socialMedia");
 
 
         IMDBRatingAggregationStrategy aggregationStrategy = new IMDBRatingAggregationStrategy();
         from("seda:waitingForEnrichment")
                 .setHeader(Exchange.HTTP_QUERY, simple("t=${header.seriesTitle}&r=xml"))
                 .setHeader(Exchange.HTTP_METHOD, constant("GET"))
-                //.throttle(1).asyncDelayed() // Throttler EIP to avoid overloading omdbapi (1 request per second allowed)
-                //.enrich("http://omdbapi.com/", aggregationStrategy)
+                .throttle(1).asyncDelayed() // Throttler EIP to avoid overloading omdbapi (1 request per second allowed)
+                .enrich("http://omdbapi.com/", aggregationStrategy)
                 .to("jpa://tvgrabber.entities.Series");
 
 
