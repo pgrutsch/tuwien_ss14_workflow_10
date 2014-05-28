@@ -9,10 +9,12 @@ import org.springframework.stereotype.Component;
 import tvgrabber.TVGrabberMain;
 import tvgrabber.entities.TVGrabberUser;
 import tvgrabber.exceptions.UnsubscribeException;
+import tvgrabber.util.PropertiesUtil;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,10 +25,9 @@ import java.util.Map;
 @Component
 public class Addressmanager {
     private static final Logger logger = Logger.getLogger(Addressmanager.class);
-    private static final String existsUserByMail = "SELECT id, email, subscribed, searchTerm FROM TVUser WHERE email = ?";
 
-    @Autowired
-    private DataSource dataSource;
+    private @Autowired DataSource dataSource;
+    private @Autowired PropertiesUtil props;
 
     public void unsubscribe(@Headers Map<String, Object> headers, @Body String myBody, Exchange exchange) throws UnsubscribeException {
         String userMail = String.valueOf(headers.get("from"));
@@ -36,14 +37,17 @@ public class Addressmanager {
             subscriber.setSubscribed(false);
             subscriber.setSearchTerm("");
             exchange.getOut().getHeaders().put("To", userMail);
-            exchange.getOut().getHeaders().put("From", "workflow2014ss@gmail.com");
-            exchange.getOut().getHeaders().put("Subject", "Successfully unsubscribed");
+            exchange.getOut().getHeaders().put("From", props.getProperty("addressmanager.fromMail"));
+            exchange.getOut().getHeaders().put("Subject", props.getProperty("addressmanger.successfullyUnsubscribed"));
         }else{
-            logger.debug("User '" + userMail + "' tried to unsubscribe: '" + myBody + "' but isn't in the db.");
-            throw new UnsubscribeException("User '" + userMail + "' tried to unsubscribe: '" + myBody + "' but isn't in the db.");
+            String message = props.getProperty("addressmanager.user")+" '" + userMail + "' "+props.getProperty("addressmanager.triedTo") +" '"
+                    + myBody + "' "+ props.getProperty("addressmanager.notInDB");
+            logger.debug(message);
+            throw new UnsubscribeException(message);
         }
         exchange.getOut().setBody(subscriber);
     }
+
     public void subscribe(@Headers Map<String, Object> headers, @Body String myBody, Exchange exchange){
         String userMail = String.valueOf(headers.get("from"));
         logger.debug("Started to subscribe user " + userMail);
@@ -58,8 +62,8 @@ public class Addressmanager {
         subscriber.setSearchTerm(myBody);
         exchange.getOut().setBody(subscriber);
         exchange.getOut().getHeaders().put("To", userMail);
-        exchange.getOut().getHeaders().put("From", "workflow2014ss@gmail.com");
-        exchange.getOut().getHeaders().put("Subject", "Successfully subscribed");
+        exchange.getOut().getHeaders().put("From", props.getProperty("addressmanager.fromMail"));
+        exchange.getOut().getHeaders().put("Subject", props.getProperty("addressmanager.successfullySubscribed"));
     }
 
     /** DB lookup, if there is an user with the given email
@@ -70,7 +74,8 @@ public class Addressmanager {
         TVGrabberUser dbUser = null;
         try {
             Connection con = dataSource.getConnection();
-            PreparedStatement existsUserPS = con.prepareStatement(existsUserByMail);
+            //TODO: use namedQueries or properties!?
+            PreparedStatement existsUserPS = con.prepareStatement(props.getSQL("addressmanager.existsUserByMail"));
             existsUserPS.setString(1, email);
             ResultSet rsUser = existsUserPS.executeQuery();
             while (rsUser.next()){
