@@ -54,7 +54,7 @@ public class TVGrabberUser implements Serializable {
         this.email = email;
     }
 
-    public boolean getSubscribed() {
+    public boolean isSubscribed() {
         return subscribed;
     }
 

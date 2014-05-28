@@ -32,7 +32,7 @@ public class Addressmanager {
         String userMail = String.valueOf(headers.get("from"));
         logger.debug("Started to unsubscribe user: " + userMail);
         TVGrabberUser subscriber = existsUser(userMail);
-        if(subscriber!=null) {
+        if(subscriber!=null && subscriber.isSubscribed()) {
             subscriber.setSubscribed(false);
             subscriber.setSearchTerm("");
             exchange.getOut().getHeaders().put("To", userMail);

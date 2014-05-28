@@ -56,12 +56,12 @@ public class AddressmanagerTest extends CamelTestSupport {
         addressmanager.subscribe(header, myBody, exchange);
 
         assertEquals("bla", exchange.getOut().getBody(TVGrabberUser.class).getEmail());
-        assertTrue(exchange.getOut().getBody(TVGrabberUser.class).getSubscribed());
+        assertTrue(exchange.getOut().getBody(TVGrabberUser.class).isSubscribed());
 
         header.put("from","mail@address.biz");
         addressmanager.subscribe(header,myBody,exchange);
         assertEquals("mail@address.biz", exchange.getOut().getBody(TVGrabberUser.class).getEmail());
-        assertTrue(exchange.getOut().getBody(TVGrabberUser.class).getSubscribed());
+        assertTrue(exchange.getOut().getBody(TVGrabberUser.class).isSubscribed());
         assertEquals(myBody, exchange.getOut().getBody(TVGrabberUser.class).getSearchTerm());
 
     }
@@ -73,7 +73,7 @@ public class AddressmanagerTest extends CamelTestSupport {
 
         addressmanager.unsubscribe(header,myBody,exchange);
         assertEquals("usermailbiz",exchange.getOut().getBody(TVGrabberUser.class).getEmail());
-        assertFalse(exchange.getOut().getBody(TVGrabberUser.class).getSubscribed());
+        assertFalse(exchange.getOut().getBody(TVGrabberUser.class).isSubscribed());
         assertEquals("", exchange.getOut().getBody(TVGrabberUser.class).getSearchTerm());
         assertNotEquals(myBody, exchange.getOut().getBody(TVGrabberUser.class).getSearchTerm());
         assertFalse(exchange.getOut().isFault());
