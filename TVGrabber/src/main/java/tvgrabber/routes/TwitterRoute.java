@@ -1,10 +1,9 @@
 package tvgrabber.routes;
 
-import org.apache.camel.Endpoint;
-import org.apache.camel.LoggingLevel;
-import org.apache.camel.Predicate;
+import org.apache.camel.*;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
+import tvgrabber.entities.Comment;
 
 /**
  * Created by LeBon on 26.05.14.
@@ -28,7 +27,15 @@ public class TwitterRoute extends RouteBuilder {
 
         /* change the time for testing stuff */
         from(twitterEnd).throttle(1).timePeriodMillis(600000L).asyncDelayed()
-                .choice().when(isComment).to(twitterAccess)
+                .choice().when(isComment).process(new Processor() {
+            @Override
+            public void process(Exchange exchange) throws Exception {
+                Comment comment = exchange.getIn().getBody(Comment.class);
+                String tweet = comment.getComment() + " for " + comment.getTvprogram().getTitle();
+                exchange.getIn().setBody(tweet);
+
+            }
+        }).to(twitterAccess)
                 .otherwise().split(body()).setBody(simple("${body.title}"))
                 .to(twitterAccess).end();
     }
