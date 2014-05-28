@@ -20,9 +20,6 @@ public class TVGrabberComment extends RouteBuilder {
 
     private static final Logger logger = Logger.getLogger(TVGrabberComment.class);
 
-    @Autowired
-    private CommentBean commentBean;
-
     @Override
     public void configure() throws Exception {
 
@@ -31,7 +28,7 @@ public class TVGrabberComment extends RouteBuilder {
         from(url)
                 .log(LoggingLevel.INFO, "Receiving SOAP msg from http://localhost:8080/spring-soap/PostComment")
                 .errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL))
-                .bean(commentBean)
+                .bean(CommentBean.class)
                 .recipientList(header("recipients"))
                 .parallelProcessing();
 

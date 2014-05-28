@@ -39,9 +39,8 @@ public class Addressmanager {
             exchange.getOut().getHeaders().put("From", "workflow2014ss@gmail.com");
             exchange.getOut().getHeaders().put("Subject", "Successfully unsubscribed");
         }else{
-            exchange.getOut().setFault(true);
             logger.debug("User '" + userMail + "' tried to unsubscribe: '" + myBody + "' but isn't in the db.");
-            exchange.setException(new UnsubscribeException("User '" + userMail + "' tried to unsubscribe: '" + myBody + "' but isn't in the db."));
+            new UnsubscribeException("User '" + userMail + "' tried to unsubscribe: '" + myBody + "' but isn't in the db.");
         }
         exchange.getOut().setBody(subscriber);
     }
