@@ -1,5 +1,6 @@
 package tvgrabber;
 
+import org.apache.camel.spring.javaconfig.CamelConfiguration;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,16 +18,19 @@ import javax.sql.DataSource;
 @Configuration
 @ImportResource({"classpath:META-INF/cxf/cxf.xml"})
 @ComponentScan(basePackages = {"tvgrabber"})
-public class TVGrabberConfig {
+public class TVGrabberConfig extends CamelConfiguration {
 
     private static final Logger logger = Logger.getLogger(TVGrabberConfig.class);
 
-
     /* Don't define Beans here, use @Autowired instead to get instances */
 
+    /* CamelConfiguration's .routes() method has not to be overwritten since 2.13.
+       @Component annotation in RouteBuilders and @ComponentScan is used instead
+       http://camel.apache.org/spring-java-config.html
+     */
 
-    /* Initialize embedded Derby database */
 
+    /* Initialize embedded H2 database */
     @Bean
     public DataSource dataSource() {
         logger.debug("Creating DataSource");
@@ -39,4 +43,5 @@ public class TVGrabberConfig {
                 .ignoreFailedDrops(true)
                 .build();
     }
+
 }
