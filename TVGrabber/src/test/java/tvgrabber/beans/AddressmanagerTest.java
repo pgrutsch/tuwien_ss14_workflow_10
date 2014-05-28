@@ -14,8 +14,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import tvgrabber.StandAloneTestH2;
-import tvgrabber.TVGrabberConfig;
+import tvgrabber.TestConfig;
 import tvgrabber.entities.TVGrabberUser;
 import tvgrabber.exceptions.UnsubscribeException;
 import tvgrabber.routes.TVGrabberSubscribe;
@@ -30,7 +29,7 @@ import java.util.Map;
  */
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class,
-        classes = {TVGrabberConfig.class, StandAloneTestH2.class})
+        classes = {TestConfig.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @ActiveProfiles("testing")
 public class AddressmanagerTest extends CamelTestSupport {

@@ -26,7 +26,7 @@ public class TwitterRoute extends RouteBuilder {
 
 
         /* change the time for testing stuff */
-        from(twitterEnd).throttle(1).timePeriodMillis(600000L).asyncDelayed()
+        from("seda:twitter").throttle(1).timePeriodMillis(600000L).asyncDelayed()
                 .choice().when(isComment).process(new Processor() {
             @Override
             public void process(Exchange exchange) throws Exception {

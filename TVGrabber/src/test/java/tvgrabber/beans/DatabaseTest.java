@@ -10,8 +10,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import tvgrabber.StandAloneTestH2;
-import tvgrabber.TVGrabberConfig;
+import tvgrabber.TestConfig;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -25,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class,
-        classes = {TVGrabberConfig.class, StandAloneTestH2.class})
+        classes = {TestConfig.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ActiveProfiles("testing")
 public class DatabaseTest {

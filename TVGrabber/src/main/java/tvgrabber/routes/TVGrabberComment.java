@@ -23,7 +23,7 @@ public class TVGrabberComment extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        String url = "cxf://http://localhost:8080/spring-soap/PostComment?serviceClass=" + PostComment.class.getName();
+        String url = "cxf:http://localhost:8080/spring-soap/PostComment?serviceClass=" + PostComment.class.getName();
 
         from(url)
                 .log(LoggingLevel.INFO, "Receiving SOAP msg from http://localhost:8080/spring-soap/PostComment")
@@ -31,6 +31,7 @@ public class TVGrabberComment extends RouteBuilder {
                 .bean(CommentBean.class)
                 .recipientList(header("recipients"))
                 .parallelProcessing();
+
 
         from("jpa://tvgrabber.entities.Comment?consumeDelete=false&maximumResults=5&consumer.delay=7000")
                 .errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL))
@@ -42,6 +43,7 @@ public class TVGrabberComment extends RouteBuilder {
                         logger.debug("Comment: " + exchange.getIn().getBody(Comment.class).getComment());
                     }
                 });
+
 
     }
 

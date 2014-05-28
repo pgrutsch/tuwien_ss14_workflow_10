@@ -5,6 +5,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.impl.DefaultExchange;
+import org.apache.camel.test.spring.CamelSpringDelegatingTestContextLoader;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -16,14 +17,16 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import tvgrabber.StandAloneTestH2;
-import tvgrabber.TVGrabberConfig;
+import tvgrabber.TestConfig;
 import tvgrabber.entities.Comment;
 import tvgrabber.entities.Series;
 import tvgrabber.webservice.soap.SOAPComment;
 
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +40,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class,
-        classes = {TVGrabberConfig.class, StandAloneTestH2.class})
+        classes = {TestConfig.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ActiveProfiles("testing")
 public class CommentBeanTest {
@@ -141,7 +144,7 @@ public class CommentBeanTest {
         commentBean.route(headers, exchange);
 
         List<String> recipients = new ArrayList<String>();
-        recipients.add("jpa://tvgrabber.entities.Comment");
+        recipients.add("jpa:tvgrabber.entities.Comment");
         recipients.add("seda:twitter");
 
         assertEquals(recipients, headers.get("recipients"));

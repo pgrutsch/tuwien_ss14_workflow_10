@@ -1,15 +1,11 @@
 package tvgrabber.routes;
 
-import org.apache.camel.BeanInject;
-import org.apache.camel.Produce;
-import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.spring.javaconfig.CamelConfiguration;
+import org.apache.camel.spring.javaconfig.SingleRouteCamelConfiguration;
 import org.apache.camel.test.junit4.CamelTestSupport;
+import org.apache.camel.test.spring.CamelSpringDelegatingTestContextLoader;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
-import org.apache.camel.test.spring.MockEndpoints;
-import org.apache.camel.test.spring.UseAdviceWith;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,15 +15,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import tvgrabber.StandAloneTestH2;
-import tvgrabber.TVGrabberConfig;
 import tvgrabber.TestConfig;
 import tvgrabber.webservice.soap.SOAPComment;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by patrickgrutsch on 24.05.14.
@@ -35,145 +24,133 @@ import java.util.List;
 
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-        classes = {StandAloneTestH2.class, TestConfig.class},
-        loader = AnnotationConfigContextLoader.class
+        classes = {TestConfig.class, TVGrabberCommentTest.SpecificTestConfig.class}, /* define both configs for route tests */
+        loader = CamelSpringDelegatingTestContextLoader.class /* IMPORTANT: Use delegation loader */
 )
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ActiveProfiles("testing")
 public class TVGrabberCommentTest extends CamelTestSupport {
 
+    /**
+     * BASIC TEST SETUP
+     */
+
     private static final Logger logger = Logger.getLogger(TVGrabberCommentTest.class);
 
-    @Produce(uri = "cxf://http://localhost:8080/spring-soap/PostComment?serviceClass=tvgrabber.webservice.soap.PostComment")
-    private ProducerTemplate cxfProducer;
-
     @Autowired
-    protected TVGrabberComment tvGrabberComment;
+    private TVGrabberComment tvGrabberComment; /* needed for createRouteBuilder() */
 
+    @Configuration
+    public static class SpecificTestConfig extends SingleRouteCamelConfiguration {
+        @Autowired
+        private TVGrabberComment tvGrabberComment; /* needed for route() method */
 
-
-    /*
-    @Test
-    public void shouldSaveCommentToDB() throws InterruptedException {
-
-        endEndpoint.expectedMessageCount(1);
-        errorEndpoint.expectedMessageCount(0);
-
-        SOAPComment comment = new SOAPComment();
-        comment.setComment("im the comment");
-        comment.setEmail("andi@much.at");
-        comment.setTvprogram(1);
-
-        testProducer.sendBody(comment);
-
-        endEndpoint.assertIsSatisfied();
-        errorEndpoint.assertIsSatisfied();
-
+        @Bean
+        public RouteBuilder route() { /* limits the test class environment to use only one routeBuilder */
+            return tvGrabberComment;
+        }
     }
 
-    @Test
-    public void shouldNotSaveCommentWithInvalidTVProgram() throws InterruptedException {
+    @Override
+    public boolean isUseAdviceWith() { /* defines that tests run with adviceWith */
+        return true;
+    }
 
-        endEndpoint.expectedMessageCount(0);
-        errorEndpoint.expectedMessageCount(1);
+    @Override
+    protected RouteBuilder createRouteBuilder() throws Exception { /* returns the route used for the adviceWith tests */
+        return tvGrabberComment;
+    }
 
-        SOAPComment comment = new SOAPComment();
-        comment.setComment("im the comment");
-        comment.setEmail("andi@much.at");
-        comment.setTvprogram(-1);
 
-        testProducer.sendBody(comment);
-
-        endEndpoint.assertIsSatisfied();
-        errorEndpoint.assertIsSatisfied();
-
-    } */
-    /*
+    /**
+     * TESTS
+     */
 
     @Test
-    public void shouldSendCommentToTwitter() {
-
-    } */
-
-    @Test
-    public void testIsUseAdviceWith() throws Exception {
-        /*
+    public void testShouldSendCommentToDBandTwitter() throws Exception {
         context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
             @Override
             public void configure() throws Exception {
-                interceptSendToEndpoint("jpa:tvgrabber.entities.Comment")
+                replaceFromWith("seda:cxftest"); /* replace real cxf endpoint. solves problem with jetty */
+
+                interceptSendToEndpoint("jpa:*")
                         .skipSendToOriginalEndpoint()
-                        .to("mock:adviced");
+                        .to("mock:advice");
+
+                interceptSendToEndpoint("seda:twitter")
+                        .skipSendToOriginalEndpoint()
+                        .to("mock:advice");
             }
         });
+
         context.start();
 
         getMockEndpoint("mock:jpa:tvgrabber.entities.Comment").expectedMessageCount(0);
-        getMockEndpoint("mock:adviced").expectedMessageCount(1);
+        getMockEndpoint("mock:seda:twitter").expectedMessageCount(0);
+        getMockEndpoint("mock:advice").expectedMessageCount(2);
 
         SOAPComment comment = new SOAPComment();
         comment.setComment("im the comment");
         comment.setEmail("andi@much.at");
         comment.setTvprogram(1);
 
-        cxfProducer.sendBody(comment);
+        template.sendBody("seda:cxftest", comment);
 
         assertMockEndpointsSatisfied();
-        */
     }
 
-    /*
     @Test
     public void testSendMultipleCommentsToDB() throws Exception {
         context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
             @Override
             public void configure() throws Exception {
-                interceptSendToEndpoint("jpa:tvgrabber.entities.Comment")
+                replaceFromWith("seda:cxftest"); /* replace real cxf endpoint. problem with jetty */
+
+                interceptSendToEndpoint("jpa:*")
                         .skipSendToOriginalEndpoint()
-                        .to("mock:adviced");
+                        .to("mock:advice");
+
+                interceptSendToEndpoint("seda:twitter")
+                        .skipSendToOriginalEndpoint()
+                        .to("mock:advice");
             }
         });
+
         context.start();
 
         getMockEndpoint("mock:jpa:tvgrabber.entities.Comment").expectedMessageCount(0);
-        getMockEndpoint("mock:adviced").expectedMessageCount(3);
+        getMockEndpoint("mock:seda:twitter").expectedMessageCount(0);
+        getMockEndpoint("mock:advice").expectedMessageCount(6);
 
         SOAPComment comment1 = new SOAPComment();
         comment1.setComment("im the comment1");
         comment1.setEmail("andi@much.at");
         comment1.setTvprogram(1);
-        cxfProducer.sendBody(comment1);
+        template.sendBody("seda:cxftest", comment1);
 
         SOAPComment comment2 = new SOAPComment();
         comment2.setComment("im the comment2");
         comment2.setEmail("andi@much.at");
         comment2.setTvprogram(2);
-        cxfProducer.sendBody(comment2);
+        template.sendBody("seda:cxftest", comment2);
 
         SOAPComment comment3 = new SOAPComment();
         comment3.setComment("im the comment3");
         comment3.setEmail("andi@much.at");
         comment3.setTvprogram(3);
-        cxfProducer.sendBody(comment3);
+        template.sendBody("seda:cxftest", comment3);
 
         assertMockEndpointsSatisfied();
-        context.stop();
     }
-*/
-    /*
+
     @Test
-    public void testSendCommentWithInvalidTVProgramIDToDeadLetter() throws Exception {
+    public void testSendCommentWithInvalidTVProgramIDToDeadLetter() {
 
-    } */
-
-    @Override
-    public boolean isUseAdviceWith() {
-        return true;
     }
 
-    @Override
-    protected RouteBuilder createRouteBuilder() throws Exception {
-        return tvGrabberComment;
+    @Test
+    public void testSendEmptyCommentToDeadLetter() {
+
     }
 
 }

@@ -23,9 +23,6 @@ public class TVGrabberBuild extends RouteBuilder {
 
     private static final Logger logger = Logger.getLogger(TVGrabberBuild.class);
 
-    @Autowired
-    private NewSeries newSeries;
-
     @Override
     public void configure() throws Exception {
         onException(HttpOperationFailedException.class)
@@ -92,7 +89,7 @@ public class TVGrabberBuild extends RouteBuilder {
                     }
                 });
 
-       from("seda:socialMedia").filter().method(newSeries, "filterExistingSeries")
+       from("seda:socialMedia").filter().method(NewSeries.class, "filterExistingSeries")
 //                .multicast()
 //                .to("seda:facebook")
                 .to("seda:twitter");
