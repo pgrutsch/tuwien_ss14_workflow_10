@@ -37,7 +37,7 @@ public class TVGrabberBuild extends RouteBuilder {
                     }
                 }).handled(true);
 
-        errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL));
+       errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL));
 
 
         DataFormat jaxbDataFormat = new JaxbDataFormat("tvgrabber.entities");
@@ -65,8 +65,8 @@ public class TVGrabberBuild extends RouteBuilder {
                     }
                 })
                 .multicast()
-                .to("seda:waitingForEnrichment")
-                .to("seda:socialMedia");
+                .to("seda:waitingForEnrichment");
+                //.to("seda:socialMedia");
 
 
         IMDBRatingAggregationStrategy aggregationStrategy = new IMDBRatingAggregationStrategy();
