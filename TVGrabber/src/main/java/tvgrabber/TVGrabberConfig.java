@@ -1,7 +1,9 @@
 package tvgrabber;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.spring.javaconfig.CamelConfiguration;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +30,6 @@ public class TVGrabberConfig extends CamelConfiguration {
        @Component annotation in RouteBuilders and @ComponentScan is used instead
        http://camel.apache.org/spring-java-config.html
      */
-
 
     /* Initialize embedded H2 database */
     @Bean

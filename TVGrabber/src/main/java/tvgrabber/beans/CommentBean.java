@@ -43,10 +43,8 @@ public class CommentBean {
 
         exchange.getIn().setBody(comment);
 
-        String db = "jpa://tvgrabber.entities.Comment";
+        String db = "jpa:tvgrabber.entities.Comment";
         String twitter = "seda:twitter";
-
-        String facebook = ""; //TODO
 
         headers.put("recipients", Arrays.asList(db, twitter));
         headers.put("type", "comment");
