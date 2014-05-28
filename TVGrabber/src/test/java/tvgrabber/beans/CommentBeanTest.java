@@ -143,20 +143,14 @@ public class CommentBeanTest {
         List<String> recipients = new ArrayList<String>();
         recipients.add("jpa://tvgrabber.entities.Comment");
         recipients.add("seda:twitter");
-        /*
-        recipients.add("twitter://timeline/user?consumerKey=K8WGu6kIxeipNv1pYPTA" +
-                "&consumerSecret=eS6kq93pT8xnMgK4MKnUR5ilkFExALXrSWiuB1wEXv8" +
-                "&accessToken=2289840392-NyRv99h6JGrIe5n5sqNOVZtAsy4BM603ET4X69m" +
-                "&accessTokenSecret=hHgTntMJKqPyXf0NwVb7qqEyurZQgpeEMNPpeGbuYFy5H");
-        */
+
         assertEquals(recipients, headers.get("recipients"));
     }
 
+    //TODO: test empty comments etc.
     @Test
     public void route_shouldThrowNullPointerCommentEmpty() {
 
     }
-
-    //TODO: test empty comments etc.
 
 }

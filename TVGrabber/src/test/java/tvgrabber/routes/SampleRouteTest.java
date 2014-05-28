@@ -80,23 +80,14 @@ public class SampleRouteTest {
 
     @Test
     public void testRoute1() throws InterruptedException {
-        endEndpoint.expectedMessageCount(1); /* expected messages */
+        endEndpoint.expectedMessageCount(2); /* expected messages */
         errorEndpoint.expectedMessageCount(0);
 
-        testProducer.sendBody("<name>test</name>");
+        testProducer.sendBody("<name>test1</name>");
+        testProducer.sendBody("<name>test2</name>");
 
         endEndpoint.assertIsSatisfied();
         errorEndpoint.assertIsSatisfied();
     }
 
-    @Test
-    public void testRoute2() throws InterruptedException {
-        endEndpoint.expectedMessageCount(1); /* expected messages */
-        errorEndpoint.expectedMessageCount(0);
-
-        testProducer.sendBody("<name>test</name>");
-
-        endEndpoint.assertIsSatisfied();
-        errorEndpoint.assertIsSatisfied();
-    }
 }
