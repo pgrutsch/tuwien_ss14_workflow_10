@@ -31,25 +31,28 @@ public class WSClient {
         PostComment myService = (PostComment) factory.create();
 
         Scanner sc = new Scanner(System.in);
-        String input;
-
-        System.out.println("=== Enter comment and press enter or enter exit to quit");
-
-        while(sc.hasNext()) {
-
-            input = sc.nextLine();
-
-            if(input.equals("exit")) {
-                return;
-            } else {
-                SOAPComment c = new SOAPComment();
-                c.setComment(input);
-                c.setEmail("alois@huber.com");
-                c.setTvprogram(4);
-                myService.postComment(c);
-            }
 
 
+        while(true) {
+            System.out.println("===================");
+            System.out.println("Send a SOAP Comment");
+            System.out.println("===================");
+
+            System.out.println("Enter email:");
+            String email = sc.nextLine();
+
+            System.out.println("Enter comment:");
+            String comment = sc.nextLine();
+
+            System.out.println("Enter TVProgram ID:");
+            int tvprogramid = Integer.valueOf(sc.nextLine());
+
+            SOAPComment c = new SOAPComment();
+            c.setComment(comment);
+            c.setEmail(email);
+            c.setTvprogram(tvprogramid);
+
+            myService.postComment(c);
         }
 
     }
