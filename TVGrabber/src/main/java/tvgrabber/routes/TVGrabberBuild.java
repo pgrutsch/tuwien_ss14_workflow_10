@@ -8,7 +8,6 @@ import org.apache.camel.component.http.HttpOperationFailedException;
 import org.apache.camel.converter.jaxb.JaxbDataFormat;
 import org.apache.camel.spi.DataFormat;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tvgrabber.beans.IMDBRatingAggregationStrategy;
 import tvgrabber.beans.NewSeries;
