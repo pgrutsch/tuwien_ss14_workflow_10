@@ -37,17 +37,21 @@ public class TVGrabberCommentTest extends CamelTestSupport {
 
     private static final Logger logger = Logger.getLogger(TVGrabberCommentTest.class);
 
+    /**
+     * WATCH OUT for variable name. if you use eg. tvGrabberComment, there will be an uniquebeanidentifier exception!!!
+     */
     @Autowired
-    private TVGrabberComment tvGrabberComment; /* needed for createRouteBuilder() */
+    private TVGrabberComment TVGrabberComment; /* needed for createRouteBuilder() */
 
     @Configuration
     public static class SpecificTestConfig extends SingleRouteCamelConfiguration {
+
         @Autowired
-        private TVGrabberComment tvGrabberComment; /* needed for route() method */
+        private TVGrabberComment TVGrabberComment; /* needed for route() method */
 
         @Bean
         public RouteBuilder route() { /* limits the test class environment to use only one routeBuilder */
-            return tvGrabberComment;
+            return TVGrabberComment;
         }
     }
 
@@ -58,7 +62,7 @@ public class TVGrabberCommentTest extends CamelTestSupport {
 
     @Override
     protected RouteBuilder createRouteBuilder() throws Exception { /* returns the route used for the adviceWith tests */
-        return tvGrabberComment;
+        return TVGrabberComment;
     }
 
 
@@ -104,7 +108,7 @@ public class TVGrabberCommentTest extends CamelTestSupport {
         context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
             @Override
             public void configure() throws Exception {
-                replaceFromWith("seda:cxftest"); /* replace real cxf endpoint. problem with jetty */
+                replaceFromWith("seda:cxftest");
 
                 interceptSendToEndpoint("jpa:*")
                         .skipSendToOriginalEndpoint()
