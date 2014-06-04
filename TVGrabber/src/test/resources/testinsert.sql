@@ -3,7 +3,7 @@ insert into TVUser
 insert into TVUser
 (email, subscribed, searchTerm) values ('usermailbiz', TRUE , 'subscribed');
 insert into TVUser
-(email, subscribed, searchTerm) values ('usermailbiz', TRUE , 'subscribed');
+(email, subscribed, searchTerm) values ('user@mail.biz', TRUE , 'subscribed');
 
 insert into TVProgram
 (title, description, startTime, endTime, channel)
