@@ -1,5 +1,6 @@
 package tvgrabber.routes;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
@@ -45,6 +46,9 @@ public class TVGrabberSubscribeTest extends CamelTestSupport {
     @Autowired
     private TVGrabberSubscribe TVGrabberSubscribe;
 
+    @Autowired
+    private CamelContext camelContext;
+
     @Configuration
     public static class SpecificTestConfig extends SingleRouteCamelConfiguration {
         @Autowired
@@ -64,6 +68,11 @@ public class TVGrabberSubscribeTest extends CamelTestSupport {
     @Override
     protected RouteBuilder createRouteBuilder() throws Exception {
         return TVGrabberSubscribe;
+    }
+
+    @Override
+    protected CamelContext createCamelContext() throws Exception {
+        return camelContext;
     }
 
     /** Tests the routing
