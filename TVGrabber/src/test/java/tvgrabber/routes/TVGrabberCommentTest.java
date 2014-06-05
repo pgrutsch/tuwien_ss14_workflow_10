@@ -1,12 +1,16 @@
 package tvgrabber.routes;
 
+import org.apache.camel.CamelContext;
+import org.apache.camel.Service;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.RouteDefinition;
 import org.apache.camel.spring.javaconfig.SingleRouteCamelConfiguration;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.apache.camel.test.spring.CamelSpringDelegatingTestContextLoader;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +34,10 @@ import tvgrabber.webservice.soap.SOAPComment;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ActiveProfiles("testing")
 public class TVGrabberCommentTest extends CamelTestSupport {
+    @Override
+    public void setUseRouteBuilder(boolean useRouteBuilder) {
+        super.setUseRouteBuilder(useRouteBuilder);
+    }
 
     /**
      * BASIC TEST SETUP
@@ -42,6 +50,9 @@ public class TVGrabberCommentTest extends CamelTestSupport {
      */
     @Autowired
     private TVGrabberComment TVGrabberComment; /* needed for createRouteBuilder() */
+
+    @Autowired
+    private CamelContext camelContext; /* SpringCamelContext from TestConfig */
 
     @Configuration
     public static class SpecificTestConfig extends SingleRouteCamelConfiguration {
@@ -65,6 +76,11 @@ public class TVGrabberCommentTest extends CamelTestSupport {
         return TVGrabberComment;
     }
 
+    /* reuse TestConfig's SpringCamelContext to avoid creation of a DefaultCamelContext() by CamelTestSupport */
+    @Override
+    protected CamelContext createCamelContext() throws Exception {
+        return camelContext;
+    }
 
     /**
      * TESTS
@@ -101,7 +117,10 @@ public class TVGrabberCommentTest extends CamelTestSupport {
         template.sendBody("seda:cxftest", comment);
 
         assertMockEndpointsSatisfied();
+
+        context.stop();
     }
+
 
     @Test
     public void testSendMultipleCommentsToDB() throws Exception {
@@ -145,15 +164,19 @@ public class TVGrabberCommentTest extends CamelTestSupport {
         template.sendBody("seda:cxftest", comment3);
 
         assertMockEndpointsSatisfied();
+
+        context.stop();
     }
 
     @Test
-    public void testSendCommentWithInvalidTVProgramIDToDeadLetter() {
+    public void testSendCommentWithInvalidTVProgramIDToDeadLetter() throws Exception {
+
 
     }
 
     @Test
-    public void testSendEmptyCommentToDeadLetter() {
+    public void testSendEmptyCommentToDeadLetter() throws Exception {
+
 
     }
 

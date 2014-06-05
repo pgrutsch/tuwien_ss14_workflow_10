@@ -1,5 +1,6 @@
 package tvgrabber.routes;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.javaconfig.SingleRouteCamelConfiguration;
@@ -45,6 +46,9 @@ public class TwitterRouteTest extends CamelTestSupport {
     @Autowired
     private TwitterRoute twitterRoute;
 
+    @Autowired
+    private CamelContext camelContext; /* SpringCamelContext from TestConfig */
+
     @Configuration
     public static class SpecificTestConfig extends SingleRouteCamelConfiguration {
         @Autowired
@@ -64,6 +68,12 @@ public class TwitterRouteTest extends CamelTestSupport {
     @Override
     protected RouteBuilder createRouteBuilder() throws Exception {
         return twitterRoute;
+    }
+
+    /* reuse TestConfig's SpringCamelContext to avoid creation of a DefaultCamelContext() by CamelTestSupport */
+    @Override
+    protected CamelContext createCamelContext() throws Exception {
+        return camelContext;
     }
 
     @Test
@@ -92,6 +102,8 @@ public class TwitterRouteTest extends CamelTestSupport {
         template.sendBody("seda:twitter", series);
 
         assertMockEndpointsSatisfied();
+
+        context.stop();
     }
 
 }

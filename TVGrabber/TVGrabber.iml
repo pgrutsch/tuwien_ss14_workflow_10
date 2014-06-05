@@ -9,9 +9,9 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="" />
         <datasource-mapping>
-          <factory-entry name="camel" value="ed95f0ca-88e9-4b85-be40-c16cf80c9432" />
+          <factory-entry name="camel-test" value="74bd8694-ae41-4df3-8406-e415bbf85603" />
         </datasource-mapping>
-        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/test/resources/META-INF/persistence.xml" />
       </configuration>
     </facet>
     <facet type="web" name="Web">

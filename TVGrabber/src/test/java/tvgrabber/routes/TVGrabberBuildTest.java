@@ -1,5 +1,6 @@
 package tvgrabber.routes;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.javaconfig.SingleRouteCamelConfiguration;
@@ -48,6 +49,9 @@ public class TVGrabberBuildTest extends CamelTestSupport {
     @Autowired
     private TVGrabberBuild TVGrabberBuild; /* needed for createRouteBuilder() */
 
+    @Autowired
+    private CamelContext camelContext; /* SpringCamelContext from TestConfig */
+
     @Configuration
     public static class SpecificTestConfig extends SingleRouteCamelConfiguration {
 
@@ -68,6 +72,12 @@ public class TVGrabberBuildTest extends CamelTestSupport {
     @Override
     protected RouteBuilder createRouteBuilder() throws Exception { /* returns the route used for the adviceWith tests */
         return TVGrabberBuild;
+    }
+
+    /* reuse TestConfig's SpringCamelContext to avoid creation of a DefaultCamelContext() by CamelTestSupport */
+    @Override
+    protected CamelContext createCamelContext() throws Exception {
+        return camelContext;
     }
 
     /**
@@ -118,6 +128,8 @@ public class TVGrabberBuildTest extends CamelTestSupport {
 
         assertMockEndpointsSatisfied();
         */
+
+        context.stop();
     }
 
 
