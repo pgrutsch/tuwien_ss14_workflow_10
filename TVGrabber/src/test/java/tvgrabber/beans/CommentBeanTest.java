@@ -20,8 +20,11 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import tvgrabber.TestConfig;
 import tvgrabber.entities.Comment;
 import tvgrabber.entities.Series;
+import tvgrabber.exceptions.InvalidSoapCommentException;
 import tvgrabber.webservice.soap.SOAPComment;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -51,43 +54,20 @@ public class CommentBeanTest {
 
     private static final Logger logger = Logger.getLogger(CommentBeanTest.class);
 
-    @Autowired
-    private CommentBean commentBean;
+    private EntityManager entityManager;
 
     @Autowired
-    private DataSource dataSource;
+    private EntityManagerFactory entityManagerFactory;
+
+    @Autowired
+    private CommentBean commentBean;
 
     @Before
     public void setUp() {
         context = new DefaultCamelContext();
         exchange = new DefaultExchange(context);
         headers = new HashMap<String, Object>();
-
-        Message in = exchange.getIn();
-        in.setBody(createSOAPComment());
-        in.setHeaders(headers);
-    }
-
-    private SOAPComment createSOAPComment() {
-        SOAPComment soapComment = new SOAPComment();
-        soapComment.setComment("i'm the best comment in the world");
-        soapComment.setEmail("hans@mueller.at");
-        soapComment.setTvprogram(1);
-
-        return soapComment;
-    }
-
-    private Comment createComment() {
-        Comment comment = new Comment();
-        comment.setComment("i'm the best comment in the world");
-        comment.setEmail("hans@mueller.at");
-
-        Series series = new Series();
-        series.setId(1);
-
-        comment.setTvprogram(series);
-
-        return comment;
+        entityManager = entityManagerFactory.createEntityManager();
     }
 
     @After
@@ -95,51 +75,33 @@ public class CommentBeanTest {
         exchange = null;
         context = null;
         headers = null;
+        entityManager.close();
     }
 
     @Test
-    public void route_shouldReplaceSOAPCommentWithComment() {
-        Connection c = null;
-        try {
-            c = dataSource.getConnection();
-            Statement s = c.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM TVProgram");
+    public void route_shouldReplaceSOAPCommentWithComment() throws InvalidSoapCommentException {
+        SOAPComment soapComment = new SOAPComment();
+        soapComment.setComment("mycomment");
+        soapComment.setTvprogram(1);
+        soapComment.setEmail("anton@mueller.at");
 
-            logger.debug("1Reading TVPrograms ...");
-            while(rs.next()) {
-                logger.debug("id: " + rs.getInt("id") + " title: " + rs.getString("title"));
-            }
-        } catch (SQLException e) {
-            logger.error("ERROR INSERT AND READ");
-            e.printStackTrace();
-        }
-
+        exchange.getIn().setBody(soapComment);
 
         commentBean.route(headers, exchange);
-        Comment comment = createComment();
 
-        assertEquals(exchange.getIn().getBody(Comment.class).getComment(), comment.getComment());
-        assertEquals(exchange.getIn().getBody(Comment.class).getEmail(), comment.getEmail());
-        assertEquals(exchange.getIn().getBody(Comment.class).getTvprogram().getId(), comment.getTvprogram().getId());
-        assertEquals(exchange.getIn().getBody(Comment.class).getId(), comment.getId());
+        assertEquals(exchange.getIn().getBody(Comment.class).getComment(), "mycomment");
+        assertEquals(exchange.getIn().getBody(Comment.class).getEmail(), "anton@mueller.at");
+        assertEquals(exchange.getIn().getBody(Comment.class).getTvprogram().getId(), 1, 0);
     }
 
     @Test
     public void route_shouldSetRecipientlistHeader() throws Exception {
-        Connection c = null;
-        try {
-            c = dataSource.getConnection();
-            Statement s = c.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM TVProgram");
+        SOAPComment soapComment = new SOAPComment();
+        soapComment.setComment("mycomment");
+        soapComment.setTvprogram(1);
+        soapComment.setEmail("anton@mueller.at");
 
-            logger.debug("2Reading TVPrograms ...");
-            while(rs.next()) {
-                logger.debug("id: " + rs.getInt("id") + " title: " + rs.getString("title"));
-            }
-        } catch (SQLException e) {
-            logger.error("ERROR INSERT AND READ");
-            e.printStackTrace();
-        }
+        exchange.getIn().setBody(soapComment);
 
         commentBean.route(headers, exchange);
 
@@ -150,10 +112,90 @@ public class CommentBeanTest {
         assertEquals(recipients, headers.get("recipients"));
     }
 
-    //TODO: test empty comments etc.
     @Test
-    public void route_shouldThrowNullPointerCommentEmpty() {
+    public void route_shouldSetTypeHeader() throws Exception {
+        SOAPComment soapComment = new SOAPComment();
+        soapComment.setComment("mycomment");
+        soapComment.setTvprogram(1);
+        soapComment.setEmail("anton@mueller.at");
 
+        exchange.getIn().setBody(soapComment);
+
+        commentBean.route(headers, exchange);
+
+        assertEquals("comment", headers.get("type"));
+    }
+
+    @Test(expected = InvalidSoapCommentException.class)
+    public void route_shouldThrowInvalidSoapCommentExCommentEmpty() throws InvalidSoapCommentException {
+        SOAPComment soapComment = new SOAPComment();
+        soapComment.setComment("");
+        soapComment.setTvprogram(1);
+        soapComment.setEmail("anton@mueller.at");
+
+        exchange.getIn().setBody(soapComment);
+
+        commentBean.route(headers, exchange);
+    }
+
+    @Test(expected = InvalidSoapCommentException.class)
+    public void route_shouldThrowInvalidSoapCommentExCommentNull() throws InvalidSoapCommentException {
+        SOAPComment soapComment = new SOAPComment();
+        soapComment.setComment(null);
+        soapComment.setTvprogram(1);
+        soapComment.setEmail("anton@mueller.at");
+
+        exchange.getIn().setBody(soapComment);
+
+        commentBean.route(headers, exchange);
+    }
+
+    @Test(expected = InvalidSoapCommentException.class)
+    public void route_shouldThrowInvalidSoapCommentExEmailEmpty() throws InvalidSoapCommentException {
+        SOAPComment soapComment = new SOAPComment();
+        soapComment.setComment("mycomment");
+        soapComment.setTvprogram(1);
+        soapComment.setEmail("");
+
+        exchange.getIn().setBody(soapComment);
+
+        commentBean.route(headers, exchange);
+    }
+
+    @Test(expected = InvalidSoapCommentException.class)
+    public void route_shouldThrowInvalidSoapCommentExEmailNull() throws InvalidSoapCommentException {
+        SOAPComment soapComment = new SOAPComment();
+        soapComment.setComment("mycomment");
+        soapComment.setTvprogram(1);
+        soapComment.setEmail(null);
+
+        exchange.getIn().setBody(soapComment);
+
+        commentBean.route(headers, exchange);
+    }
+
+    @Test(expected = InvalidSoapCommentException.class)
+    public void route_shouldThrowInvalidSoapCommentExEmailInvalid() throws InvalidSoapCommentException {
+        SOAPComment soapComment = new SOAPComment();
+        soapComment.setComment("mycomment");
+        soapComment.setTvprogram(1);
+        soapComment.setEmail("asdfasdf");
+
+        exchange.getIn().setBody(soapComment);
+
+        commentBean.route(headers, exchange);
+    }
+
+    @Test(expected = InvalidSoapCommentException.class)
+    public void route_shouldThrowInvalidSoapCommentExInvalidTVProgramID() throws InvalidSoapCommentException {
+        SOAPComment soapComment = new SOAPComment();
+        soapComment.setComment("mycomment");
+        soapComment.setTvprogram(-1);
+        soapComment.setEmail("anton@mueller.at");
+
+        exchange.getIn().setBody(soapComment);
+
+        commentBean.route(headers, exchange);
     }
 
 }

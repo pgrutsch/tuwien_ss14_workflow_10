@@ -34,6 +34,15 @@ public class DatabaseTest {
     @Autowired
     private DataSource dataSource;
 
+    /**
+     * Working with database is now possible with EntityManger.
+     *
+     * @Autowired
+     * private EntityManagerFactory entityManagerFactory;
+     *
+     * private EntityManger entityManger = entityManagerFactory.createEntityManager();
+     */
+
     @Before
     public void setUp() {
         Connection conn = null;

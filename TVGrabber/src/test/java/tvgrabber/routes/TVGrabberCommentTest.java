@@ -1,16 +1,13 @@
 package tvgrabber.routes;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.Service;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.model.RouteDefinition;
 import org.apache.camel.spring.javaconfig.SingleRouteCamelConfiguration;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.apache.camel.test.spring.CamelSpringDelegatingTestContextLoader;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +31,6 @@ import tvgrabber.webservice.soap.SOAPComment;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ActiveProfiles("testing")
 public class TVGrabberCommentTest extends CamelTestSupport {
-    @Override
-    public void setUseRouteBuilder(boolean useRouteBuilder) {
-        super.setUseRouteBuilder(useRouteBuilder);
-    }
 
     /**
      * BASIC TEST SETUP
@@ -91,7 +84,7 @@ public class TVGrabberCommentTest extends CamelTestSupport {
         context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
             @Override
             public void configure() throws Exception {
-                replaceFromWith("seda:cxftest"); /* replace real cxf endpoint. solves problem with jetty */
+                replaceFromWith("seda:cxftest");
 
                 interceptSendToEndpoint("jpa:*")
                         .skipSendToOriginalEndpoint()
@@ -123,7 +116,7 @@ public class TVGrabberCommentTest extends CamelTestSupport {
 
 
     @Test
-    public void testSendMultipleCommentsToDB() throws Exception {
+    public void testSendMultipleCommentsToDBandTwitter() throws Exception {
         context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
             @Override
             public void configure() throws Exception {
@@ -170,14 +163,64 @@ public class TVGrabberCommentTest extends CamelTestSupport {
 
     @Test
     public void testSendCommentWithInvalidTVProgramIDToDeadLetter() throws Exception {
+        context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                replaceFromWith("seda:cxftest");
 
+                interceptSendToEndpoint("seda:errors")
+                        .skipSendToOriginalEndpoint()
+                        .to("mock:advice");
+            }
+        });
 
+        context.start();
+
+        getMockEndpoint("mock:jpa:tvgrabber.entities.Comment").expectedMessageCount(0);
+        getMockEndpoint("mock:seda:twitter").expectedMessageCount(0);
+        getMockEndpoint("mock:advice").expectedMessageCount(1);
+
+        SOAPComment comment = new SOAPComment();
+        comment.setComment("im the comment");
+        comment.setEmail("andi@much.at");
+        comment.setTvprogram(-1);
+
+        template.sendBody("seda:cxftest", comment);
+
+        assertMockEndpointsSatisfied();
+
+        context.stop();
     }
 
     @Test
     public void testSendEmptyCommentToDeadLetter() throws Exception {
+        context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                replaceFromWith("seda:cxftest");
 
+                interceptSendToEndpoint("seda:errors")
+                        .skipSendToOriginalEndpoint()
+                        .to("mock:advice");
+            }
+        });
 
+        context.start();
+
+        getMockEndpoint("mock:jpa:tvgrabber.entities.Comment").expectedMessageCount(0);
+        getMockEndpoint("mock:seda:twitter").expectedMessageCount(0);
+        getMockEndpoint("mock:advice").expectedMessageCount(1);
+
+        SOAPComment comment = new SOAPComment();
+        comment.setComment("");
+        comment.setEmail("andi@much.at");
+        comment.setTvprogram(1);
+
+        template.sendBody("seda:cxftest", comment);
+
+        assertMockEndpointsSatisfied();
+
+        context.stop();
     }
 
 }

@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tvgrabber.entities.Comment;
 import tvgrabber.entities.Series;
+import tvgrabber.exceptions.InvalidSoapCommentException;
 import tvgrabber.webservice.soap.SOAPComment;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by patrickgrutsch on 18.05.14.
@@ -25,10 +29,19 @@ public class CommentBean {
 
     private static final Logger logger = Logger.getLogger(CommentBean.class);
 
+    public static final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    private Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+
     @Autowired
     private DataSource dataSource;
 
-    public void route(@Headers Map<String, Object> headers, Exchange exchange) throws NullPointerException {
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
+
+    public void route(@Headers Map<String, Object> headers, Exchange exchange) throws InvalidSoapCommentException {
 
         SOAPComment soapComment = exchange.getIn().getBody(SOAPComment.class);
 
@@ -50,65 +63,35 @@ public class CommentBean {
         headers.put("type", "comment");
     }
 
-    private void validateComment(SOAPComment comment) throws NullPointerException {
+    private void validateComment(SOAPComment comment) throws InvalidSoapCommentException {
         if(comment.getComment() != null && comment.getEmail() != null) {
             if(getSeriesByID(comment.getTvprogram()) != null) {
                 if(!comment.getComment().trim().isEmpty() &&
                         !comment.getEmail().trim().isEmpty()) {
-                    // comment is valid
+                    if(pattern.matcher(comment.getEmail()).matches()) {
+                        // comment is valid
+                    } else {
+                        logger.debug("Email '" + comment.getEmail() + "' is invalid");
+                        throw new InvalidSoapCommentException("Email is invalid");
+                    }
                 } else {
-                    logger.debug("Comment or Email are empty");
-                    throw new NullPointerException();
+                    logger.debug("Comment or Email is empty");
+                    throw new InvalidSoapCommentException("Comment or Email is empty");
                 }
             } else {
                 logger.debug("Invalid TVProgram ID: " + comment.getTvprogram() + ". Not found in DB");
-                throw new NullPointerException();
+                throw new InvalidSoapCommentException("Invalid TVProgram ID: " + comment.getTvprogram() + ". Not found in DB");
             }
         } else {
-            logger.debug("Comment or Email are null");
-            throw new NullPointerException();
+            logger.debug("Comment or Email is null");
+            throw new InvalidSoapCommentException("Comment or Email is null");
         }
     }
 
     private Series getSeriesByID(int id){
-        Series tvProgram = null;
-
-        Connection con = null;
-        PreparedStatement getSeriesByIDPS = null;
-        ResultSet rsSeries = null;
-        try {
-            con = dataSource.getConnection();
-            getSeriesByIDPS = con.prepareStatement("SELECT * FROM TVProgram WHERE ID = ?");
-            getSeriesByIDPS.setInt(1, id);
-            rsSeries = getSeriesByIDPS.executeQuery();
-
-            while (rsSeries.next()){
-                tvProgram = new Series();
-                tvProgram.setId(rsSeries.getInt("id"));
-                tvProgram.setTitle(rsSeries.getString("title"));
-                tvProgram.setDesc(rsSeries.getString("description"));
-                tvProgram.setStart(rsSeries.getDate("startTime"));
-                tvProgram.setStop(rsSeries.getDate("endTime"));
-                tvProgram.setChannel(rsSeries.getString("channel"));
-                tvProgram.setImdbRating(rsSeries.getDouble("imdbRating"));
-                return tvProgram;
-            }
-
-            return tvProgram;
-
-        } catch (SQLException e) {
-            logger.error("DB error:");
-            logger.error(e.toString());
-            return null;
-        } finally {
-            try {
-                if(con != null) con.close();
-                if(getSeriesByIDPS != null) getSeriesByIDPS.close();
-                if(rsSeries != null) rsSeries.close();
-            } catch (SQLException e) {
-                logger.error(e.toString());
-            }
-
-        }
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Series series = entityManager.find(Series.class, id);
+        entityManager.close();
+        return series;
     }
 }
