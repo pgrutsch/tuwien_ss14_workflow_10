@@ -10,7 +10,7 @@ import tvgrabber.entities.Series;
  * User: Isabella
  * Date: 05.06.14
  * Time: 15:08
- * To change this template use File | Settings | File Templates.
+ * Aggregate the Messages with the same title in one Message (same serie)
  */
 public class NewsletterTitleAS implements AggregationStrategy {
 

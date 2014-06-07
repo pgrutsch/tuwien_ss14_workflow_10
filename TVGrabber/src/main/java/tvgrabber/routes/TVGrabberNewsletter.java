@@ -32,6 +32,15 @@ public class TVGrabberNewsletter extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+        java.util.Date dateWeek = null;
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        try{
+            dateWeek = dateFormat.parse("2014-04-27 00:00:00");
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
 
         //constant date in long value 27.04 - 2.05
         long week = 1398398400000L+(86400*7*1000);
@@ -42,6 +51,7 @@ public class TVGrabberNewsletter extends RouteBuilder {
         String weekstartString = format.format(weekstart);
         String weekendString = format.format(weekend);
 
+        //polls the weekly newsletter from the db
         from("jpa://tvgrabber.entities.Series?consumeDelete=true&consumer.delay=5000&consumer.query=" +
                 "select s from tvgrabber.entities.Series s where (s.start >= '" + weekstartString + "' AND s.stop <= '" + weekendString + "')")
                 .bean(newsletterbean,"changeHeader")
@@ -55,7 +65,7 @@ public class TVGrabberNewsletter extends RouteBuilder {
                     }
                 }).to("seda:aggregator");
 
-        //aggreagte by title
+        //aggregate by title -> for example all columbo to one columbo message
         from("seda:aggregator").aggregate(new NewsletterTitleAS()).header("title")
         .completionInterval(15000)
         .to("seda:resequencer");
@@ -72,7 +82,7 @@ public class TVGrabberNewsletter extends RouteBuilder {
                     }
          }).to("seda:aggregatorAll");
 
-
+        //aggregate alle message to one
        from("seda:aggregatorAll").aggregate(new NewsletterFullAS()).header("title")
        .completionInterval(15000)
                .log(LoggingLevel.INFO, "********************** Aggregator ALL  **************************")

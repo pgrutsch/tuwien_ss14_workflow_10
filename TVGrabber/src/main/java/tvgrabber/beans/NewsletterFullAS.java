@@ -13,7 +13,7 @@ import java.util.List;
  * User: Isabella
  * Date: 05.06.14
  * Time: 15:10
- * To change this template use File | Settings | File Templates.
+ * Aggregate the Resequenced-Messages in one message
  */
 public class NewsletterFullAS implements AggregationStrategy {
 

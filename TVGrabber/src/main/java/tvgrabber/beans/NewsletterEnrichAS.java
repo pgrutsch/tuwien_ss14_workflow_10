@@ -10,7 +10,8 @@ import tvgrabber.entities.TVGrabberUser;
  * User: Isabella
  * Date: 05.06.14
  * Time: 15:04
- * To change this template use File | Settings | File Templates.
+ * Search in the DB who has subscribed for which serie and add the email in
+ * "to" header for smtp.
  */
 public class NewsletterEnrichAS implements AggregationStrategy
 {
