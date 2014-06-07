@@ -2,27 +2,24 @@ package tvgrabber.routes;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
-import org.apache.camel.Message;
+
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.model.ExpressionNode;
-import org.apache.camel.model.config.BatchResequencerConfig;
-import org.apache.camel.processor.aggregate.AggregationStrategy;
-import org.apache.log4j.Logger;
-import org.apache.openjpa.lib.log.Log;
-import org.springframework.stereotype.Component;
-import tvgrabber.TVGrabberMain;
-import tvgrabber.entities.Series;
-import tvgrabber.entities.TVGrabberUser;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import tvgrabber.beans.NewsletterBean;
+import tvgrabber.beans.NewsletterEnrichAS;
+import tvgrabber.beans.NewsletterFullAS;
+import tvgrabber.beans.NewsletterTitleAS;
+import tvgrabber.entities.Series;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
- * Created by patrickgrutsch on 30.04.14.
+ * Created by Isabella on 30.04.14.
  */
 
 @Component
@@ -30,62 +27,64 @@ public class TVGrabberNewsletter extends RouteBuilder {
 
     private static final Logger logger = Logger.getLogger(TVGrabberNewsletter.class);
 
+    @Autowired
+    private NewsletterBean newsletterbean;
+
     @Override
     public void configure() throws Exception {
 
-     /*    from("jpa://tvgrabber.entities.Series?consumer.delay=10000&consumer.query=select s from tvgrabber.entities.Series s") //where s.title like '%Fußball%' or s.title like '%Sturm%'")
-                 .log(LoggingLevel.INFO, "********************** Lese Serien fuer Newsletter ein **************************")
-                 .process(new Processor() {
-                     @Override
-                     public void process(Exchange exchange) throws Exception {
-                         logger.info("Series: " + exchange.getIn().getBody(Series.class).getTitle());
-                     }
-                 }).convertBodyTo(Series.class)
-                 .to("seda:resequencer");
+        //constant date in long value 27.04 - 2.05
+        long week = 1398398400000L+(86400*7*1000);
+        Date weekstart = new Date(1398398400000L);
+        Date weekend = new Date(week);
 
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String weekstartString = format.format(weekstart);
+        String weekendString = format.format(weekend);
 
-        from("seda:resequencer").resequence(body()).batch(new BatchResequencerConfig(5,10000L))
-                .log(LoggingLevel.INFO, "********************** NEWSLETTER2 **************************")
+        from("jpa://tvgrabber.entities.Series?consumeDelete=true&consumer.delay=5000&consumer.query=" +
+                "select s from tvgrabber.entities.Series s where (s.start >= '" + weekstartString + "' AND s.stop <= '" + weekendString + "')")
+                .bean(newsletterbean,"changeHeader")
+                .log(LoggingLevel.INFO, "********************** Newsletter INC  **************************")
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        logger.info("Series: " + exchange.getIn().getBody(Series.class).getTitle());
+                        logger.info("Newsletter INC: " + exchange.getIn().getBody(Series.class).getTitle() + " " +
+                        exchange.getIn().getBody(Series.class).getStart().toString()
+                        + " Titel " + exchange.getIn().getHeader("title"));
                     }
-                })
-                .to("seda:aggregator");
+                }).to("seda:aggregator");
 
-        from("seda:aggregator").aggregate(header("id"),new AggregationStrategy() {
-            @Override
-            public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
-                Message newIn = newExchange.getIn();
-                String oldBody = oldExchange.getIn().getBody(String.class);
-                String newBody = newIn.getBody(String.class);
-                newIn.setBody(oldBody + newBody);
-                return newExchange;
-            }
-        }).completionSize(1)
-        .to("seda:publisher");
-        /*.log(LoggingLevel.INFO, "********************** NEWSLETTER3 **************************")
+        //aggreagte by title
+        from("seda:aggregator").aggregate(new NewsletterTitleAS()).header("title")
+        .completionInterval(15000)
+        .to("seda:resequencer");
+
+         //reverse sort by title
+         from("seda:resequencer").resequence(header("title")).batch().timeout(10000).reverse()
+                .log(LoggingLevel.INFO, "######################### Resequencer INC  #########################")
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        logger.info("Series: " + exchange.getIn().getBody(Series.class).getTitle());
+                        logger.info("Resequencer:" + exchange.getIn().getBody(String.class));
+
+                        exchange.getIn().setHeader("title","fin");
                     }
-                });*/
-        // .to("jpm:publisher");
+         }).to("seda:aggregatorAll");
 
-/*
-        from("seda:publisher").process(new Processor() {
-            @Override
-            public void process(Exchange exchange) throws Exception {
-                logger.info("Finito: " + exchange.getIn().getBody(Series.class).getTitle());
-            }
-        });
-      //  from("jpm:publisher")
 
-*/
-
+       from("seda:aggregatorAll").aggregate(new NewsletterFullAS()).header("title")
+       .completionInterval(15000)
+               .log(LoggingLevel.INFO, "********************** Aggregator ALL  **************************")
+               .process(new Processor() {
+                   @Override
+                   public void process(Exchange exchange) throws Exception {
+                       logger.info("All INC: " + exchange.getIn().getBody(String.class));
+                   }
+               })
+       .pollEnrich("jpa://tvgrabber.entities.TVGrabberUser?consumeDelete=false&consumer.query=" +
+               "Select s from TVGrabberUser s where s.subscribed=True" +
+               "", new NewsletterEnrichAS())
+       .to("smtps://smtp.gmail.com:465?password=workflow2014&username=workflow2014ss@gmail.com");
     }
-
-
 }
