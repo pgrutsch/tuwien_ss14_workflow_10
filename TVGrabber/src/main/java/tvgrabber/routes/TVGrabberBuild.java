@@ -61,8 +61,8 @@ public class TVGrabberBuild extends RouteBuilder {
                     }
                 })
                 .multicast()
-                .to("seda:waitingForEnrichment");
-                //.to("seda:socialMedia");
+                .to("seda:waitingForEnrichment")
+                .to("seda:socialMedia");
 
 
         IMDBRatingAggregationStrategy aggregationStrategy = new IMDBRatingAggregationStrategy();
