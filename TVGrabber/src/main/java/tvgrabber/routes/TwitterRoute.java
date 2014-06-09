@@ -30,10 +30,7 @@ public class TwitterRoute extends RouteBuilder {
 
         loadCredentials();
 
-        //TODO add some more stuff to twitter but verify length in both cases
-
-
-        onException(TwitterException.class).redeliveryDelay(2000).maximumRedeliveries(3);
+        onException(TwitterException.class).redeliveryDelay(1000).maximumRedeliveries(3).continued(true);
 
         /* change the time for testing stuff */
         from("seda:twitter").throttle(1).timePeriodMillis(600000L).asyncDelayed()
@@ -49,7 +46,7 @@ public class TwitterRoute extends RouteBuilder {
 
             }
         }).to(twitterAccess)
-                .otherwise().split(body()).setBody(simple("${body.title}"))
+                .otherwise().setBody(simple("${body.title}"))
                 .to(twitterAccess).end();
     }
 

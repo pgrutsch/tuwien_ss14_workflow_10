@@ -24,7 +24,7 @@ public class FacebookRoute extends RouteBuilder {
     public void configure() throws Exception {
 
         loadCredentials();
-        onException(FacebookException.class).redeliveryDelay(2000).maximumRedeliveries(3);
+        onException(FacebookException.class).redeliveryDelay(1000).maximumRedeliveries(3).continued(true);
 
         /*the throttle denies the spamming in fb*/
         from("seda:facebook").throttle(1).timePeriodMillis(600000L).asyncDelayed()
