@@ -26,6 +26,7 @@ import javax.sql.DataSource;
 @Configuration
 @ImportResource({"classpath:META-INF/cxf/cxf.xml"})
 @ComponentScan(basePackages = {"tvgrabber"})
+@PropertySource({"classpath:data.properties"})
 @EnableTransactionManagement
 @Profile("production")
 public class TVGrabberConfig extends CamelConfiguration {
