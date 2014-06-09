@@ -24,6 +24,7 @@ import tvgrabber.TestConfig;
 import tvgrabber.beans.Addressmanager;
 import tvgrabber.entities.ObjectFactory;
 import tvgrabber.entities.Series;
+import tvgrabber.exceptions.UnsubscribeException;
 import tvgrabber.routes.TVGrabberSubscribe;
 
 import java.util.Date;
@@ -75,11 +76,11 @@ public class TVGrabberSubscribeTest extends CamelTestSupport {
         return camelContext;
     }
 
-    /** Tests the routing
+    /** Tests the subscribe routing
      * @throws Exception
      */
     @Test
-    public void testRouting() throws Exception {
+    public void testSubscribeRouting() throws Exception {
 
         context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
             @Override
@@ -122,6 +123,56 @@ public class TVGrabberSubscribeTest extends CamelTestSupport {
         assertMockEndpointsSatisfied();
     }
 
+    /**
+     * Unsubscribes two existing user and one non existing user
+     * @throws Exception
+     */
+    @Test
+    public void testUnsubscribeUsers() throws Exception {
 
+        context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                replaceFromWith("seda:popTest");
+
+                mockEndpoints("seda:subscribe");
+                mockEndpoints("seda:unsubscribe");
+            }
+        });
+        context.getRouteDefinitions().get(1).adviceWith(context, new AdviceWithRouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                mockEndpoints(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL);
+                interceptSendToEndpoint("jpa:*")
+                        .skipSendToOriginalEndpoint()
+                        .to("mock:jpaEnd");
+            }
+        });
+        context.start();
+        getMockEndpoint("mock:seda:subscribe").expectedMessageCount(0);
+        getMockEndpoint("mock:seda:unsubscribe").expectedMessageCount(2);
+        getMockEndpoint("mock:jpaEnd").expectedMessageCount(2);
+        getMockEndpoint("mock:" + TVGrabberDeadLetter.DEAD_LETTER_CHANNEL).expectedMessageCount(1);
+
+        HashMap<String, Object> headers = new HashMap<String, Object>();
+
+        headers.put("subject", "Unsubscribe");
+        headers.put("to", "workflowSS2014");
+        headers.put("from", "usermailbiz");
+        template.sendBodyAndHeaders("seda:popTest", "body", headers);
+
+        headers.put("subject", "Unsubscribe");
+        headers.put("to", "workflowSS2014");
+        headers.put("from", "user@mail.biz");
+        template.sendBodyAndHeaders("seda:popTest", "body1", headers);
+
+        headers.put("subject", "Unsubscribe");
+        headers.put("to", "workflowSS2014");
+        headers.put("from", "bla");
+        template.sendBodyAndHeaders("seda:popTest", "body2", headers);
+
+        assertMockEndpointsSatisfied();
+
+    }
 }
 
