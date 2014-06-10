@@ -50,7 +50,7 @@ public class TVGrabberNewsletter extends RouteBuilder {
         String weekendString = format.format(weekend);
 
         //polls the weekly newsletter from the db
-        from("jpa://tvgrabber.entities.Series?consumeDelete=true&consumer.delay=5000&consumer.query=" +
+        from("{{newsletter.jpa}}" +
                 "select s from tvgrabber.entities.Series s where (s.start >= '" + weekstartString + "' AND s.stop <= '" + weekendString + "')")
                 .bean(newsletterbean,"changeHeader")
                 .log(LoggingLevel.INFO, "********************** Newsletter INC  **************************")
@@ -90,9 +90,8 @@ public class TVGrabberNewsletter extends RouteBuilder {
                        logger.info("All INC: " + exchange.getIn().getBody(String.class));
                    }
                })
-       .pollEnrich("jpa://tvgrabber.entities.TVGrabberUser?consumeDelete=false&consumer.query=" +
-               "Select s from TVGrabberUser s where s.subscribed=True" +
+       .pollEnrich("{{newsletter.pollEnrich}}" +
                "", new NewsletterEnrichAS())
-       .to("smtps://smtp.gmail.com:465?password=workflow2014&username=workflow2014ss@gmail.com");
+       .to("{{global.smtp}}");
     }
 }

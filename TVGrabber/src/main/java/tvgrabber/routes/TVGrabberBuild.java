@@ -38,9 +38,9 @@ public class TVGrabberBuild extends RouteBuilder {
 
         DataFormat jaxbDataFormat = new JaxbDataFormat("tvgrabber.entities");
 
-        from("file://src/tvdata?noop=true&initialDelay=2000&delay=4000&fileName=guide.xml")
+        from("{{build.file}}")
                 .log(LoggingLevel.INFO, "Loading guide.xml")
-                .wireTap("file://archive?fileName=${date:now:yyyyMMdd}_${file:onlyname}")
+                .wireTap("{{build.wireTapArchive}}")
                 .split().tokenizeXML("programme")
                 .unmarshal(jaxbDataFormat)
                 .filter().method(Series.class, "isSeries") // Content filter
@@ -71,12 +71,12 @@ public class TVGrabberBuild extends RouteBuilder {
                 .setHeader(Exchange.HTTP_METHOD, constant("GET"))
                 //.throttle(1).asyncDelayed() // Throttler EIP to avoid overloading omdbapi (1 request per second allowed)
                 //.enrich("http://omdbapi.com/", aggregationStrategy)
-                .to("jpa://tvgrabber.entities.Series");
+                .to("{{build.jpaSeries}}");
 
 
         /* Fetch 5 entries every 5 seconds to check if there is really data in the database */
 
-        from("jpa://tvgrabber.entities.Series?consumeDelete=false&maximumResults=5&consumer.delay=5000")
+        from("{{build.consumeSeries}}")
                 .log(LoggingLevel.INFO, "Reading series from TVProgram table")
                 .process(new Processor() {
                     @Override

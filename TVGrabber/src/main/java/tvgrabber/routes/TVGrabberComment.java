@@ -19,14 +19,11 @@ import tvgrabber.webservice.soap.PostComment;
 public class TVGrabberComment extends RouteBuilder {
 
     private static final Logger logger = Logger.getLogger(TVGrabberComment.class);
-    private static final String CXFENDPOINT = "cxf:http://localhost:8080/spring-soap/PostComment?serviceClass="
-            + PostComment.class.getName();
-    private static final String JPAENDPOINT = "jpa://tvgrabber.entities.Comment?consumeDelete=false&maximumResults=5&consumer.delay=7000";
 
     @Override
     public void configure() throws Exception {
 
-        from(CXFENDPOINT)
+        from("{{comment.CXFEndpoint}}"+PostComment.class.getName())
                 .log(LoggingLevel.INFO, "Receiving new SOAP msg from http://localhost:8080/spring-soap/PostComment")
                 .errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL))
                 .bean(CommentValidator.class)
@@ -35,7 +32,7 @@ public class TVGrabberComment extends RouteBuilder {
                 .parallelProcessing();
 
 
-        from(JPAENDPOINT)
+        from("{{comment.JPAEndpoint}}")
                 .errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL))
                 .log(LoggingLevel.INFO, "Reading comments from DB")
                 .process(new Processor() {
