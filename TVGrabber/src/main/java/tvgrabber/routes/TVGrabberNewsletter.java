@@ -2,10 +2,8 @@ package tvgrabber.routes;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
-
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

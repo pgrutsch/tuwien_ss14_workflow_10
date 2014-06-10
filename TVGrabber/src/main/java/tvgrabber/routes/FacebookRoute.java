@@ -5,9 +5,9 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import tvgrabber.entities.Series;
-import tvgrabber.util.PropertiesUtil;
 
 /**
  * Created by LeBon on 27.05.14.
@@ -16,7 +16,7 @@ import tvgrabber.util.PropertiesUtil;
 public class FacebookRoute extends RouteBuilder {
 
     @Autowired
-    PropertiesUtil prop;
+    Environment prop;
 
     private String facebookRout = "facebook://postStatusMessage?inBody=message";
 
@@ -39,10 +39,10 @@ public class FacebookRoute extends RouteBuilder {
     }
 
     private void loadCredentials() {
-        facebookRout += "&userId=" + prop.getFaceBookProperty("userID");
-        facebookRout += "&oAuthAppId=" + prop.getFaceBookProperty("oAuthAppId");
-        facebookRout += "&oAuthAppSecret=" + prop.getFaceBookProperty("oAuthAppSecret");
-        facebookRout += "&oAuthAccessToken=" + prop.getFaceBookProperty("oAuthAccessToken");
+        facebookRout += "&userId=" + prop.getProperty("userID");
+        facebookRout += "&oAuthAppId=" + prop.getProperty("oAuthAppId");
+        facebookRout += "&oAuthAppSecret=" + prop.getProperty("oAuthAppSecret");
+        facebookRout += "&oAuthAccessToken=" + prop.getProperty("oAuthAccessToken");
 
     }
 

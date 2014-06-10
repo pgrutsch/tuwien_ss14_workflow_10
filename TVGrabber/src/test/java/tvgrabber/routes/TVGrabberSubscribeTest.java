@@ -1,17 +1,13 @@
 package tvgrabber.routes;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.EndpointInject;
-import org.apache.camel.Produce;
-import org.apache.camel.ProducerTemplate;
+import org.apache.camel.PropertyInject;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.javaconfig.SingleRouteCamelConfiguration;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.apache.camel.test.spring.CamelSpringDelegatingTestContextLoader;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +17,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import tvgrabber.TestConfig;
-import tvgrabber.beans.Addressmanager;
-import tvgrabber.entities.ObjectFactory;
-import tvgrabber.entities.Series;
-import tvgrabber.exceptions.UnsubscribeException;
-import tvgrabber.routes.TVGrabberSubscribe;
 
-import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -43,6 +33,13 @@ import java.util.HashMap;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ActiveProfiles("testing")
 public class TVGrabberSubscribeTest extends CamelTestSupport {
+
+    private @PropertyInject("subscribe.unsubscribeQueue") String unsubscribeQueue;
+    private @PropertyInject("subscribe.subscribeQueue") String subscribeQueue;
+    private @PropertyInject("addressmanager.fromMail") String mailAddress;
+    private @PropertyInject("subscribe.criteria") String criteria;
+    private @PropertyInject("subscribe.criteriaValue") String criteriaValue;
+    private @PropertyInject("subscribe.antiCriteriaValue") String subscribeCriteriaValue;
 
     @Autowired
     private TVGrabberSubscribe TVGrabberSubscribe;
@@ -86,8 +83,8 @@ public class TVGrabberSubscribeTest extends CamelTestSupport {
             @Override
             public void configure() throws Exception {
                 replaceFromWith("seda:popTest");
-                mockEndpoints("seda:subscribe");
-                mockEndpoints("seda:unsubscribe");
+                mockEndpoints(subscribeQueue);
+                mockEndpoints(unsubscribeQueue);
             }
         });
         context.getRouteDefinitions().get(2).adviceWith(context, new AdviceWithRouteBuilder() {
@@ -105,18 +102,18 @@ public class TVGrabberSubscribeTest extends CamelTestSupport {
         context.start();
 
         getMockEndpoint("mock:jpaEnd").expectedMessageCount(2);
-        getMockEndpoint("mock:seda:subscribe").expectedMessageCount(2);
-        getMockEndpoint("mock:seda:unsubscribe").expectedMessageCount(0);
+        getMockEndpoint("mock:"+subscribeQueue).expectedMessageCount(2);
+        getMockEndpoint("mock:"+unsubscribeQueue).expectedMessageCount(0);
         getMockEndpoint("mock:smtpsEnd").expectedMessageCount(2);
 
         HashMap<String,Object> headers = new HashMap<String, Object>();
-        headers.put("subject","Subscribe");
-        headers.put("to", "workflowSS2014");
+        headers.put(criteria,subscribeCriteriaValue);
+        headers.put("to", mailAddress);
         headers.put("from", "bla");
         template.sendBodyAndHeaders("seda:popTest","body",headers);
 
-        headers.put("subject","Subscribe");
-        headers.put("to", "workflowSS2014");
+        headers.put(criteria,subscribeCriteriaValue);
+        headers.put("to", mailAddress);
         headers.put("from", "newUser");
         template.sendBodyAndHeaders("seda:popTest","body",headers);
 
@@ -135,8 +132,8 @@ public class TVGrabberSubscribeTest extends CamelTestSupport {
             public void configure() throws Exception {
                 replaceFromWith("seda:popTest");
 
-                mockEndpoints("seda:subscribe");
-                mockEndpoints("seda:unsubscribe");
+                mockEndpoints(subscribeQueue);
+                mockEndpoints(unsubscribeQueue);
             }
         });
         context.getRouteDefinitions().get(1).adviceWith(context, new AdviceWithRouteBuilder() {
@@ -149,25 +146,25 @@ public class TVGrabberSubscribeTest extends CamelTestSupport {
             }
         });
         context.start();
-        getMockEndpoint("mock:seda:subscribe").expectedMessageCount(0);
-        getMockEndpoint("mock:seda:unsubscribe").expectedMessageCount(2);
+        getMockEndpoint("mock:"+subscribeQueue).expectedMessageCount(0);
+        getMockEndpoint("mock:"+unsubscribeQueue).expectedMessageCount(2);
         getMockEndpoint("mock:jpaEnd").expectedMessageCount(2);
         getMockEndpoint("mock:" + TVGrabberDeadLetter.DEAD_LETTER_CHANNEL).expectedMessageCount(1);
 
         HashMap<String, Object> headers = new HashMap<String, Object>();
 
-        headers.put("subject", "Unsubscribe");
-        headers.put("to", "workflowSS2014");
+        headers.put(criteria, criteriaValue);
+        headers.put("to", mailAddress);
         headers.put("from", "usermailbiz");
         template.sendBodyAndHeaders("seda:popTest", "body", headers);
 
-        headers.put("subject", "Unsubscribe");
-        headers.put("to", "workflowSS2014");
+        headers.put(criteria, criteriaValue);
+        headers.put("to", mailAddress);
         headers.put("from", "user@mail.biz");
         template.sendBodyAndHeaders("seda:popTest", "body1", headers);
 
-        headers.put("subject", "Unsubscribe");
-        headers.put("to", "workflowSS2014");
+        headers.put("subject", criteriaValue);
+        headers.put("to", mailAddress);
         headers.put("from", "bla");
         template.sendBodyAndHeaders("seda:popTest", "body2", headers);
 

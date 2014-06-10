@@ -18,7 +18,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import tvgrabber.TestConfig;
 import tvgrabber.entities.Series;
-import tvgrabber.webservice.soap.SOAPComment;
 
 
 /**

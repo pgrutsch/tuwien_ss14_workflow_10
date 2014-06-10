@@ -1,10 +1,7 @@
 package tvgrabber.entities;
 
 import org.apache.camel.Exchange;
-import org.apache.openjpa.persistence.jdbc.Strategy;
 import tvgrabber.beans.XMLDateAdapter;
-import tvgrabber.routes.*;
-import tvgrabber.routes.TVGrabberComment;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;

@@ -6,9 +6,9 @@ import org.apache.camel.Predicate;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import tvgrabber.entities.Comment;
-import tvgrabber.util.PropertiesUtil;
 import twitter4j.TwitterException;
 
 /**
@@ -18,7 +18,7 @@ import twitter4j.TwitterException;
 public class TwitterRoute extends RouteBuilder {
 
     @Autowired
-    PropertiesUtil prop;
+    Environment prop;
 
     private String twitterAccess = "twitter://timeline/user";
 
@@ -59,9 +59,9 @@ public class TwitterRoute extends RouteBuilder {
     }
 
     private void loadCredentials() {
-        twitterAccess += "?consumerKey=" + prop.getTwitterProperty("oauth.consumerKey");
-        twitterAccess += "&consumerSecret=" + prop.getTwitterProperty("oauth.consumerSecret");
-        twitterAccess += "&accessToken=" + prop.getTwitterProperty("oauth.accessToken");
-        twitterAccess += "&accessTokenSecret=" + prop.getTwitterProperty("oauth.accessTokenSecret");
+        twitterAccess += "?consumerKey=" + prop.getProperty("oauth.consumerKey");
+        twitterAccess += "&consumerSecret=" + prop.getProperty("oauth.consumerSecret");
+        twitterAccess += "&accessToken=" + prop.getProperty("oauth.accessToken");
+        twitterAccess += "&accessTokenSecret=" + prop.getProperty("oauth.accessTokenSecret");
     }
 }

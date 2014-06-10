@@ -1,6 +1,5 @@
 package tvgrabber.routes;
 
-import facebook4j.FacebookException;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;

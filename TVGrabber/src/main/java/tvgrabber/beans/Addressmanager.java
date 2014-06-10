@@ -5,16 +5,17 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Headers;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import tvgrabber.TVGrabberMain;
 import tvgrabber.entities.TVGrabberUser;
 import tvgrabber.exceptions.UnsubscribeException;
-import tvgrabber.util.PropertiesUtil;
 
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,7 +28,7 @@ public class Addressmanager {
     private static final Logger logger = Logger.getLogger(Addressmanager.class);
 
     private @Autowired DataSource dataSource;
-    private @Autowired PropertiesUtil props;
+    private @Autowired Environment props;
 
     public void unsubscribe(@Headers Map<String, Object> headers, @Body String myBody, Exchange exchange) throws UnsubscribeException {
         String userMail = String.valueOf(headers.get("from"));
@@ -57,7 +58,6 @@ public class Addressmanager {
            subscriber = new TVGrabberUser();
            subscriber.setEmail(userMail);
         }
-        //TODO: discuss about the values of subscribed
         subscriber.setSubscribed(true);
         subscriber.setSearchTerm(myBody);
         exchange.getOut().setBody(subscriber);
@@ -74,8 +74,7 @@ public class Addressmanager {
         TVGrabberUser dbUser = null;
         try {
             Connection con = dataSource.getConnection();
-            //TODO: use namedQueries or properties!?
-            PreparedStatement existsUserPS = con.prepareStatement(props.getSQL("addressmanager.existsUserByMail"));
+            PreparedStatement existsUserPS = con.prepareStatement(props.getProperty("addressmanager.existsUserByMail"));
             existsUserPS.setString(1, email);
             ResultSet rsUser = existsUserPS.executeQuery();
             while (rsUser.next()){

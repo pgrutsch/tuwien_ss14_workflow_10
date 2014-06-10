@@ -3,7 +3,6 @@ package tvgrabber;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.test.context.ActiveProfiles;
 
 /**
  * Created by patrickgrutsch on 30.04.14.

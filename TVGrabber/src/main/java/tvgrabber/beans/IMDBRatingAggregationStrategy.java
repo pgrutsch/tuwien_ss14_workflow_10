@@ -6,6 +6,7 @@ import org.apache.camel.processor.aggregate.AggregationStrategy;
 import org.apache.log4j.Logger;
 import org.xml.sax.InputSource;
 import tvgrabber.entities.Series;
+
 import java.io.StringReader;
 
 /**

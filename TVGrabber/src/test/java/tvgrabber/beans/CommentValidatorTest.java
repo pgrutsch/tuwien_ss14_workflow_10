@@ -19,9 +19,6 @@ import tvgrabber.TestConfig;
 import tvgrabber.exceptions.InvalidSoapCommentException;
 import tvgrabber.webservice.soap.SOAPComment;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by patrickgrutsch on 06.06.14.
  */

@@ -1,5 +1,6 @@
 package tvgrabber;
 
+import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.spring.javaconfig.CamelConfiguration;
 import org.apache.log4j.Logger;
 import org.apache.openjpa.jdbc.sql.H2Dictionary;
@@ -24,6 +25,8 @@ import javax.sql.DataSource;
 @Configuration
 @Profile("testing")
 @ComponentScan(basePackages = {"tvgrabber"} )
+@PropertySource(value = {"classpath:data.properties", "classpath:sql.properties",
+        "classpath:facebook4j.properties", "classpath:twitter4j.properties"})
 @EnableTransactionManagement
 @ImportResource({"classpath:META-INF/cxf/cxf.xml"})
 public class TestConfig extends CamelConfiguration {
@@ -80,4 +83,12 @@ public class TestConfig extends CamelConfiguration {
         return jpaTransactionManager;
     }
 
+    @Bean
+    public static PropertiesComponent properties() throws Exception {
+        PropertiesComponent pc = new PropertiesComponent();
+        String[] locations= {"classpath:data.properties", "classpath:sql.properties",
+                "classpath:facebook4j.properties", "classpath:twitter4j.properties"};
+        pc.setLocations(locations);
+        return pc;
+    }
 }

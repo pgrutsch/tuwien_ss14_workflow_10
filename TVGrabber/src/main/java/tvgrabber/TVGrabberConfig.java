@@ -1,10 +1,10 @@
 package tvgrabber;
 
+import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.spring.javaconfig.CamelConfiguration;
 import org.apache.log4j.Logger;
 import org.apache.openjpa.jdbc.sql.H2Dictionary;
 import org.springframework.context.annotation.*;
-import org.springframework.instrument.classloading.SimpleLoadTimeWeaver;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -24,9 +24,10 @@ import javax.sql.DataSource;
  */
 
 @Configuration
+@PropertySource(value = {"classpath:data.properties", "classpath:sql.properties",
+                "classpath:facebook4j.properties", "classpath:twitter4j.properties"})
 @ImportResource({"classpath:META-INF/cxf/cxf.xml"})
 @ComponentScan(basePackages = {"tvgrabber"})
-@PropertySource({"classpath:data.properties"})
 @EnableTransactionManagement
 @Profile("production")
 public class TVGrabberConfig extends CamelConfiguration {
@@ -91,5 +92,14 @@ public class TVGrabberConfig extends CamelConfiguration {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
         jpaTransactionManager.setEntityManagerFactory(entityManagerFactory());
         return jpaTransactionManager;
+    }
+
+    @Bean
+    public static PropertiesComponent properties() throws Exception {
+        PropertiesComponent pc = new PropertiesComponent();
+        String[] locations= {"classpath:data.properties", "classpath:sql.properties",
+                "classpath:facebook4j.properties", "classpath:twitter4j.properties"};
+        pc.setLocations(locations);
+        return pc;
     }
 }
