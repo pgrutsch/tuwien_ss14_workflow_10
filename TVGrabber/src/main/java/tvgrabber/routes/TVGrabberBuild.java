@@ -61,8 +61,8 @@ public class TVGrabberBuild extends RouteBuilder {
                     }
                 })
                 .multicast()
-                .to("seda:waitingForEnrichment")
-                .to("seda:socialMedia");
+                .to("{{socialMedia.seda}}")
+                .to("seda:waitingForEnrichment");
 
 
         IMDBRatingAggregationStrategy aggregationStrategy = new IMDBRatingAggregationStrategy();
@@ -88,10 +88,10 @@ public class TVGrabberBuild extends RouteBuilder {
                     }
                 });
 
-       from("seda:socialMedia").filter().method(NewSeries.class, "filterExistingSeries")
+       from("{{socialMedia.seda}}").filter().method(NewSeries.class, "filterExistingSeries")
 //                .multicast()
-//                .to("seda:facebook")
-                .to("seda:twitter");
+//                .to("{{facebook.seda}}")
+                .to("{{twitter.seda}}");
 
     }
 

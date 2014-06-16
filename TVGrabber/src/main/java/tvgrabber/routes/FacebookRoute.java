@@ -9,6 +9,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import tvgrabber.entities.Series;
 
+import java.util.Date;
+
 /**
  * Created by LeBon on 27.05.14.
  */
@@ -27,7 +29,7 @@ public class FacebookRoute extends RouteBuilder {
         onException(FacebookException.class).redeliveryDelay(1000).maximumRedeliveries(3).continued(true);
 
         /*the throttle denies the spamming in fb*/
-        from("seda:facebook").throttle(1).timePeriodMillis(600000L).asyncDelayed()
+        from("{{facebook.seda}}").throttle(1).timePeriodMillis(600000L).asyncDelayed()
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {

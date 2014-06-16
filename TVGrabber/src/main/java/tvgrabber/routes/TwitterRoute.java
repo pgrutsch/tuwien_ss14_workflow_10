@@ -25,7 +25,6 @@ public class TwitterRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        Endpoint twitterEnd = endpoint("seda:twitter");
         Predicate isComment = header("type").isEqualTo("comment");
 
         loadCredentials();
@@ -33,7 +32,7 @@ public class TwitterRoute extends RouteBuilder {
         onException(TwitterException.class).redeliveryDelay(1000).maximumRedeliveries(3).continued(true);
 
         /* change the time for testing stuff */
-        from("seda:twitter").throttle(1).timePeriodMillis(600000L).asyncDelayed()
+        from("{{twitter.seda}}").throttle(1).timePeriodMillis(600000L).asyncDelayed()
                 .choice().when(isComment).process(new Processor() {
             @Override
             public void process(Exchange exchange) throws Exception {
