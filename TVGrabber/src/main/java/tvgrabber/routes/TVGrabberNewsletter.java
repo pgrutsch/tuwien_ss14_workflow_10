@@ -25,9 +25,6 @@ public class TVGrabberNewsletter extends RouteBuilder {
 
     private static final Logger logger = Logger.getLogger(TVGrabberNewsletter.class);
 
-    @Autowired
-    private NewsletterBean newsletterbean;
-
     @Override
     public void configure() throws Exception {
         java.util.Date dateWeek = null;
@@ -52,7 +49,7 @@ public class TVGrabberNewsletter extends RouteBuilder {
         //polls the weekly newsletter from the db
         from("{{newsletter.jpa}}" +
                 "select s from tvgrabber.entities.Series s where (s.start >= '" + weekstartString + "' AND s.stop <= '" + weekendString + "')")
-                .bean(newsletterbean,"changeHeader")
+                .bean(NewsletterBean.class,"changeHeader")
                 .log(LoggingLevel.INFO, "********************** Newsletter INC  **************************")
                 .process(new Processor() {
                     @Override

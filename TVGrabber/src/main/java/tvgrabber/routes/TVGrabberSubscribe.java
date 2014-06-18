@@ -34,6 +34,7 @@ public class TVGrabberSubscribe extends RouteBuilder {
                 .to("{{global.smtp}}")
                 .errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL));
 
+        
         /* Subscribe user  */
         from("{{subscribe.subscribeQueue").bean(Addressmanager.class, "subscribe")
                 .to("{{subscribe.jpaUser}}")
