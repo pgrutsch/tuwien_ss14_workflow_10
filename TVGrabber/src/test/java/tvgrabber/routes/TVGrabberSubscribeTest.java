@@ -87,7 +87,7 @@ public class TVGrabberSubscribeTest extends CamelTestSupport {
                 mockEndpoints(unsubscribeQueue);
             }
         });
-        context.getRouteDefinitions().get(2).adviceWith(context, new AdviceWithRouteBuilder() {
+        context.getRouteDefinitions().get(3).adviceWith(context, new AdviceWithRouteBuilder() {
             @Override
             public void configure() throws Exception {
                 interceptSendToEndpoint("smtps:*")
@@ -140,11 +140,17 @@ public class TVGrabberSubscribeTest extends CamelTestSupport {
             @Override
             public void configure() throws Exception {
                 mockEndpoints(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL);
-                interceptSendToEndpoint("jpa:*")
+            }
+        });
+        context.getRouteDefinitions().get(3).adviceWith(context, new AdviceWithRouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+               interceptSendToEndpoint("jpa:*")
                         .skipSendToOriginalEndpoint()
                         .to("mock:jpaEnd");
             }
         });
+
         context.start();
         getMockEndpoint("mock:"+subscribeQueue).expectedMessageCount(0);
         getMockEndpoint("mock:"+unsubscribeQueue).expectedMessageCount(2);

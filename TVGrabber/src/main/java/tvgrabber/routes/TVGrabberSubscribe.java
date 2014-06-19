@@ -30,16 +30,17 @@ public class TVGrabberSubscribe extends RouteBuilder {
 
         /* Unsubscribe user  */
         from("{{subscribe.unsubscribeQueue}}").bean(Addressmanager.class, "unsubscribe")
-                .to("{{subscribe.jpaUser}}")
-                .to("{{global.smtp}}")
+                .to("{{subscribe.saveAndAnswer}}")
                 .errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL));
 
         
         /* Subscribe user  */
         from("{{subscribe.subscribeQueue").bean(Addressmanager.class, "subscribe")
+                .to("{{subscribe.saveAndAnswer}}");
+
+        /* Save in db and send a answer mail */
+        from("{{subscribe.saveAndAnswer}}")
                 .to("{{subscribe.jpaUser}}")
                 .to("{{global.smtp}}");
         }
-
-
     }
