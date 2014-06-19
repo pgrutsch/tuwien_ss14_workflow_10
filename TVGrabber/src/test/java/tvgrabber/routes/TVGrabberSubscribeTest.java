@@ -145,6 +145,9 @@ public class TVGrabberSubscribeTest extends CamelTestSupport {
         context.getRouteDefinitions().get(3).adviceWith(context, new AdviceWithRouteBuilder() {
             @Override
             public void configure() throws Exception {
+               interceptSendToEndpoint("smtps:*")
+                        .skipSendToOriginalEndpoint()
+                        .to("mock:smtpsEnd");
                interceptSendToEndpoint("jpa:*")
                         .skipSendToOriginalEndpoint()
                         .to("mock:jpaEnd");
