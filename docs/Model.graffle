@@ -337,6 +337,460 @@
 		<dict>
 			<key>Class</key>
 			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>2063</integer>
+			</dict>
+			<key>ID</key>
+			<integer>2266</integer>
+			<key>Points</key>
+			<array>
+				<string>{597.88446788224712, 336.24556391834886}</string>
+				<string>{626.22827409357137, 336.00000410623585}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>Legacy</key>
+					<true/>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>2079</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>2261</integer>
+			</dict>
+			<key>ID</key>
+			<integer>2263</integer>
+			<key>Points</key>
+			<array>
+				<string>{376.12512738412619, 375.65218170108341}</string>
+				<string>{432.51588318832029, 349.9049662484029}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>Legacy</key>
+					<true/>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>2261</integer>
+			</dict>
+			<key>ID</key>
+			<integer>2262</integer>
+			<key>Points</key>
+			<array>
+				<string>{376.11141939016215, 302.23324188255685}</string>
+				<string>{432.51360373192574, 324.77237015713411}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>Legacy</key>
+					<true/>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>2047</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>AbsoluteRotation</key>
+					<string>YES</string>
+					<key>Bounds</key>
+					<string>{{434.62504310824272, 356.99999223825267}, {54, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2255</integer>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+						</dict>
+						<key>shadow</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<string>0</string>
+								<key>g</key>
+								<string>0</string>
+								<key>r</key>
+								<string>0</string>
+							</dict>
+							<key>Draws</key>
+							<string>NO</string>
+							<key>ShadowVector</key>
+							<string>{9, 9}</string>
+						</dict>
+						<key>stroke</key>
+						<dict>
+							<key>Draws</key>
+							<string>NO</string>
+							<key>PointAtLeast</key>
+							<true/>
+							<key>Width</key>
+							<real>0.72000002861022949</real>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Pad</key>
+						<integer>4</integer>
+						<key>Text</key>
+						<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\deftab720
+\pard\pardeftab720\pardirnatural\qc
+
+\f0\fs16 \cf0 seda:saveAndAnswer}</string>
+						<key>VerticalPad</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{481.00004310824272, 327.56199223825269}, {3.375, 3.375}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2256</integer>
+					<key>Shape</key>
+					<string>HorizontalTriangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<string>0.501961</string>
+								<key>g</key>
+								<string>0.501961</string>
+								<key>r</key>
+								<string>0.501961</string>
+							</dict>
+						</dict>
+						<key>shadow</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<string>0</string>
+								<key>g</key>
+								<string>0</string>
+								<key>r</key>
+								<string>0</string>
+							</dict>
+							<key>Draws</key>
+							<string>NO</string>
+							<key>ShadowVector</key>
+							<string>{9, 9}</string>
+						</dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<string>0.501961</string>
+								<key>g</key>
+								<string>0.501961</string>
+								<key>r</key>
+								<string>0.501961</string>
+							</dict>
+							<key>PointAtLeast</key>
+							<true/>
+							<key>Width</key>
+							<real>0.72000002861022949</real>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>AllowLabelDrop</key>
+					<false/>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>ID</key>
+					<integer>2257</integer>
+					<key>OrthogonalBarAutomatic</key>
+					<true/>
+					<key>OrthogonalBarPoint</key>
+					<string>{0, 0}</string>
+					<key>OrthogonalBarPosition</key>
+					<real>-1</real>
+					<key>Points</key>
+					<array>
+						<string>{443.87504310824272, 329.24999223825267}</string>
+						<string>{484.37504310824272, 329.24999223825267}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>shadow</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<string>0</string>
+								<key>g</key>
+								<string>0</string>
+								<key>r</key>
+								<string>0</string>
+							</dict>
+							<key>ShadowVector</key>
+							<string>{9, 9}</string>
+						</dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<string>0.501961</string>
+								<key>g</key>
+								<string>0.501961</string>
+								<key>r</key>
+								<string>0.501961</string>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>Legacy</key>
+							<true/>
+							<key>LineType</key>
+							<integer>2</integer>
+							<key>PointAtLeast</key>
+							<true/>
+							<key>TailArrow</key>
+							<string>0</string>
+							<key>Width</key>
+							<real>0.72000002861022949</real>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>Group</string>
+					<key>Graphics</key>
+					<array>
+						<dict>
+							<key>Bounds</key>
+							<string>{{485.44604310824269, 336.05399223825265}, {2.0498699999999999, 8.1994799999999994}}</string>
+							<key>Class</key>
+							<string>ShapedGraphic</string>
+							<key>ID</key>
+							<integer>2259</integer>
+							<key>Shape</key>
+							<string>visioImport-3</string>
+							<key>Style</key>
+							<dict>
+								<key>fill</key>
+								<dict>
+									<key>Color</key>
+									<dict>
+										<key>b</key>
+										<string>0.901961</string>
+										<key>g</key>
+										<string>0.901961</string>
+										<key>r</key>
+										<string>0.901961</string>
+									</dict>
+								</dict>
+								<key>shadow</key>
+								<dict>
+									<key>Color</key>
+									<dict>
+										<key>b</key>
+										<string>0</string>
+										<key>g</key>
+										<string>0</string>
+										<key>r</key>
+										<string>0</string>
+									</dict>
+									<key>Draws</key>
+									<string>NO</string>
+									<key>ShadowVector</key>
+									<string>{9, 9}</string>
+								</dict>
+								<key>stroke</key>
+								<dict>
+									<key>PointAtLeast</key>
+									<true/>
+									<key>Width</key>
+									<real>0.23999999463558197</real>
+								</dict>
+							</dict>
+						</dict>
+						<dict>
+							<key>Bounds</key>
+							<string>{{440.50004310824266, 335.99999223825267}, {46.125, 8.9999900000000004}}</string>
+							<key>Class</key>
+							<string>ShapedGraphic</string>
+							<key>ID</key>
+							<integer>2260</integer>
+							<key>Shape</key>
+							<string>visioImport-2</string>
+							<key>Style</key>
+							<dict>
+								<key>fill</key>
+								<dict>
+									<key>Color</key>
+									<dict>
+										<key>b</key>
+										<string>0</string>
+										<key>g</key>
+										<string>0</string>
+										<key>r</key>
+										<string>0</string>
+									</dict>
+									<key>FillType</key>
+									<integer>2</integer>
+									<key>GradientAngle</key>
+									<real>270</real>
+									<key>GradientColor</key>
+									<dict>
+										<key>b</key>
+										<string>1</string>
+										<key>g</key>
+										<string>1</string>
+										<key>r</key>
+										<string>1</string>
+									</dict>
+								</dict>
+								<key>shadow</key>
+								<dict>
+									<key>Color</key>
+									<dict>
+										<key>b</key>
+										<string>0</string>
+										<key>g</key>
+										<string>0</string>
+										<key>r</key>
+										<string>0</string>
+									</dict>
+									<key>Draws</key>
+									<string>NO</string>
+									<key>ShadowVector</key>
+									<string>{9, 9}</string>
+								</dict>
+								<key>stroke</key>
+								<dict>
+									<key>PointAtLeast</key>
+									<true/>
+									<key>Width</key>
+									<real>0.23999999463558197</real>
+								</dict>
+							</dict>
+						</dict>
+					</array>
+					<key>ID</key>
+					<integer>2258</integer>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{432.62504310824272, 318.49999223825267}, {58.5, 36}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2261</integer>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<string>0.8</string>
+								<key>g</key>
+								<string>1</string>
+								<key>r</key>
+								<string>0.8</string>
+							</dict>
+						</dict>
+						<key>shadow</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<string>0</string>
+								<key>g</key>
+								<string>0</string>
+								<key>r</key>
+								<string>0</string>
+							</dict>
+							<key>Draws</key>
+							<string>NO</string>
+							<key>ShadowVector</key>
+							<string>{9, 9}</string>
+						</dict>
+						<key>stroke</key>
+						<dict>
+							<key>PointAtLeast</key>
+							<true/>
+							<key>Width</key>
+							<real>0.23999999463558197</real>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>2254</integer>
+			<key>Notes</key>
+			<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
+\cocoascreenfonts1{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red51\green51\blue51;}
+\deftab720
+\pard\pardeftab720\sa240
+
+\f0\fs25\fsmilli12800 \cf2 Channel - one application writes information to the channel and the other one reads that information from the channel}</string>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
 			<key>ID</key>
 			<integer>2253</integer>
 			<key>Points</key>
@@ -752,8 +1206,8 @@
 			<integer>2243</integer>
 			<key>Points</key>
 			<array>
-				<string>{727.73226190187745, 81.848134455011802}</string>
-				<string>{765.04835263379982, 81.65516039116693}</string>
+				<string>{727.73226187730381, 81.847329395003442}</string>
+				<string>{765.04835259685626, 81.653332460990541}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1567,8 +2021,8 @@
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Recipient List - Define a channel for each recipient. Then use a 
-\i Recipient List
-\i0  to inspect an incoming message, determine the list of desired recipients, and forward the message to all channels associated with the recipients in the list.}</string>
+\i \cf2 Recipient List
+\i0 \cf2  to inspect an incoming message, determine the list of desired recipients, and forward the message to all channels associated with the recipients in the list.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -1582,8 +2036,8 @@
 			<integer>2215</integer>
 			<key>Points</key>
 			<array>
-				<string>{632.17615930428826, 81.924364205842082}</string>
-				<string>{668.99226553124788, 81.829529295042391}</string>
+				<string>{632.17615969453743, 81.985120793750511}</string>
+				<string>{668.99226358038072, 81.966445946534336}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -2009,8 +2463,8 @@
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Message Endpoint - Connect an application to a messaging channel using a 
-\i Message Endpoint
-\i0 , a client of the messaging system that the application can then use to send or receive messages.}</string>
+\i \cf2 Message Endpoint
+\i0 \cf2 , a client of the messaging system that the application can then use to send or receive messages.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -2817,112 +3271,6 @@
 \f0\fs25\fsmilli12800 \cf2 Channel - one application writes information to the channel and the other one reads that information from the channel}</string>
 		</dict>
 		<dict>
-			<key>Bounds</key>
-			<string>{{348.19208185481699, 167.41022085775199}, {163.82704162597656, 51}}</string>
-			<key>Class</key>
-			<string>ShapedGraphic</string>
-			<key>FontInfo</key>
-			<dict>
-				<key>Color</key>
-				<dict>
-					<key>b</key>
-					<string>0.821332</string>
-					<key>g</key>
-					<string>0.672602</string>
-					<key>r</key>
-					<string>0.928374</string>
-				</dict>
-				<key>Font</key>
-				<string>Verdana</string>
-				<key>Size</key>
-				<real>18</real>
-			</dict>
-			<key>ID</key>
-			<integer>2185</integer>
-			<key>Shape</key>
-			<string>Rectangle</string>
-			<key>Style</key>
-			<dict>
-				<key>fill</key>
-				<dict>
-					<key>Color</key>
-					<dict>
-						<key>b</key>
-						<string>0.436973</string>
-						<key>g</key>
-						<string>0.155566</string>
-						<key>r</key>
-						<string>0.758999</string>
-					</dict>
-					<key>FillType</key>
-					<integer>2</integer>
-					<key>GradientAngle</key>
-					<real>90</real>
-					<key>GradientColor</key>
-					<dict>
-						<key>b</key>
-						<string>0.25098</string>
-						<key>g</key>
-						<string>0</string>
-						<key>r</key>
-						<string>0.501961</string>
-					</dict>
-				</dict>
-				<key>shadow</key>
-				<dict>
-					<key>Beneath</key>
-					<string>YES</string>
-					<key>Color</key>
-					<dict>
-						<key>a</key>
-						<string>0.15</string>
-						<key>b</key>
-						<string>0</string>
-						<key>g</key>
-						<string>0</string>
-						<key>r</key>
-						<string>0</string>
-					</dict>
-					<key>Fuzziness</key>
-					<real>0.0</real>
-					<key>ShadowVector</key>
-					<string>{2, 2}</string>
-				</dict>
-				<key>stroke</key>
-				<dict>
-					<key>Color</key>
-					<dict>
-						<key>b</key>
-						<string>0.511421</string>
-						<key>g</key>
-						<string>0.637255</string>
-						<key>r</key>
-						<string>0.120867</string>
-					</dict>
-					<key>Draws</key>
-					<string>NO</string>
-					<key>Width</key>
-					<real>2</real>
-				</dict>
-			</dict>
-			<key>Text</key>
-			<dict>
-				<key>Text</key>
-				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
-\cocoascreenfonts1{\fonttbl\f0\fnil\fcharset0 Verdana;}
-{\colortbl;\red255\green255\blue255;\red237\green172\blue209;}
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
-
-\f0\fs20 \cf2 .multicast()\
-.to()\
-.to(); can be illustrated with RecipientList}</string>
-				<key>VerticalPad</key>
-				<integer>0</integer>
-			</dict>
-			<key>TextRelativeArea</key>
-			<string>{{0.10000000000000001, 0.14999999999999999}, {0.80000000000000004, 0.69999999999999996}}</string>
-		</dict>
-		<dict>
 			<key>Class</key>
 			<string>LineGraphic</string>
 			<key>Head</key>
@@ -3236,8 +3584,8 @@
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Content Enricher - Use a specialized transformer, a 
-\i Content Enricher
-\i0 , to access an external data source in order to augment a message with missing information.}</string>
+\i \cf2 Content Enricher
+\i0 \cf2 , to access an external data source in order to augment a message with missing information.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -3673,8 +4021,8 @@
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Recipient List - Define a channel for each recipient. Then use a 
-\i Recipient List
-\i0  to inspect an incoming message, determine the list of desired recipients, and forward the message to all channels associated with the recipients in the list.}</string>
+\i \cf2 Recipient List
+\i0 \cf2  to inspect an incoming message, determine the list of desired recipients, and forward the message to all channels associated with the recipients in the list.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -3688,8 +4036,8 @@
 			<integer>2155</integer>
 			<key>Points</key>
 			<array>
-				<string>{344.74503348251716, 123.24998586592733}</string>
-				<string>{376.00512738921776, 123.24998586592733}</string>
+				<string>{344.7450334825171, 123.24998586592733}</string>
+				<string>{376.00512738920452, 123.24998586592733}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -3721,8 +4069,8 @@
 			<integer>2154</integer>
 			<key>Points</key>
 			<array>
-				<string>{254.74493772262363, 123.67914918655131}</string>
-				<string>{286.00503402490892, 123.33765178272171}</string>
+				<string>{254.74494008776031, 123.73739252794842}</string>
+				<string>{286.00503649783434, 123.45788673249072}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -3754,8 +4102,8 @@
 			<integer>2153</integer>
 			<key>Points</key>
 			<array>
-				<string>{164.74485989877974, 123.83142861686621}</string>
-				<string>{196.00494535568879, 123.91809781083953}</string>
+				<string>{164.74485989877968, 123.83154641800202}</string>
+				<string>{196.00494535567535, 123.91834099412138}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -4526,8 +4874,8 @@
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Message Endpoint - Connect an application to a messaging channel using a 
-\i Message Endpoint
-\i0 , a client of the messaging system that the application can then use to send or receive messages.}</string>
+\i \cf2 Message Endpoint
+\i0 \cf2 , a client of the messaging system that the application can then use to send or receive messages.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -5295,8 +5643,8 @@
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Message Endpoint - Connect an application to a messaging channel using a 
-\i Message Endpoint
-\i0 , a client of the messaging system that the application can then use to send or receive messages.}</string>
+\i \cf2 Message Endpoint
+\i0 \cf2 , a client of the messaging system that the application can then use to send or receive messages.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -6156,126 +6504,19 @@
 \f0\fs25\fsmilli12800 \cf2 Channel - one application writes information to the channel and the other one reads that information from the channel}</string>
 		</dict>
 		<dict>
-			<key>Bounds</key>
-			<string>{{593.03358641598084, 304.67302969236471}, {350, 70.166679382324219}}</string>
-			<key>Class</key>
-			<string>ShapedGraphic</string>
-			<key>FontInfo</key>
-			<dict>
-				<key>Color</key>
-				<dict>
-					<key>b</key>
-					<string>0.821332</string>
-					<key>g</key>
-					<string>0.672602</string>
-					<key>r</key>
-					<string>0.928374</string>
-				</dict>
-				<key>Font</key>
-				<string>Verdana</string>
-				<key>Size</key>
-				<real>18</real>
-			</dict>
-			<key>ID</key>
-			<integer>16</integer>
-			<key>Shape</key>
-			<string>Rectangle</string>
-			<key>Style</key>
-			<dict>
-				<key>fill</key>
-				<dict>
-					<key>Color</key>
-					<dict>
-						<key>b</key>
-						<string>0.436973</string>
-						<key>g</key>
-						<string>0.155566</string>
-						<key>r</key>
-						<string>0.758999</string>
-					</dict>
-					<key>FillType</key>
-					<integer>2</integer>
-					<key>GradientAngle</key>
-					<real>90</real>
-					<key>GradientColor</key>
-					<dict>
-						<key>b</key>
-						<string>0.25098</string>
-						<key>g</key>
-						<string>0</string>
-						<key>r</key>
-						<string>0.501961</string>
-					</dict>
-				</dict>
-				<key>shadow</key>
-				<dict>
-					<key>Beneath</key>
-					<string>YES</string>
-					<key>Color</key>
-					<dict>
-						<key>a</key>
-						<string>0.15</string>
-						<key>b</key>
-						<string>0</string>
-						<key>g</key>
-						<string>0</string>
-						<key>r</key>
-						<string>0</string>
-					</dict>
-					<key>Fuzziness</key>
-					<real>0.0</real>
-					<key>ShadowVector</key>
-					<string>{2, 2}</string>
-				</dict>
-				<key>stroke</key>
-				<dict>
-					<key>Color</key>
-					<dict>
-						<key>b</key>
-						<string>0.511421</string>
-						<key>g</key>
-						<string>0.637255</string>
-						<key>r</key>
-						<string>0.120867</string>
-					</dict>
-					<key>Draws</key>
-					<string>NO</string>
-					<key>Width</key>
-					<real>2</real>
-				</dict>
-			</dict>
-			<key>Text</key>
-			<dict>
-				<key>Text</key>
-				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
-\cocoascreenfonts1{\fonttbl\f0\fnil\fcharset0 Verdana;}
-{\colortbl;\red255\green255\blue255;\red237\green172\blue209;}
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
-{\field{\*\fldinst{HYPERLINK "http://camel.apache.org/how-to-send-the-same-message-to-multiple-endpoints.html"}}{\fldrslt 
-\f0\fs20 \cf2 http://camel.apache.org/how-to-send-the-same-message-to-multiple-endpoints.html}}
-\f0\fs20 \cf2 \
-\
-what is 2x .to() ?? see link above, maybe add .multicast()}</string>
-				<key>VerticalPad</key>
-				<integer>0</integer>
-			</dict>
-			<key>TextRelativeArea</key>
-			<string>{{0.10000000000000001, 0.14999999999999999}, {0.80000000000000004, 0.69999999999999996}}</string>
-		</dict>
-		<dict>
 			<key>Class</key>
 			<string>LineGraphic</string>
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
-				<integer>2063</integer>
+				<integer>2072</integer>
 			</dict>
 			<key>ID</key>
-			<integer>2081</integer>
+			<integer>2080</integer>
 			<key>Points</key>
 			<array>
-				<string>{486.24512086537032, 369.92566830082376}</string>
-				<string>{517.80458781453285, 369.66669659482147}</string>
+				<string>{491.2450399277468, 336.28605758865245}</string>
+				<string>{530.51447239048196, 336.00001423885084}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -6292,35 +6533,7 @@ what is 2x .to() ?? see link above, maybe add .multicast()}</string>
 			<key>Tail</key>
 			<dict>
 				<key>ID</key>
-				<integer>2079</integer>
-			</dict>
-		</dict>
-		<dict>
-			<key>Class</key>
-			<string>LineGraphic</string>
-			<key>Head</key>
-			<dict>
-				<key>ID</key>
-				<integer>2072</integer>
-			</dict>
-			<key>ID</key>
-			<integer>2080</integer>
-			<key>Points</key>
-			<array>
-				<string>{376.12002581996722, 369.96307055985943}</string>
-				<string>{418.87512490484522, 369.66667357418373}</string>
-			</array>
-			<key>Style</key>
-			<dict>
-				<key>stroke</key>
-				<dict>
-					<key>HeadArrow</key>
-					<string>FilledArrow</string>
-					<key>Legacy</key>
-					<true/>
-					<key>TailArrow</key>
-					<string>0</string>
-				</dict>
+				<integer>2261</integer>
 			</dict>
 		</dict>
 		<dict>
@@ -6343,8 +6556,8 @@ what is 2x .to() ?? see link above, maybe add .multicast()}</string>
 					<real>-1</real>
 					<key>Points</key>
 					<array>
-						<string>{418.87512490484522, 369.66667357418373}</string>
-						<string>{452.87512490484522, 369.66667357418373}</string>
+						<string>{530.51447239048196, 336.00001423885084}</string>
+						<string>{564.51447239048196, 336.00001423885084}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -6392,7 +6605,7 @@ what is 2x .to() ?? see link above, maybe add .multicast()}</string>
 					<key>AbsoluteRotation</key>
 					<string>YES</string>
 					<key>Bounds</key>
-					<string>{{416.125124606822, 391.66667357418373}, {77, 18}}</string>
+					<string>{{527.76447209245873, 358.00001423885084}, {77, 18}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -6456,7 +6669,7 @@ JPA}</string>
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{454.62512490484522, 361.16667357418373}, {18, 18}}</string>
+							<string>{{566.26447239048196, 327.50001423885084}, {18, 18}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>ID</key>
@@ -6506,7 +6719,7 @@ JPA}</string>
 							<array>
 								<dict>
 									<key>Bounds</key>
-									<string>{{444.50012490484522, 366.79167357418373}, {6.75, 6.75}}</string>
+									<string>{{556.13947239048196, 333.12501423885084}, {6.75, 6.75}}</string>
 									<key>Class</key>
 									<string>ShapedGraphic</string>
 									<key>ID</key>
@@ -6585,8 +6798,8 @@ JPA}</string>
 									<real>-1</real>
 									<key>Points</key>
 									<array>
-										<string>{427.62512490484522, 370.16667357418373}</string>
-										<string>{427.62512490484522, 370.16667357418373}</string>
+										<string>{539.26447239048196, 336.50001423885084}</string>
+										<string>{539.26447239048196, 336.50001423885084}</string>
 									</array>
 									<key>Style</key>
 									<dict>
@@ -6632,7 +6845,7 @@ JPA}</string>
 								</dict>
 								<dict>
 									<key>Bounds</key>
-									<string>{{427.62512490484522, 352.16667357418373}, {58.5, 36}}</string>
+									<string>{{539.26447239048196, 318.50001423885084}, {58.5, 36}}</string>
 									<key>Class</key>
 									<string>ShapedGraphic</string>
 									<key>ID</key>
@@ -6697,8 +6910,8 @@ JPA}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Message Endpoint - Connect an application to a messaging channel using a 
-\i Message Endpoint
-\i0 , a client of the messaging system that the application can then use to send or receive messages.}</string>
+\i \cf2 Message Endpoint
+\i0 \cf2 , a client of the messaging system that the application can then use to send or receive messages.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -6720,8 +6933,8 @@ JPA}</string>
 					<real>-1</real>
 					<key>Points</key>
 					<array>
-						<string>{517.80458781453285, 369.66669659482147}</string>
-						<string>{551.80458781453285, 369.66669659482147}</string>
+						<string>{626.22827409357137, 336.00000410623585}</string>
+						<string>{660.22827409357137, 336.00000410623585}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -6769,7 +6982,7 @@ JPA}</string>
 					<key>AbsoluteRotation</key>
 					<string>YES</string>
 					<key>Bounds</key>
-					<string>{{515.05458751650963, 391.66669659482147}, {77, 18}}</string>
+					<string>{{623.47827379554815, 358.00000410623585}, {77, 18}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -6833,7 +7046,7 @@ SMTP}</string>
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{553.55458781453285, 361.16669659482147}, {18, 18}}</string>
+							<string>{{661.97827409357137, 327.50000410623585}, {18, 18}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>ID</key>
@@ -6883,7 +7096,7 @@ SMTP}</string>
 							<array>
 								<dict>
 									<key>Bounds</key>
-									<string>{{543.42958781453285, 366.79169659482147}, {6.75, 6.75}}</string>
+									<string>{{651.85327409357137, 333.12500410623585}, {6.75, 6.75}}</string>
 									<key>Class</key>
 									<string>ShapedGraphic</string>
 									<key>ID</key>
@@ -6962,8 +7175,8 @@ SMTP}</string>
 									<real>-1</real>
 									<key>Points</key>
 									<array>
-										<string>{526.55458781453285, 370.16669659482147}</string>
-										<string>{526.55458781453285, 370.16669659482147}</string>
+										<string>{634.97827409357137, 336.50000410623585}</string>
+										<string>{634.97827409357137, 336.50000410623585}</string>
 									</array>
 									<key>Style</key>
 									<dict>
@@ -7009,7 +7222,7 @@ SMTP}</string>
 								</dict>
 								<dict>
 									<key>Bounds</key>
-									<string>{{526.55458781453285, 352.16669659482147}, {58.5, 36}}</string>
+									<string>{{634.97827409357137, 318.50000410623585}, {58.5, 36}}</string>
 									<key>Class</key>
 									<string>ShapedGraphic</string>
 									<key>ID</key>
@@ -7074,451 +7287,8 @@ SMTP}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Message Endpoint - Connect an application to a messaging channel using a 
-\i Message Endpoint
-\i0 , a client of the messaging system that the application can then use to send or receive messages.}</string>
-		</dict>
-		<dict>
-			<key>Class</key>
-			<string>LineGraphic</string>
-			<key>Head</key>
-			<dict>
-				<key>ID</key>
-				<integer>1849</integer>
-			</dict>
-			<key>ID</key>
-			<integer>2061</integer>
-			<key>Points</key>
-			<array>
-				<string>{486.24507954610618, 290.25898128910501}</string>
-				<string>{517.80454649526871, 290.00000958310272}</string>
-			</array>
-			<key>Style</key>
-			<dict>
-				<key>stroke</key>
-				<dict>
-					<key>HeadArrow</key>
-					<string>FilledArrow</string>
-					<key>Legacy</key>
-					<true/>
-					<key>TailArrow</key>
-					<string>0</string>
-				</dict>
-			</dict>
-			<key>Tail</key>
-			<dict>
-				<key>ID</key>
-				<integer>2058</integer>
-			</dict>
-		</dict>
-		<dict>
-			<key>Class</key>
-			<string>LineGraphic</string>
-			<key>Head</key>
-			<dict>
-				<key>ID</key>
-				<integer>2051</integer>
-			</dict>
-			<key>ID</key>
-			<integer>2059</integer>
-			<key>Points</key>
-			<array>
-				<string>{376.11998450070297, 290.29638354814068}</string>
-				<string>{418.87508358558097, 289.99998656246498}</string>
-			</array>
-			<key>Style</key>
-			<dict>
-				<key>stroke</key>
-				<dict>
-					<key>HeadArrow</key>
-					<string>FilledArrow</string>
-					<key>Legacy</key>
-					<true/>
-					<key>TailArrow</key>
-					<string>0</string>
-				</dict>
-			</dict>
-			<key>Tail</key>
-			<dict>
-				<key>ID</key>
-				<integer>2047</integer>
-			</dict>
-		</dict>
-		<dict>
-			<key>Class</key>
-			<string>Group</string>
-			<key>Graphics</key>
-			<array>
-				<dict>
-					<key>AllowLabelDrop</key>
-					<false/>
-					<key>Class</key>
-					<string>LineGraphic</string>
-					<key>ID</key>
-					<integer>2051</integer>
-					<key>OrthogonalBarAutomatic</key>
-					<true/>
-					<key>OrthogonalBarPoint</key>
-					<string>{0, 0}</string>
-					<key>OrthogonalBarPosition</key>
-					<real>-1</real>
-					<key>Points</key>
-					<array>
-						<string>{418.87508358558097, 289.99998656246498}</string>
-						<string>{452.87508358558097, 289.99998656246498}</string>
-					</array>
-					<key>Style</key>
-					<dict>
-						<key>shadow</key>
-						<dict>
-							<key>Color</key>
-							<dict>
-								<key>b</key>
-								<string>0</string>
-								<key>g</key>
-								<string>0</string>
-								<key>r</key>
-								<string>0</string>
-							</dict>
-							<key>ShadowVector</key>
-							<string>{9, 9}</string>
-						</dict>
-						<key>stroke</key>
-						<dict>
-							<key>Color</key>
-							<dict>
-								<key>catalog</key>
-								<string>System</string>
-								<key>name</key>
-								<string>controlShadowColor</string>
-							</dict>
-							<key>HeadArrow</key>
-							<string>FilledArrow</string>
-							<key>HeadScale</key>
-							<real>1.1180554628372192</real>
-							<key>Legacy</key>
-							<true/>
-							<key>LineType</key>
-							<integer>2</integer>
-							<key>PointAtLeast</key>
-							<true/>
-							<key>TailArrow</key>
-							<string>0</string>
-							<key>Width</key>
-							<real>0.72000002861022949</real>
-						</dict>
-					</dict>
-				</dict>
-				<dict>
-					<key>AbsoluteRotation</key>
-					<string>YES</string>
-					<key>Bounds</key>
-					<string>{{416.12508328755774, 311.99998656246498}, {77, 18}}</string>
-					<key>Class</key>
-					<string>ShapedGraphic</string>
-					<key>ID</key>
-					<integer>2052</integer>
-					<key>Shape</key>
-					<string>Rectangle</string>
-					<key>Style</key>
-					<dict>
-						<key>fill</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>shadow</key>
-						<dict>
-							<key>Color</key>
-							<dict>
-								<key>b</key>
-								<string>0</string>
-								<key>g</key>
-								<string>0</string>
-								<key>r</key>
-								<string>0</string>
-							</dict>
-							<key>Draws</key>
-							<string>NO</string>
-							<key>ShadowVector</key>
-							<string>{9, 9}</string>
-						</dict>
-						<key>stroke</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-							<key>PointAtLeast</key>
-							<true/>
-							<key>Width</key>
-							<real>0.72000002861022949</real>
-						</dict>
-					</dict>
-					<key>Text</key>
-					<dict>
-						<key>Pad</key>
-						<integer>4</integer>
-						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
-\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-\deftab720
-\pard\pardeftab720\pardirnatural\qc
-
-\f0\fs16 \cf0 Message Endpoint\
-JPA}</string>
-						<key>VerticalPad</key>
-						<integer>0</integer>
-					</dict>
-				</dict>
-				<dict>
-					<key>Class</key>
-					<string>Group</string>
-					<key>Graphics</key>
-					<array>
-						<dict>
-							<key>Bounds</key>
-							<string>{{454.62508358558097, 281.49998656246498}, {18, 18}}</string>
-							<key>Class</key>
-							<string>ShapedGraphic</string>
-							<key>ID</key>
-							<integer>2054</integer>
-							<key>Shape</key>
-							<string>Rectangle</string>
-							<key>Style</key>
-							<dict>
-								<key>shadow</key>
-								<dict>
-									<key>Color</key>
-									<dict>
-										<key>b</key>
-										<string>0</string>
-										<key>g</key>
-										<string>0</string>
-										<key>r</key>
-										<string>0</string>
-									</dict>
-									<key>Draws</key>
-									<string>NO</string>
-									<key>ShadowVector</key>
-									<string>{9, 9}</string>
-								</dict>
-								<key>stroke</key>
-								<dict>
-									<key>Color</key>
-									<dict>
-										<key>b</key>
-										<string>0.2</string>
-										<key>g</key>
-										<string>0.2</string>
-										<key>r</key>
-										<string>0.2</string>
-									</dict>
-									<key>PointAtLeast</key>
-									<true/>
-									<key>Width</key>
-									<real>0.72000002861022949</real>
-								</dict>
-							</dict>
-						</dict>
-						<dict>
-							<key>Class</key>
-							<string>Group</string>
-							<key>Graphics</key>
-							<array>
-								<dict>
-									<key>Bounds</key>
-									<string>{{444.50008358558097, 287.12498656246498}, {6.75, 6.75}}</string>
-									<key>Class</key>
-									<string>ShapedGraphic</string>
-									<key>ID</key>
-									<integer>2056</integer>
-									<key>Shape</key>
-									<string>HorizontalTriangle</string>
-									<key>Style</key>
-									<dict>
-										<key>fill</key>
-										<dict>
-											<key>Color</key>
-											<dict>
-												<key>b</key>
-												<string>0.501961</string>
-												<key>g</key>
-												<string>0.501961</string>
-												<key>r</key>
-												<string>0.501961</string>
-											</dict>
-										</dict>
-										<key>shadow</key>
-										<dict>
-											<key>Color</key>
-											<dict>
-												<key>b</key>
-												<string>0</string>
-												<key>g</key>
-												<string>0</string>
-												<key>r</key>
-												<string>0</string>
-											</dict>
-											<key>Draws</key>
-											<string>NO</string>
-											<key>ShadowVector</key>
-											<string>{9, 9}</string>
-										</dict>
-										<key>stroke</key>
-										<dict>
-											<key>Color</key>
-											<dict>
-												<key>b</key>
-												<string>0.501961</string>
-												<key>g</key>
-												<string>0.501961</string>
-												<key>r</key>
-												<string>0.501961</string>
-											</dict>
-											<key>PointAtLeast</key>
-											<true/>
-											<key>Width</key>
-											<real>0.72000002861022949</real>
-										</dict>
-									</dict>
-								</dict>
-								<dict>
-									<key>AllowLabelDrop</key>
-									<false/>
-									<key>Class</key>
-									<string>LineGraphic</string>
-									<key>Head</key>
-									<dict>
-										<key>ID</key>
-										<integer>2058</integer>
-										<key>Info</key>
-										<integer>4</integer>
-									</dict>
-									<key>ID</key>
-									<integer>2057</integer>
-									<key>IsLocked</key>
-									<string>YES</string>
-									<key>OrthogonalBarAutomatic</key>
-									<true/>
-									<key>OrthogonalBarPoint</key>
-									<string>{0, 0}</string>
-									<key>OrthogonalBarPosition</key>
-									<real>-1</real>
-									<key>Points</key>
-									<array>
-										<string>{427.62508358558097, 290.49998656246498}</string>
-										<string>{427.62508358558097, 290.49998656246498}</string>
-									</array>
-									<key>Style</key>
-									<dict>
-										<key>shadow</key>
-										<dict>
-											<key>Color</key>
-											<dict>
-												<key>b</key>
-												<string>0</string>
-												<key>g</key>
-												<string>0</string>
-												<key>r</key>
-												<string>0</string>
-											</dict>
-											<key>ShadowVector</key>
-											<string>{9, 9}</string>
-										</dict>
-										<key>stroke</key>
-										<dict>
-											<key>Color</key>
-											<dict>
-												<key>b</key>
-												<string>0.501961</string>
-												<key>g</key>
-												<string>0.501961</string>
-												<key>r</key>
-												<string>0.501961</string>
-											</dict>
-											<key>HeadArrow</key>
-											<string>0</string>
-											<key>Legacy</key>
-											<true/>
-											<key>LineType</key>
-											<integer>2</integer>
-											<key>PointAtLeast</key>
-											<true/>
-											<key>TailArrow</key>
-											<string>0</string>
-											<key>Width</key>
-											<real>0.72000002861022949</real>
-										</dict>
-									</dict>
-								</dict>
-								<dict>
-									<key>Bounds</key>
-									<string>{{427.62508358558097, 272.49998656246498}, {58.5, 36}}</string>
-									<key>Class</key>
-									<string>ShapedGraphic</string>
-									<key>ID</key>
-									<integer>2058</integer>
-									<key>Shape</key>
-									<string>Rectangle</string>
-									<key>Style</key>
-									<dict>
-										<key>fill</key>
-										<dict>
-											<key>Color</key>
-											<dict>
-												<key>b</key>
-												<string>0.8</string>
-												<key>g</key>
-												<string>1</string>
-												<key>r</key>
-												<string>0.8</string>
-											</dict>
-										</dict>
-										<key>shadow</key>
-										<dict>
-											<key>Color</key>
-											<dict>
-												<key>b</key>
-												<string>0</string>
-												<key>g</key>
-												<string>0</string>
-												<key>r</key>
-												<string>0</string>
-											</dict>
-											<key>Draws</key>
-											<string>NO</string>
-											<key>ShadowVector</key>
-											<string>{9, 9}</string>
-										</dict>
-										<key>stroke</key>
-										<dict>
-											<key>PointAtLeast</key>
-											<true/>
-											<key>Width</key>
-											<real>0.23999999463558197</real>
-										</dict>
-									</dict>
-								</dict>
-							</array>
-							<key>ID</key>
-							<integer>2055</integer>
-						</dict>
-					</array>
-					<key>ID</key>
-					<integer>2053</integer>
-				</dict>
-			</array>
-			<key>ID</key>
-			<integer>2050</integer>
-			<key>Notes</key>
-			<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
-\cocoascreenfonts1{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
-{\colortbl;\red255\green255\blue255;\red51\green51\blue51;}
-\deftab720
-\pard\pardeftab720\sa240
-
-\f0\fs25\fsmilli12800 \cf2 Message Endpoint - Connect an application to a messaging channel using a 
-\i Message Endpoint
-\i0 , a client of the messaging system that the application can then use to send or receive messages.}</string>
+\i \cf2 Message Endpoint
+\i0 \cf2 , a client of the messaging system that the application can then use to send or receive messages.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -8660,8 +8430,8 @@ SMTP}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Message Endpoint - Connect an application to a messaging channel using a 
-\i Message Endpoint
-\i0 , a client of the messaging system that the application can then use to send or receive messages.}</string>
+\i \cf2 Message Endpoint
+\i0 \cf2 , a client of the messaging system that the application can then use to send or receive messages.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -9010,8 +8780,8 @@ SMTP}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Content Enricher - Use a specialized transformer, a 
-\i Content Enricher
-\i0 , to access an external data source in order to augment a message with missing information.}</string>
+\i \cf2 Content Enricher
+\i0 \cf2 , to access an external data source in order to augment a message with missing information.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -9053,8 +8823,8 @@ SMTP}</string>
 			<integer>2010</integer>
 			<key>Points</key>
 			<array>
-				<string>{535.7794321973073, 499.82694607695095}</string>
-				<string>{566.07390985993857, 499.66113688414214}</string>
+				<string>{535.7794321972774, 499.82684820749188}</string>
+				<string>{566.07390985237475, 499.66094524798439}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -9502,8 +9272,8 @@ SMTP}</string>
 			<integer>1999</integer>
 			<key>Points</key>
 			<array>
-				<string>{268.24493481016918, 499.42561863766974}</string>
-				<string>{294.47046292670387, 499.64388783593671}</string>
+				<string>{268.24493392177226, 499.45613777129813}</string>
+				<string>{294.47046051005037, 499.69656588973828}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -9863,12 +9633,12 @@ SMTP}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Aggregator - The 
-\i Aggregator
-\i0  is a special 
-\i Filter
-\i0  that receives a stream of messages and identifies messages that are correlated. Once a complete set of messages has been received, the 
-\i Aggregator
-\i0  collects information from each correlated message and publishes a single, aggregated message to the output channel for further processing.}</string>
+\i \cf2 Aggregator
+\i0 \cf2  is a special 
+\i \cf2 Filter
+\i0 \cf2  that receives a stream of messages and identifies messages that are correlated. Once a complete set of messages has been received, the 
+\i \cf2 Aggregator
+\i0 \cf2  collects information from each correlated message and publishes a single, aggregated message to the output channel for further processing.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -10858,8 +10628,8 @@ SMTP}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Content Filter - Use a 
-\i Content Filter
-\i0  to remove unimportant data items from a message leaving only important items.}</string>
+\i \cf2 Content Filter
+\i0 \cf2  to remove unimportant data items from a message leaving only important items.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -11277,15 +11047,15 @@ SMTP}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Resequencer - Use a stateful filter, a 
-\i Resequencer
-\i0 , to collect and re-order messages so that they can be published to the output channel in a specified order.\
+\i \cf2 Resequencer
+\i0 \cf2 , to collect and re-order messages so that they can be published to the output channel in a specified order.\
 The 
-\i Resequencer
-\i0  can receive a stream of messages that may not arrive in order. The 
-\i Resequencer
-\i0  contains in internal buffer to store out-of-sequence messages until a complete sequence is obtained. The in-sequence messages are then published to the output channel. It is important that the output channel is order-preserving so messages are guaranteed to arrive in order at the next component. Like most other routers, a 
-\i Resequencer
-\i0  usually does not modify the message contents.}</string>
+\i \cf2 Resequencer
+\i0 \cf2  can receive a stream of messages that may not arrive in order. The 
+\i \cf2 Resequencer
+\i0 \cf2  contains in internal buffer to store out-of-sequence messages until a complete sequence is obtained. The in-sequence messages are then published to the output channel. It is important that the output channel is order-preserving so messages are guaranteed to arrive in order at the next component. Like most other routers, a 
+\i \cf2 Resequencer
+\i0 \cf2  usually does not modify the message contents.}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
@@ -11957,11 +11727,11 @@ JPA}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Polling Consumer - The aplication should use a 
-\i Polling Consumer
-\i0 , one that explicitly makes a call when it wants to receive a message.\
+\i \cf2 Polling Consumer
+\i0 \cf2 , one that explicitly makes a call when it wants to receive a message.\
 This is also known as a synchronous receiver, because the receiver thread blocks until a message is received. We call it a 
-\i Polling Consumer
-\i0  because the receiver polls for a message, processes it, then polls for another.}</string>
+\i \cf2 Polling Consumer
+\i0 \cf2  because the receiver polls for a message, processes it, then polls for another.}</string>
 				</dict>
 			</array>
 			<key>ID</key>
@@ -12520,8 +12290,8 @@ This is also known as a synchronous receiver, because the receiver thread blocks
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Message Endpoint - Connect an application to a messaging channel using a 
-\i Message Endpoint
-\i0 , a client of the messaging system that the application can then use to send or receive messages.}</string>
+\i \cf2 Message Endpoint
+\i0 \cf2 , a client of the messaging system that the application can then use to send or receive messages.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -12957,8 +12727,8 @@ This is also known as a synchronous receiver, because the receiver thread blocks
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Recipient List - Define a channel for each recipient. Then use a 
-\i Recipient List
-\i0  to inspect an incoming message, determine the list of desired recipients, and forward the message to all channels associated with the recipients in the list.}</string>
+\i \cf2 Recipient List
+\i0 \cf2  to inspect an incoming message, determine the list of desired recipients, and forward the message to all channels associated with the recipients in the list.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -13429,8 +13199,8 @@ CXF SOAP}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Event-Driven Consumer - This is also known as an asynchronous receiver, because the receiver does not have a running thread until a callback thread delivers a message. We call it an 
-\i Event-Driven Consumer
-\i0  because the receiver acts like the message delivery is an event that triggers the receiver into action.}</string>
+\i \cf2 Event-Driven Consumer
+\i0 \cf2  because the receiver acts like the message delivery is an event that triggers the receiver into action.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -13772,12 +13542,12 @@ CXF SOAP}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Aggregator - The 
-\i Aggregator
-\i0  is a special 
-\i Filter
-\i0  that receives a stream of messages and identifies messages that are correlated. Once a complete set of messages has been received, the 
-\i Aggregator
-\i0  collects information from each correlated message and publishes a single, aggregated message to the output channel for further processing.}</string>
+\i \cf2 Aggregator
+\i0 \cf2  is a special 
+\i \cf2 Filter
+\i0 \cf2  that receives a stream of messages and identifies messages that are correlated. Once a complete set of messages has been received, the 
+\i \cf2 Aggregator
+\i0 \cf2  collects information from each correlated message and publishes a single, aggregated message to the output channel for further processing.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -13811,383 +13581,6 @@ CXF SOAP}</string>
 				<key>ID</key>
 				<integer>1465</integer>
 			</dict>
-		</dict>
-		<dict>
-			<key>Class</key>
-			<string>Group</string>
-			<key>Graphics</key>
-			<array>
-				<dict>
-					<key>AllowLabelDrop</key>
-					<false/>
-					<key>Class</key>
-					<string>LineGraphic</string>
-					<key>ID</key>
-					<integer>1849</integer>
-					<key>OrthogonalBarAutomatic</key>
-					<true/>
-					<key>OrthogonalBarPoint</key>
-					<string>{0, 0}</string>
-					<key>OrthogonalBarPosition</key>
-					<real>-1</real>
-					<key>Points</key>
-					<array>
-						<string>{517.80454649526871, 290.00000958310272}</string>
-						<string>{551.80454649526871, 290.00000958310272}</string>
-					</array>
-					<key>Style</key>
-					<dict>
-						<key>shadow</key>
-						<dict>
-							<key>Color</key>
-							<dict>
-								<key>b</key>
-								<string>0</string>
-								<key>g</key>
-								<string>0</string>
-								<key>r</key>
-								<string>0</string>
-							</dict>
-							<key>ShadowVector</key>
-							<string>{9, 9}</string>
-						</dict>
-						<key>stroke</key>
-						<dict>
-							<key>Color</key>
-							<dict>
-								<key>catalog</key>
-								<string>System</string>
-								<key>name</key>
-								<string>controlShadowColor</string>
-							</dict>
-							<key>HeadArrow</key>
-							<string>FilledArrow</string>
-							<key>HeadScale</key>
-							<real>1.1180554628372192</real>
-							<key>Legacy</key>
-							<true/>
-							<key>LineType</key>
-							<integer>2</integer>
-							<key>PointAtLeast</key>
-							<true/>
-							<key>TailArrow</key>
-							<string>0</string>
-							<key>Width</key>
-							<real>0.72000002861022949</real>
-						</dict>
-					</dict>
-				</dict>
-				<dict>
-					<key>AbsoluteRotation</key>
-					<string>YES</string>
-					<key>Bounds</key>
-					<string>{{515.05454619724549, 312.00000958310272}, {77, 18}}</string>
-					<key>Class</key>
-					<string>ShapedGraphic</string>
-					<key>ID</key>
-					<integer>1850</integer>
-					<key>Shape</key>
-					<string>Rectangle</string>
-					<key>Style</key>
-					<dict>
-						<key>fill</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>shadow</key>
-						<dict>
-							<key>Color</key>
-							<dict>
-								<key>b</key>
-								<string>0</string>
-								<key>g</key>
-								<string>0</string>
-								<key>r</key>
-								<string>0</string>
-							</dict>
-							<key>Draws</key>
-							<string>NO</string>
-							<key>ShadowVector</key>
-							<string>{9, 9}</string>
-						</dict>
-						<key>stroke</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-							<key>PointAtLeast</key>
-							<true/>
-							<key>Width</key>
-							<real>0.72000002861022949</real>
-						</dict>
-					</dict>
-					<key>Text</key>
-					<dict>
-						<key>Pad</key>
-						<integer>4</integer>
-						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
-\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-\deftab720
-\pard\pardeftab720\pardirnatural\qc
-
-\f0\fs16 \cf0 Message Endpoint\
-SMTP}</string>
-						<key>VerticalPad</key>
-						<integer>0</integer>
-					</dict>
-				</dict>
-				<dict>
-					<key>Class</key>
-					<string>Group</string>
-					<key>Graphics</key>
-					<array>
-						<dict>
-							<key>Bounds</key>
-							<string>{{553.55454649526871, 281.50000958310272}, {18, 18}}</string>
-							<key>Class</key>
-							<string>ShapedGraphic</string>
-							<key>ID</key>
-							<integer>1852</integer>
-							<key>Shape</key>
-							<string>Rectangle</string>
-							<key>Style</key>
-							<dict>
-								<key>shadow</key>
-								<dict>
-									<key>Color</key>
-									<dict>
-										<key>b</key>
-										<string>0</string>
-										<key>g</key>
-										<string>0</string>
-										<key>r</key>
-										<string>0</string>
-									</dict>
-									<key>Draws</key>
-									<string>NO</string>
-									<key>ShadowVector</key>
-									<string>{9, 9}</string>
-								</dict>
-								<key>stroke</key>
-								<dict>
-									<key>Color</key>
-									<dict>
-										<key>b</key>
-										<string>0.2</string>
-										<key>g</key>
-										<string>0.2</string>
-										<key>r</key>
-										<string>0.2</string>
-									</dict>
-									<key>PointAtLeast</key>
-									<true/>
-									<key>Width</key>
-									<real>0.72000002861022949</real>
-								</dict>
-							</dict>
-						</dict>
-						<dict>
-							<key>Class</key>
-							<string>Group</string>
-							<key>Graphics</key>
-							<array>
-								<dict>
-									<key>Bounds</key>
-									<string>{{543.42954649526871, 287.12500958310272}, {6.75, 6.75}}</string>
-									<key>Class</key>
-									<string>ShapedGraphic</string>
-									<key>ID</key>
-									<integer>1854</integer>
-									<key>Shape</key>
-									<string>HorizontalTriangle</string>
-									<key>Style</key>
-									<dict>
-										<key>fill</key>
-										<dict>
-											<key>Color</key>
-											<dict>
-												<key>b</key>
-												<string>0.501961</string>
-												<key>g</key>
-												<string>0.501961</string>
-												<key>r</key>
-												<string>0.501961</string>
-											</dict>
-										</dict>
-										<key>shadow</key>
-										<dict>
-											<key>Color</key>
-											<dict>
-												<key>b</key>
-												<string>0</string>
-												<key>g</key>
-												<string>0</string>
-												<key>r</key>
-												<string>0</string>
-											</dict>
-											<key>Draws</key>
-											<string>NO</string>
-											<key>ShadowVector</key>
-											<string>{9, 9}</string>
-										</dict>
-										<key>stroke</key>
-										<dict>
-											<key>Color</key>
-											<dict>
-												<key>b</key>
-												<string>0.501961</string>
-												<key>g</key>
-												<string>0.501961</string>
-												<key>r</key>
-												<string>0.501961</string>
-											</dict>
-											<key>PointAtLeast</key>
-											<true/>
-											<key>Width</key>
-											<real>0.72000002861022949</real>
-										</dict>
-									</dict>
-								</dict>
-								<dict>
-									<key>AllowLabelDrop</key>
-									<false/>
-									<key>Class</key>
-									<string>LineGraphic</string>
-									<key>Head</key>
-									<dict>
-										<key>ID</key>
-										<integer>1856</integer>
-										<key>Info</key>
-										<integer>4</integer>
-									</dict>
-									<key>ID</key>
-									<integer>1855</integer>
-									<key>IsLocked</key>
-									<string>YES</string>
-									<key>OrthogonalBarAutomatic</key>
-									<true/>
-									<key>OrthogonalBarPoint</key>
-									<string>{0, 0}</string>
-									<key>OrthogonalBarPosition</key>
-									<real>-1</real>
-									<key>Points</key>
-									<array>
-										<string>{526.55454649526871, 290.50000958310272}</string>
-										<string>{526.55454649526871, 290.50000958310272}</string>
-									</array>
-									<key>Style</key>
-									<dict>
-										<key>shadow</key>
-										<dict>
-											<key>Color</key>
-											<dict>
-												<key>b</key>
-												<string>0</string>
-												<key>g</key>
-												<string>0</string>
-												<key>r</key>
-												<string>0</string>
-											</dict>
-											<key>ShadowVector</key>
-											<string>{9, 9}</string>
-										</dict>
-										<key>stroke</key>
-										<dict>
-											<key>Color</key>
-											<dict>
-												<key>b</key>
-												<string>0.501961</string>
-												<key>g</key>
-												<string>0.501961</string>
-												<key>r</key>
-												<string>0.501961</string>
-											</dict>
-											<key>HeadArrow</key>
-											<string>0</string>
-											<key>Legacy</key>
-											<true/>
-											<key>LineType</key>
-											<integer>2</integer>
-											<key>PointAtLeast</key>
-											<true/>
-											<key>TailArrow</key>
-											<string>0</string>
-											<key>Width</key>
-											<real>0.72000002861022949</real>
-										</dict>
-									</dict>
-								</dict>
-								<dict>
-									<key>Bounds</key>
-									<string>{{526.55454649526871, 272.50000958310272}, {58.5, 36}}</string>
-									<key>Class</key>
-									<string>ShapedGraphic</string>
-									<key>ID</key>
-									<integer>1856</integer>
-									<key>Shape</key>
-									<string>Rectangle</string>
-									<key>Style</key>
-									<dict>
-										<key>fill</key>
-										<dict>
-											<key>Color</key>
-											<dict>
-												<key>b</key>
-												<string>0.8</string>
-												<key>g</key>
-												<string>1</string>
-												<key>r</key>
-												<string>0.8</string>
-											</dict>
-										</dict>
-										<key>shadow</key>
-										<dict>
-											<key>Color</key>
-											<dict>
-												<key>b</key>
-												<string>0</string>
-												<key>g</key>
-												<string>0</string>
-												<key>r</key>
-												<string>0</string>
-											</dict>
-											<key>Draws</key>
-											<string>NO</string>
-											<key>ShadowVector</key>
-											<string>{9, 9}</string>
-										</dict>
-										<key>stroke</key>
-										<dict>
-											<key>PointAtLeast</key>
-											<true/>
-											<key>Width</key>
-											<real>0.23999999463558197</real>
-										</dict>
-									</dict>
-								</dict>
-							</array>
-							<key>ID</key>
-							<integer>1853</integer>
-						</dict>
-					</array>
-					<key>ID</key>
-					<integer>1851</integer>
-				</dict>
-			</array>
-			<key>ID</key>
-			<integer>1848</integer>
-			<key>Notes</key>
-			<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
-\cocoascreenfonts1{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
-{\colortbl;\red255\green255\blue255;\red51\green51\blue51;}
-\deftab720
-\pard\pardeftab720\sa240
-
-\f0\fs25\fsmilli12800 \cf2 Message Endpoint - Connect an application to a messaging channel using a 
-\i Message Endpoint
-\i0 , a client of the messaging system that the application can then use to send or receive messages.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -14526,8 +13919,8 @@ SMTP}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Content Based Router - The 
-\i Content-Based Router
-\i0  examines the message content and routes the message onto a different channel based on data contained in the message.}</string>
+\i \cf2 Content-Based Router
+\i0 \cf2  examines the message content and routes the message onto a different channel based on data contained in the message.}</string>
 					<key>Shape</key>
 					<string>Rectangle</string>
 					<key>Style</key>
@@ -15042,8 +14435,8 @@ POP3}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Event-Driven Consumer - This is also known as an asynchronous receiver, because the receiver does not have a running thread until a callback thread delivers a message. We call it an 
-\i Event-Driven Consumer
-\i0  because the receiver acts like the message delivery is an event that triggers the receiver into action.}</string>
+\i \cf2 Event-Driven Consumer
+\i0 \cf2  because the receiver acts like the message delivery is an event that triggers the receiver into action.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -15375,8 +14768,8 @@ POP3}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Splitter - Use a 
-\i Splitter
-\i0  to break out the composite message into a series of individual messages, each containing data related to one item.}</string>
+\i \cf2 Splitter
+\i0 \cf2  to break out the composite message into a series of individual messages, each containing data related to one item.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -15585,13 +14978,13 @@ POP3}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Message Filter - Use a special kind of Message Router, a 
-\i Message Filter
-\i0 , to eliminate undesired messages from a channel based on a set of criteria.\
+\i \cf2 Message Filter
+\i0 \cf2 , to eliminate undesired messages from a channel based on a set of criteria.\
 The 
-\i Message Filter
-\i0  has only a single output channel. If the message content matches the criteria specified by the 
-\i Message Filter
-\i0 , the message is routed to the output channel. If the message content does not match the criteria, the message is discarded.}</string>
+\i \cf2 Message Filter
+\i0 \cf2  has only a single output channel. If the message content matches the criteria specified by the 
+\i \cf2 Message Filter
+\i0 \cf2 , the message is routed to the output channel. If the message content does not match the criteria, the message is discarded.}</string>
 		</dict>
 		<dict>
 			<key>Class</key>
@@ -16121,11 +15514,11 @@ FILE}</string>
 \pard\pardeftab720\sa240
 
 \f0\fs25\fsmilli12800 \cf2 Polling Consumer - The aplication should use a 
-\i Polling Consumer
-\i0 , one that explicitly makes a call when it wants to receive a message.\
+\i \cf2 Polling Consumer
+\i0 \cf2 , one that explicitly makes a call when it wants to receive a message.\
 This is also known as a synchronous receiver, because the receiver thread blocks until a message is received. We call it a 
-\i Polling Consumer
-\i0  because the receiver polls for a message, processes it, then polls for another.}</string>
+\i \cf2 Polling Consumer
+\i0 \cf2  because the receiver polls for a message, processes it, then polls for another.}</string>
 				</dict>
 			</array>
 			<key>ID</key>
@@ -16179,7 +15572,7 @@ This is also known as a synchronous receiver, because the receiver thread blocks
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-06-18 12:51:21 +0000</string>
+	<string>2014-06-19 10:12:39 +0000</string>
 	<key>Modifier</key>
 	<string>pg</string>
 	<key>NotesVisible</key>
@@ -16274,7 +15667,7 @@ This is also known as a synchronous receiver, because the receiver thread blocks
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{5.217391412515048, 0}, {1113.0435013365434, 759.13045052093946}}</string>
+		<string>{{0, 0}, {1113.0435013365434, 759.13045052093946}}</string>
 		<key>Zoom</key>
 		<real>1.1499999761581421</real>
 		<key>ZoomValues</key>
