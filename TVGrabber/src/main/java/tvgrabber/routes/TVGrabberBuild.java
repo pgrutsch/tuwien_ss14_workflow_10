@@ -60,8 +60,8 @@ public class TVGrabberBuild extends RouteBuilder {
                         logger.debug("Series stop: " + msg.getStop());
                     }
                 })
-                .multicast()
-                .to("{{socialMedia.seda}}")
+//                .multicast()
+//                .to("{{socialMedia.seda}}")
                 .to("seda:waitingForEnrichment");
 
 
@@ -89,8 +89,8 @@ public class TVGrabberBuild extends RouteBuilder {
                 });
 
        from("{{socialMedia.seda}}").filter().method(NewSeries.class, "filterExistingSeries")
-//                .multicast()
-//                .to("{{facebook.seda}}")
+                .multicast()
+                .to("{{facebook.seda}}")
                 .to("{{twitter.seda}}");
 
     }

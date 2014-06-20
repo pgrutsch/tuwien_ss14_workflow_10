@@ -1,6 +1,7 @@
 package tvgrabber.routes;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.PropertyInject;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.javaconfig.SingleRouteCamelConfiguration;
@@ -42,10 +43,8 @@ public class TwitterRouteTest extends CamelTestSupport {
 
     private static final Logger logger = Logger.getLogger(TwitterRouteTest.class);
 
-    private String twitterAccess = "twitter://timeline/user?consumerKey=K8WGu6kIxeipNv1pYPTA" +
-            "&consumerSecret=eS6kq93pT8xnMgK4MKnUR5ilkFExALXrSWiuB1wEXv8" +
-            "&accessToken=2289840392-NyRv99h6JGrIe5n5sqNOVZtAsy4BM603ET4X69m" +
-            "&accessTokenSecret=hHgTntMJKqPyXf0NwVb7qqEyurZQgpeEMNPpeGbuYFy5H";
+
+    private @PropertyInject("twitter.seda") String twitter;
 
     @Autowired
     private TwitterRoute twitterRoute;
@@ -108,7 +107,7 @@ public class TwitterRouteTest extends CamelTestSupport {
         series.setStart(new Date());
         series.setStop(new Date());
 
-        template.sendBody("seda:twitter", series);
+        template.sendBody(twitter, series);
 
         assertMockEndpointsSatisfied();
 
@@ -135,7 +134,7 @@ public class TwitterRouteTest extends CamelTestSupport {
         series.setTitle("blab");
         comment.setTvprogram(series);
 
-        template.sendBodyAndHeader("seda:twitter", comment, "type", "comment");
+        template.sendBodyAndHeader(twitter, comment, "type", "comment");
 
         assertMockEndpointsSatisfied();
 
@@ -164,7 +163,7 @@ public class TwitterRouteTest extends CamelTestSupport {
         series.setTitle("blab");
         comment.setTvprogram(series);
 
-        template.sendBodyAndHeader("seda:twitter", comment, "type", "comment");
+        template.sendBodyAndHeader(twitter, comment, "type", "comment");
 
         assertMockEndpointsSatisfied();
 
@@ -191,7 +190,7 @@ public class TwitterRouteTest extends CamelTestSupport {
         when(series.getTitle())
                 .thenReturn("test");
 
-        template.sendBody("seda:twitter", series);
+        template.sendBody(twitter, series);
 
         assertMockEndpointsSatisfied();
 
@@ -218,7 +217,7 @@ public class TwitterRouteTest extends CamelTestSupport {
         when(series.getTitle())
                 .thenReturn("test");
 
-        template.sendBody("seda:twitter", series);
+        template.sendBody(twitter, series);
 
         assertMockEndpointsSatisfied();
 

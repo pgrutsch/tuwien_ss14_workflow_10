@@ -2,6 +2,7 @@ package tvgrabber.beans;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
+import org.apache.camel.PropertyInject;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.impl.DefaultExchange;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
@@ -47,6 +48,8 @@ public class CommentBeanTest {
     @Autowired
     private CommentBean commentBean;
 
+    private @PropertyInject("twitter.seda") String twitter;
+
     @Before
     public void setUp() {
         context = new DefaultCamelContext();
@@ -90,7 +93,7 @@ public class CommentBeanTest {
 
         List<String> recipients = new ArrayList<String>();
         recipients.add("jpa:tvgrabber.entities.Comment");
-        recipients.add("seda:twitter");
+        recipients.add(twitter);
 
         assertEquals(recipients, headers.get("recipients"));
     }

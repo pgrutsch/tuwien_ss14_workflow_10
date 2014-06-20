@@ -1,6 +1,7 @@
 package tvgrabber.routes;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.PropertyInject;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.javaconfig.SingleRouteCamelConfiguration;
@@ -35,6 +36,8 @@ public class TVGrabberCommentTest extends CamelTestSupport {
     /**
      * BASIC TEST SETUP
      */
+
+    private @PropertyInject("twitter.seda") String twitter;
 
     private static final Logger logger = Logger.getLogger(TVGrabberCommentTest.class);
 
@@ -90,7 +93,7 @@ public class TVGrabberCommentTest extends CamelTestSupport {
                         .skipSendToOriginalEndpoint()
                         .to("mock:advice");
 
-                interceptSendToEndpoint("seda:twitter")
+                interceptSendToEndpoint(twitter)
                         .skipSendToOriginalEndpoint()
                         .to("mock:advice");
             }
@@ -126,7 +129,7 @@ public class TVGrabberCommentTest extends CamelTestSupport {
                         .skipSendToOriginalEndpoint()
                         .to("mock:advice");
 
-                interceptSendToEndpoint("seda:twitter")
+                interceptSendToEndpoint(twitter)
                         .skipSendToOriginalEndpoint()
                         .to("mock:advice");
             }
