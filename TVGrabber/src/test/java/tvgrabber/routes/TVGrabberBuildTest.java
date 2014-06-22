@@ -1,6 +1,7 @@
 package tvgrabber.routes;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.PropertyInject;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.javaconfig.SingleRouteCamelConfiguration;
@@ -19,6 +20,8 @@ import org.springframework.test.context.ContextConfiguration;
 import tvgrabber.TestConfig;
 import tvgrabber.entities.Series;
 
+import java.util.Date;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -36,15 +39,12 @@ import tvgrabber.entities.Series;
 @ActiveProfiles("testing")
 public class TVGrabberBuildTest extends CamelTestSupport {
 
-    /**
-     * BASIC TEST SETUP
-     */
-
     private static final Logger logger = Logger.getLogger(TVGrabberBuildTest.class);
 
-    /**
-     * WATCH OUT for variable name. if you use eg. tvGrabberBuild, there will be an uniquebeanidentifier exception!!!
-     */
+    private @PropertyInject("build.enrichmentQueue") String waitingForEnrichment;
+    private @PropertyInject("buildtest.file") String guideXMLBuildTest;
+
+
     @Autowired
     private TVGrabberBuild TVGrabberBuild; /* needed for createRouteBuilder() */
 
@@ -73,7 +73,6 @@ public class TVGrabberBuildTest extends CamelTestSupport {
         return TVGrabberBuild;
     }
 
-    /* reuse TestConfig's SpringCamelContext to avoid creation of a DefaultCamelContext() by CamelTestSupport */
     @Override
     protected CamelContext createCamelContext() throws Exception {
         return camelContext;
@@ -84,9 +83,39 @@ public class TVGrabberBuildTest extends CamelTestSupport {
      */
 
     @Test
+    public void testXMLReader() throws Exception {
+        logger.debug("testXMLReader - consuming from ROUTE: "+ guideXMLBuildTest);
+
+        context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                replaceFromWith(guideXMLBuildTest);
+
+                interceptSendToEndpoint(waitingForEnrichment)
+                        .skipSendToOriginalEndpoint()
+                        .to("mock:result");
+            }
+        });
+
+        context.start();
+
+        // Expecting 1 message because content filter checks for "isSeries"
+        getMockEndpoint("mock:result").expectedMessageCount(1);
+
+        assertMockEndpointsSatisfied();
+
+        Series s = getMockEndpoint("mock:result").getExchanges().get(0).getIn().getBody(Series.class);
+
+        assertEquals("Columbo", s.getTitle());
+        assertEquals("ORF 2", s.getChannel());
+
+        context.stop();
+    }
+
+    @Test
     public void testIMDBRatingEnrichment() throws Exception {
-        //logger.info("Route0="+ context.getRouteDefinitions().get(0).toString());
-        logger.info("Route1="+ context.getRouteDefinitions().get(1).toString());
+        logger.debug("Route0="+ context.getRouteDefinitions().get(0).toString());
+        logger.debug("Route1="+ context.getRouteDefinitions().get(1).toString());
 
         // Do not load guide.xml file
         context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
@@ -100,9 +129,9 @@ public class TVGrabberBuildTest extends CamelTestSupport {
         context.getRouteDefinitions().get(1).adviceWith(context, new AdviceWithRouteBuilder() {
             @Override
             public void configure() throws Exception {
-                replaceFromWith("seda:enrichTest");
+                //replaceFromWith("seda:enrichTest");
 
-                interceptSendToEndpoint("jpa://tvgrabber.entities.Series")
+                interceptSendToEndpoint("jpa://*")
                         .skipSendToOriginalEndpoint()
                         .to("mock:result");
             }
@@ -110,32 +139,24 @@ public class TVGrabberBuildTest extends CamelTestSupport {
 
         context.start();
 
-        Series s = new Series();
-        s.setTitle("Californication");
+        getMockEndpoint("mock:result").expectedMessageCount(1);
 
+        Series s = new Series();
+        s.setTitle("Um Himmels Willen");
+        s.setStart(new Date());
+        s.setStop(new Date());
         assertEquals(s.getImdbRating(), 0.0, 0); // Initial value should be zero
 
-
-        template.sendBody("seda:enrichTest", s);
-
-        //System.out.println("WFE: "+ getMockEndpoint("seda:waitingForEnrichment").getExchanges().isEmpty());
-        System.out.println("RES: "+ getMockEndpoint("mock:result").getExchanges().isEmpty());
-
-        Double imdbRating = 0.0; //getMockEndpoint("mock:result").getExchanges().get(0).getIn().getBody(Series.class).getImdbRating();
-        log.info("Series "+ s.getTitle() + " was enriched with IMDBRating "+ imdbRating);
-        assertTrue(0.0 <= imdbRating && imdbRating <= 10.0);
-
-        //getMockEndpoint("seda:waitingForEnrichment").expectedMessageCount(0);
-        getMockEndpoint("mock:result").expectedMessageCount(0);
+        template.sendBody(waitingForEnrichment, s);
 
         assertMockEndpointsSatisfied();
 
+        logger.debug("RES size: " + getMockEndpoint("mock:result").getExchanges().size());
+
+        Series sres = getMockEndpoint("mock:result").getExchanges().get(0).getIn().getBody(Series.class);
+        //log.debug("Series "+ sres.getTitle() + " was enriched with IMDBRating "+ sres.getImdbRating());
+        assertTrue(0.0 <= sres.getImdbRating() && sres.getImdbRating() <= 10.0);
 
         context.stop();
     }
-
-
-    /*
-     * TODO: Test Invalid XML File
-     */
 }
