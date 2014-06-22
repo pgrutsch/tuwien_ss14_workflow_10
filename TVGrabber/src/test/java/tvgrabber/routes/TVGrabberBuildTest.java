@@ -85,6 +85,9 @@ public class TVGrabberBuildTest extends CamelTestSupport {
 
     @Test
     public void testIMDBRatingEnrichment() throws Exception {
+        //logger.info("Route0="+ context.getRouteDefinitions().get(0).toString());
+        logger.info("Route1="+ context.getRouteDefinitions().get(1).toString());
+
         // Do not load guide.xml file
         context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
             @Override
@@ -97,9 +100,9 @@ public class TVGrabberBuildTest extends CamelTestSupport {
         context.getRouteDefinitions().get(1).adviceWith(context, new AdviceWithRouteBuilder() {
             @Override
             public void configure() throws Exception {
-                //replaceFromWith("seda:enrichTest");
+                replaceFromWith("seda:enrichTest");
 
-                interceptSendToEndpoint("jpa:*")
+                interceptSendToEndpoint("jpa://tvgrabber.entities.Series")
                         .skipSendToOriginalEndpoint()
                         .to("mock:result");
             }
@@ -108,25 +111,25 @@ public class TVGrabberBuildTest extends CamelTestSupport {
         context.start();
 
         Series s = new Series();
-        s.setTitle("Um Himmels Willen");
+        s.setTitle("Californication");
 
         assertEquals(s.getImdbRating(), 0.0, 0); // Initial value should be zero
 
-        /* Not yet working: Message should be in mock:result in the end
-        template.sendBody("seda:waitingForEnrichment", s);
 
-        System.out.println("WFE: "+ getMockEndpoint("mock:waitingForEnrichment").getExchanges().isEmpty());
+        template.sendBody("seda:enrichTest", s);
+
+        //System.out.println("WFE: "+ getMockEndpoint("seda:waitingForEnrichment").getExchanges().isEmpty());
         System.out.println("RES: "+ getMockEndpoint("mock:result").getExchanges().isEmpty());
 
         Double imdbRating = 0.0; //getMockEndpoint("mock:result").getExchanges().get(0).getIn().getBody(Series.class).getImdbRating();
         log.info("Series "+ s.getTitle() + " was enriched with IMDBRating "+ imdbRating);
         assertTrue(0.0 <= imdbRating && imdbRating <= 10.0);
 
-        getMockEndpoint("mock:seda:waitingForEnrichment").expectedMessageCount(0);
+        //getMockEndpoint("seda:waitingForEnrichment").expectedMessageCount(0);
         getMockEndpoint("mock:result").expectedMessageCount(0);
 
         assertMockEndpointsSatisfied();
-        */
+
 
         context.stop();
     }

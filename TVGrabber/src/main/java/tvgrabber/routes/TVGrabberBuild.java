@@ -62,20 +62,19 @@ public class TVGrabberBuild extends RouteBuilder {
                 })
 //                .multicast()
 //                .to("{{socialMedia.seda}}")
-                .to("seda:waitingForEnrichment");
+                .to("{{build.enrichmentQueue}}");
 
 
         IMDBRatingAggregationStrategy aggregationStrategy = new IMDBRatingAggregationStrategy();
-        from("seda:waitingForEnrichment")
+        from("{{build.enrichmentQueue}}")
                 .setHeader(Exchange.HTTP_QUERY, simple("t=${header.seriesTitle}&r=xml"))
                 .setHeader(Exchange.HTTP_METHOD, constant("GET"))
                 //.throttle(1).asyncDelayed() // Throttler EIP to avoid overloading omdbapi (1 request per second allowed)
-                //.enrich("http://omdbapi.com/", aggregationStrategy)
+                .enrich("http://omdbapi.com/", aggregationStrategy)
                 .to("{{build.jpaSeries}}");
 
 
         /* Fetch 5 entries every 5 seconds to check if there is really data in the database */
-
         from("{{build.consumeSeries}}")
                 .log(LoggingLevel.INFO, "Reading series from TVProgram table")
                 .process(new Processor() {
