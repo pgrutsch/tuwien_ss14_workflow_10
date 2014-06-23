@@ -3,6 +3,7 @@ package tvgrabber.beans;
 import org.apache.camel.Exchange;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 import tvgrabber.entities.Series;
 
 /**
@@ -12,6 +13,7 @@ import tvgrabber.entities.Series;
  * Time: 15:08
  * Aggregate the Messages with the same title in one Message (same serie)
  */
+@Component
 public class NewsletterTitleAS implements AggregationStrategy {
 
     private static final Logger logger = Logger.getLogger(NewsletterTitleAS.class);

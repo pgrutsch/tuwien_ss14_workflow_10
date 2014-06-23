@@ -3,6 +3,7 @@ package tvgrabber.beans;
 import org.apache.camel.Exchange;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 import tvgrabber.entities.Series;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
  * Time: 15:10
  * Aggregate the Resequenced-Messages in one message
  */
+@Component
 public class NewsletterFullAS implements AggregationStrategy {
 
     private static final Logger logger = Logger.getLogger(NewsletterFullAS.class);

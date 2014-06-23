@@ -3,6 +3,7 @@ package tvgrabber.beans;
 import org.apache.camel.Exchange;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 import tvgrabber.entities.TVGrabberUser;
 
 /**
@@ -13,6 +14,7 @@ import tvgrabber.entities.TVGrabberUser;
  * Search in the DB who has subscribed for which serie and add the email in
  * "to" header for smtp.
  */
+@Component
 public class NewsletterEnrichAS implements AggregationStrategy
 {
     private static final Logger logger = Logger.getLogger(NewsletterEnrichAS.class);
