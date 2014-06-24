@@ -44,6 +44,10 @@ public class TVGrabberBuildTest extends CamelTestSupport {
     private @PropertyInject("build.enrichmentQueue") String waitingForEnrichment;
     private @PropertyInject("buildtest.file") String guideXMLBuildTest;
 
+    private @PropertyInject("socialMedia.seda") String socialMedia;
+    private @PropertyInject("twitter.seda") String twitter;
+    private @PropertyInject("facebook.seda") String facebook;
+
 
     @Autowired
     private TVGrabberBuild TVGrabberBuild; /* needed for createRouteBuilder() */
@@ -157,6 +161,60 @@ public class TVGrabberBuildTest extends CamelTestSupport {
         //log.debug("Series "+ sres.getTitle() + " was enriched with IMDBRating "+ sres.getImdbRating());
         assertTrue(0.0 <= sres.getImdbRating() && sres.getImdbRating() <= 10.0);
 
+        context.stop();
+    }
+
+    @Test
+    public void filterNonExistingSeriesForSocialMedia() throws Exception {
+        context.getRouteDefinitions().get(3).adviceWith(context, new AdviceWithRouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                replaceFromWith(socialMedia);
+
+                interceptSendToEndpoint(twitter)
+                        .skipSendToOriginalEndpoint()
+                        .to("mock:twitter");
+
+                interceptSendToEndpoint(facebook)
+                        .skipSendToOriginalEndpoint()
+                        .to("mock:facebook");
+            }
+        });
+        getMockEndpoint("mock:twitter").expectedMessageCount(1);
+        getMockEndpoint("mock:facebook").expectedMessageCount(1);
+
+        Series s = new Series();
+        s.setTitle("new one");
+
+        template.sendBody(socialMedia, s);
+        assertMockEndpointsSatisfied();
+        context.stop();
+    }
+
+    @Test
+    public void filterExistingSeriesForSocialMedia() throws Exception {
+        context.getRouteDefinitions().get(3).adviceWith(context, new AdviceWithRouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                replaceFromWith(socialMedia);
+
+                interceptSendToEndpoint(twitter)
+                        .skipSendToOriginalEndpoint()
+                        .to("mock:twitter");
+
+                interceptSendToEndpoint(facebook)
+                        .skipSendToOriginalEndpoint()
+                        .to("mock:facebook");
+            }
+        });
+        getMockEndpoint("mock:twitter").expectedMessageCount(0);
+        getMockEndpoint("mock:facebook").expectedMessageCount(0);
+
+        Series s = new Series();
+        s.setTitle("test1");
+
+        template.sendBody(socialMedia, s);
+        assertMockEndpointsSatisfied();
         context.stop();
     }
 }
