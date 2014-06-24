@@ -9,8 +9,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import tvgrabber.entities.Series;
 
-import java.util.Date;
-
 /**
  * Created by LeBon on 27.05.14.
  */

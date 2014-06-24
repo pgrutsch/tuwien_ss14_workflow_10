@@ -118,6 +118,8 @@ public class TVGrabberSubscribeTest extends CamelTestSupport {
         template.sendBodyAndHeaders("seda:popTest","body",headers);
 
         assertMockEndpointsSatisfied();
+
+        context.stop();
     }
 
     /**
@@ -179,6 +181,7 @@ public class TVGrabberSubscribeTest extends CamelTestSupport {
 
         assertMockEndpointsSatisfied();
 
+        context.stop();
     }
 }
 

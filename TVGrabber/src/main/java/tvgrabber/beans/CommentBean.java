@@ -2,7 +2,6 @@ package tvgrabber.beans;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Headers;
-import org.apache.camel.PropertyInject;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -29,7 +28,7 @@ public class CommentBean {
     private EntityManagerFactory entityManagerFactory;
 
     @Autowired
-    Environment prop;
+    private Environment prop;
 
     public void route(@Headers Map<String, Object> headers, Exchange exchange) throws InvalidSoapCommentException {
         SOAPComment soapComment = exchange.getIn().getBody(SOAPComment.class);
@@ -43,9 +42,7 @@ public class CommentBean {
 
         exchange.getIn().setBody(comment);
 
-        String db = "jpa:tvgrabber.entities.Comment";
-
-        headers.put("recipients", Arrays.asList(db, prop.getProperty("twitter.seda")));
+        headers.put("recipients", Arrays.asList(prop.getProperty("comment.jpaComment"), prop.getProperty("twitter.seda")));
         headers.put("type", "comment");
     }
 
