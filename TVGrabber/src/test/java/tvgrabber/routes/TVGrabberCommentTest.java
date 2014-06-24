@@ -38,6 +38,7 @@ public class TVGrabberCommentTest extends CamelTestSupport {
      */
 
     private @PropertyInject("twitter.seda") String twitter;
+    private @PropertyInject("comment.jpaComment") String jpaComment;
 
     private static final Logger logger = Logger.getLogger(TVGrabberCommentTest.class);
 
@@ -89,7 +90,7 @@ public class TVGrabberCommentTest extends CamelTestSupport {
             public void configure() throws Exception {
                 replaceFromWith("seda:cxftest");
 
-                interceptSendToEndpoint("jpa:*")
+                interceptSendToEndpoint(jpaComment)
                         .skipSendToOriginalEndpoint()
                         .to("mock:advice");
 
@@ -125,7 +126,7 @@ public class TVGrabberCommentTest extends CamelTestSupport {
             public void configure() throws Exception {
                 replaceFromWith("seda:cxftest");
 
-                interceptSendToEndpoint("jpa:*")
+                interceptSendToEndpoint(jpaComment)
                         .skipSendToOriginalEndpoint()
                         .to("mock:advice");
 

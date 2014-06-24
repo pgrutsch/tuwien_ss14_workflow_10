@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<tv generator-info-name="WebGrab+Plus/w MDB &amp; REX Postprocess -- version 1.1.1/52.22 -- Jan van Straaten" generator-info-url="http://www.webgrabplus.com">
+  <channel id="ORF eins">
+    <display-name lang="de">ORF eins</display-name>
+    <icon src="http://tvtv.at/images/senderlogos/orf1.gif" />
+    <url>http://www.tvtv.at</url>
+  </channel>
+  <programme start="20140426194900 +0200" stop="20140426195500 +0200" channel="ORF 2">
+    <title lang="de">Wetter</title>
+    <title lang="xx">Wetter</title>
+    <category lang="de">Sonstiges</category>
+    <category lang="de">Nachrichten/Info</category>
+    <video>
+      <aspect>Breitbild</aspect>
+    </video>
+    <subtitles type="Gehörlose" />
+  </programme>
+  <programme start="20140427005500 +0200" stop="20140427021000 +0200" channel="ORF 2">
+    <title lang="de">Columbo – Ein Denkmal für die Ewigkeit</title>
+    <title lang="xx">Columbo</title>
+    <desc lang="de">Der ehrgeizige und skrupellose Architekt Elliot Markham hat den Multimillionär Beau Williamson aus dem Weg geschafft, ohne eine Spur zu hinterlassen. Columbo muss ein Verbrechen beweisen, bei dem sogar die Leiche fehlt</desc>
+    <credits>
+      <director>Peter Falk</director>
+      <actor>Peter Falk (Columbo)</actor>
+      <actor>Patrick O'Neal (Elliot Markham)</actor>
+    </credits>
+    <date>1972</date>
+    <category lang="de">Krimi</category>
+    <category lang="de">Serie</category>
+    <episode-num>Staffel 1, Folge 8</episode-num>
+    <subtitles type="Gehörlose" />
+  </programme>
+</tv>

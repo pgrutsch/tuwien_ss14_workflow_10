@@ -50,7 +50,7 @@ public class TestConfig extends CamelConfiguration {
      * Following error can be safely ignored, because no loadTimeWeaver is defined and enhancement isn't needed.
      * see http://openjpa.apache.org/integration.html
      *
-     * 60  camel  WARN   [main] openjpa.Runtime - An error occurred while registering a ClassTransformer with PersistenceUnitInfo: name 'camel'
+     * 60  camel  WARN   [main] openjpa.Runtime - An error occurred while registering a ClassTransformer with PersistenceUnitInfo: name 'camel-test'
      */
 
     @Bean
