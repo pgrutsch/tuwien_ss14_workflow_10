@@ -1,17 +1,6 @@
 package tvgrabber.routes;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.spring.javaconfig.SingleRouteCamelConfiguration;
 import org.apache.camel.test.junit4.CamelTestSupport;
-import org.apache.camel.test.spring.CamelSpringDelegatingTestContextLoader;
-import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.ContextConfiguration;
-import tvgrabber.TestConfig;
 
 /**
  * Created by Isabella on 21.06.2014.
