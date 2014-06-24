@@ -3,6 +3,7 @@ package tvgrabber.beans;
 import org.apache.camel.Body;
 import org.apache.camel.Exchange;
 import org.apache.camel.Headers;
+import org.apache.camel.Processor;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -24,7 +25,7 @@ import java.util.Map;
  */
 
 @Component
-public class Addressmanager {
+public class Addressmanager implements Processor {
     private static final Logger logger = Logger.getLogger(Addressmanager.class);
 
     private @Autowired DataSource dataSource;
@@ -91,6 +92,22 @@ public class Addressmanager {
             logger.error("DB error:");
             logger.error(e.toString());
             return null;
+        }
+    }
+
+    /**Modifies the exchange:
+     * if the user is subscribed he gets another message as if he isn't subscribed
+     * @param exchange
+     * @throws Exception
+     */
+    @Override
+    public void process(Exchange exchange) throws Exception {
+        TVGrabberUser user = exchange.getIn().getBody(TVGrabberUser.class);
+        if (user.isSubscribed()) {
+            exchange.getIn().setBody("Hello " + user.getEmail()+ " nice to have your contact data.");
+        }
+        else {
+            exchange.getIn().setBody("Hello " + user.getEmail()+ " we are sorry that you don't like our services anymore.");
         }
     }
 }

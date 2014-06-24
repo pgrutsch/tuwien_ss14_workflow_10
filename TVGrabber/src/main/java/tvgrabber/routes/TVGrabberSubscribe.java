@@ -41,6 +41,7 @@ public class TVGrabberSubscribe extends RouteBuilder {
         /* Save in db and send a answer mail */
         from("{{subscribe.saveAndAnswer}}")
                 .to("{{subscribe.jpaUser}}")
+                .process(new Addressmanager())
                 .to("{{global.smtp}}");
         }
     }

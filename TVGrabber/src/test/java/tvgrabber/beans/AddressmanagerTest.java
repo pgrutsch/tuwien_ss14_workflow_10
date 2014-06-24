@@ -86,9 +86,7 @@ public class AddressmanagerTest extends CamelTestSupport {
         header.put("from",userMail);
 
         addressmanager.unsubscribe(header,myBody,exchange);
-        //assertEquals("User '"+userMail+"' tried to unsubscribe: '"+myBody+"' but isn't in the db.",exchange.getException().getMessage());
     }
-
 
     @Override
     protected RouteBuilder createRouteBuilder() {
