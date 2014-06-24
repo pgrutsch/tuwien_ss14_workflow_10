@@ -35,7 +35,7 @@ public class NewsletterFullAS implements AggregationStrategy {
         }
         secMessage=NewExchange.getIn().getBody(String.class);
 
-        sNewsletter=firstMessage + '\n' + secMessage; // + '\n';
+        sNewsletter=firstMessage + '\n' + secMessage;
 
         NewExchange.getIn().setBody(sNewsletter);
         NewExchange.getIn().setHeader("title",NewExchange.getIn().getHeader("title"));

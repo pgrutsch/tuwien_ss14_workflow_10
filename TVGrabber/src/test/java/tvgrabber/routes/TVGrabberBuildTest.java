@@ -133,8 +133,6 @@ public class TVGrabberBuildTest extends CamelTestSupport {
         context.getRouteDefinitions().get(1).adviceWith(context, new AdviceWithRouteBuilder() {
             @Override
             public void configure() throws Exception {
-                //replaceFromWith("seda:enrichTest");
-
                 interceptSendToEndpoint("jpa://*")
                         .skipSendToOriginalEndpoint()
                         .to("mock:result");

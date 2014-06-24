@@ -31,7 +31,7 @@ public class NewsletterTitleAS implements AggregationStrategy {
             sTitle=NewExchange.getIn().getBody(Series.class).getTitle();
             sNewsletter= "$" + sTitle + "$" + '\n';
         }
-        sNewsletter=sNewsletter+NewExchange.getIn().getBody(Series.class).getStart().toString() + " - " +
+        sNewsletter = sNewsletter + NewExchange.getIn().getBody(Series.class).getStart().toString() + " - " +
                 NewExchange.getIn().getBody(Series.class).getStop().toString()+
                 " ## Rating - " + NewExchange.getIn().getBody(Series.class).getImdbRating().toString()
                 + " ##"  + " ** Channel - " + NewExchange.getIn().getBody(Series.class).getChannel() + " **"

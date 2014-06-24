@@ -61,11 +61,12 @@ public class TVGrabberNewsletter extends RouteBuilder {
 
         //aggregate by title -> for example all columbo to one columbo message
         from("seda:aggregator").aggregate(new NewsletterTitleAS()).header("title")
-        .completionInterval(2000)
-        .to("seda:resequencer");
+            .completionInterval(2000)
+            .to("seda:resequencer");
 
          //reverse sort by title
-         from("seda:resequencer").resequence(header("title")).batch().timeout(10000).reverse()
+         from("seda:resequencer")
+                .resequence(header("title")).batch().timeout(9000).reverse()
                 .log(LoggingLevel.DEBUG, "######################### Resequencer INC  #########################")
                 .process(new Processor() {
                     @Override
@@ -74,9 +75,11 @@ public class TVGrabberNewsletter extends RouteBuilder {
 
                         exchange.getIn().setHeader("title","fin");
                     }
-         }).to("seda:aggregatorAll");
+                })
+                .to("seda:aggregatorAll");
 
-        //aggregate alle message to one
+
+       //aggregate all message to one
        from("seda:aggregatorAll").aggregate(new NewsletterFullAS()).header("title")
        .completionInterval(15000)
                .log(LoggingLevel.DEBUG, "********************** Aggregator ALL  **************************")
@@ -89,5 +92,6 @@ public class TVGrabberNewsletter extends RouteBuilder {
        .pollEnrich("{{newsletter.pollEnrich}}" +
                "", new NewsletterEnrichAS())
        .to("{{global.smtp}}");
+
     }
 }
