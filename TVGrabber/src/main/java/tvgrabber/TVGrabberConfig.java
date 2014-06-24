@@ -80,7 +80,7 @@ public class TVGrabberConfig extends CamelConfiguration {
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         OpenJpaVendorAdapter jpaVendorAdapter = new OpenJpaVendorAdapter();
-        jpaVendorAdapter.setShowSql(true);
+        jpaVendorAdapter.setShowSql(false);
         jpaVendorAdapter.setDatabase(Database.H2);
         jpaVendorAdapter.setDatabasePlatform(H2Dictionary.class.getName());
         jpaVendorAdapter.setGenerateDdl(false);
@@ -102,4 +102,5 @@ public class TVGrabberConfig extends CamelConfiguration {
         pc.setLocations(locations);
         return pc;
     }
+
 }

@@ -16,7 +16,7 @@ import tvgrabber.entities.Series;
 public class FacebookRoute extends RouteBuilder {
 
     @Autowired
-    Environment prop;
+    private Environment prop;
 
     private String facebookRout = "facebook://postStatusMessage?inBody=message";
 

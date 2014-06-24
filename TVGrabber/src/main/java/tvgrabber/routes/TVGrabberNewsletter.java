@@ -49,11 +49,11 @@ public class TVGrabberNewsletter extends RouteBuilder {
         from("{{newsletter.jpa}}" +
                 "select s from tvgrabber.entities.Series s where (s.start >= '" + weekstartString + "' AND s.stop <= '" + weekendString + "')")
                 .bean(NewsletterBean.class,"changeHeader")
-                .log(LoggingLevel.INFO, "********************** Newsletter INC  **************************")
+                .log(LoggingLevel.DEBUG, "********************** Newsletter INC  **************************")
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        logger.info("Newsletter INC: " + exchange.getIn().getBody(Series.class).getTitle() + " " +
+                        logger.debug("Newsletter INC: " + exchange.getIn().getBody(Series.class).getTitle() + " " +
                         exchange.getIn().getBody(Series.class).getStart().toString()
                         + " Titel " + exchange.getIn().getHeader("title"));
                     }
@@ -61,16 +61,16 @@ public class TVGrabberNewsletter extends RouteBuilder {
 
         //aggregate by title -> for example all columbo to one columbo message
         from("seda:aggregator").aggregate(new NewsletterTitleAS()).header("title")
-        .completionInterval(15000)
+        .completionInterval(2000)
         .to("seda:resequencer");
 
          //reverse sort by title
          from("seda:resequencer").resequence(header("title")).batch().timeout(10000).reverse()
-                .log(LoggingLevel.INFO, "######################### Resequencer INC  #########################")
+                .log(LoggingLevel.DEBUG, "######################### Resequencer INC  #########################")
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        logger.info("Resequencer:" + exchange.getIn().getBody(String.class));
+                        logger.debug("Resequencer:" + exchange.getIn().getBody(String.class));
 
                         exchange.getIn().setHeader("title","fin");
                     }
@@ -79,11 +79,11 @@ public class TVGrabberNewsletter extends RouteBuilder {
         //aggregate alle message to one
        from("seda:aggregatorAll").aggregate(new NewsletterFullAS()).header("title")
        .completionInterval(15000)
-               .log(LoggingLevel.INFO, "********************** Aggregator ALL  **************************")
+               .log(LoggingLevel.DEBUG, "********************** Aggregator ALL  **************************")
                .process(new Processor() {
                    @Override
                    public void process(Exchange exchange) throws Exception {
-                       logger.info("All INC: " + exchange.getIn().getBody(String.class));
+                       logger.debug("All INC: " + exchange.getIn().getBody(String.class));
                    }
                })
        .pollEnrich("{{newsletter.pollEnrich}}" +

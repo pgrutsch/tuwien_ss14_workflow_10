@@ -10,6 +10,7 @@ import tvgrabber.beans.CommentBean;
 import tvgrabber.beans.CommentValidator;
 import tvgrabber.entities.Comment;
 import tvgrabber.webservice.soap.PostComment;
+import tvgrabber.webservice.soap.SOAPComment;
 
 /**
  * Created by patrickgrutsch on 30.04.14.
@@ -25,6 +26,14 @@ public class TVGrabberComment extends RouteBuilder {
 
         from("{{comment.CXFEndpoint}}"+PostComment.class.getName())
                 .log(LoggingLevel.INFO, "Receiving new SOAP msg from http://localhost:8080/spring-soap/PostComment")
+                .process(new Processor() {
+                    @Override
+                    public void process(Exchange exchange) throws Exception {
+                        SOAPComment c = exchange.getIn().getBody(SOAPComment.class);
+                        logger.info("From: " + c.getEmail() + " Comment: " + c.getComment() + " For TV_ID: " +
+                                        c.getTvprogram());
+                    }
+                })
                 .errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL))
                 .bean(CommentValidator.class)
                 .bean(CommentBean.class)
@@ -34,7 +43,7 @@ public class TVGrabberComment extends RouteBuilder {
 
         from("{{comment.JPAEndpoint}}")
                 .errorHandler(deadLetterChannel(TVGrabberDeadLetter.DEAD_LETTER_CHANNEL))
-                .log(LoggingLevel.INFO, "Reading comments from DB")
+                .log(LoggingLevel.DEBUG, "Reading comments from DB")
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {

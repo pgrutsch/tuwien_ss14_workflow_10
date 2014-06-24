@@ -17,7 +17,7 @@ import twitter4j.TwitterException;
 public class TwitterRoute extends RouteBuilder {
 
     @Autowired
-    Environment prop;
+    private Environment prop;
 
     private String twitterAccess = "twitter://timeline/user";
 

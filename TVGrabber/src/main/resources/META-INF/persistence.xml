@@ -17,7 +17,7 @@
         <properties>
             <property name="openjpa.ConnectionURL" value="jdbc:h2:mem:h2proddb"/>
             <property name="openjpa.ConnectionDriverName" value="org.h2.Driver"/>
-            <property name="openjpa.Log" value="DefaultLevel=WARN, Tool=INFO, SQL=INFO, Runtime=INFO"/>
+            <property name="openjpa.Log" value="DefaultLevel=WARN, Tool=WARN, SQL=WARN, Runtime=WARN"/>
             <property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
             <property name="openjpa.ConnectionUserName" value="SA"/>
             <property name="openjpa.ConnectionPassword" value=""/>

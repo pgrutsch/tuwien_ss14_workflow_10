@@ -52,7 +52,7 @@ public class TVGrabberBuild extends RouteBuilder {
                         String encodedTitle = msg.getTitle().replaceAll("[^ a-zA-Z0-9-_]", "");
                         exchange.getIn().setHeader("seriesTitle", encodedTitle);
 
-                        logger.debug("Series title: " + msg.getTitle());
+                        logger.info("Series title: " + msg.getTitle());
                         logger.debug("Series desc: " + msg.getDesc());
                         logger.debug("Series imdbRating: " + msg.getImdbRating());
                         logger.debug("Series channel: " +msg.getChannel());
@@ -69,18 +69,18 @@ public class TVGrabberBuild extends RouteBuilder {
         from("{{build.enrichmentQueue}}")
                 .setHeader(Exchange.HTTP_QUERY, simple("t=${header.seriesTitle}&r=xml"))
                 .setHeader(Exchange.HTTP_METHOD, constant("GET"))
-                //.throttle(1).asyncDelayed() // Throttler EIP to avoid overloading omdbapi (1 request per second allowed)
-                //.enrich("http://omdbapi.com/", aggregationStrategy)
+                .throttle(1).asyncDelayed() // Throttler EIP to avoid overloading omdbapi (1 request per second allowed)
+                .enrich("http://omdbapi.com/", aggregationStrategy)
                 .to("{{build.jpaSeries}}");
 
 
         /* Fetch 5 entries every 5 seconds to check if there is really data in the database */
         from("{{build.consumeSeries}}")
-                .log(LoggingLevel.INFO, "Reading series from TVProgram table")
+                .log(LoggingLevel.DEBUG, "Reading series from TVProgram table")
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        logger.info("Series: " + exchange.getIn().getBody(Series.class).getId() + " - "
+                        logger.debug("Series: " + exchange.getIn().getBody(Series.class).getId() + " - "
                                 + exchange.getIn().getBody(Series.class).getTitle() + " - "
                                 + exchange.getIn().getBody(Series.class).getStart() + " (imdbRating: "
                                 + exchange.getIn().getBody(Series.class).getImdbRating() + ")");
