@@ -60,8 +60,8 @@ public class TVGrabberBuild extends RouteBuilder {
                         logger.debug("Series stop: " + msg.getStop());
                     }
                 })
-//                .multicast()
-//                .to("{{socialMedia.seda}}")
+                //.multicast()
+                //.to("{{socialMedia.seda}}")
                 .to("{{build.enrichmentQueue}}");
 
 
