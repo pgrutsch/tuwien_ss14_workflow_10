@@ -98,7 +98,6 @@ public class TwitterRouteTest extends CamelTestSupport {
 
         context.start();
 
-//        getMockEndpoint("mock:" + twitterAccess).expectedMessageCount(0);
         getMockEndpoint("mock:twitter").expectedMessageCount(1);
         getMockEndpoint("mock:twitter").expectedBodiesReceived("blub1");
 
